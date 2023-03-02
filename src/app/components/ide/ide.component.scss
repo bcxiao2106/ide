@@ -1,0 +1,57 @@
+.ide-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #000000;
+    overflow: hidden;
+}
+.top-nav {
+    display: flex;
+    width: 100%;
+    z-index: 100;
+    height: 50px;
+    background-color: #2e3138;
+}
+.workspace-root {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+}
+.workspace-nav {
+    background-color: #2e3138;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: space-between;
+    z-index: 10;
+    width: 48px;
+}
+.workspace-main {
+    flex-grow: 1;
+    position: relative;
+}
+.layout-root {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.layout-panel {
+    position: absolute;
+
+}
+.layout-split {
+    cursor: col-resize;
+    margin-left: -4px;
+    width: 8px;
+    position: absolute;
+    z-index: 99;
+}
+.layout-split:hover {
+    background-color: #1389fd;
+    position: absolute;
+}
+// #2e3138 panel header bg
+// #202227 nav cat bg
+// #3c4453 nav active bg
