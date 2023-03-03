@@ -1,0 +1,12 @@
+<div class="section-container">
+    <header class="section-header" (click)="click()">
+        <svg *ngIf="config.isExpanded" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.97612 10.0719L12.3334 5.7146L12.9521 6.33332L8.28548 11L7.66676 11L3.0001 6.33332L3.61882 5.7146L7.97612 10.0719Z" fill="#C5C5C5"/>
+            </svg>
+        <svg *ngIf="!config.isExpanded" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0719 8.02397L5.7146 3.66666L6.33332 3.04794L11 7.71461V8.33333L6.33332 13L5.7146 12.3813L10.0719 8.02397Z" fill="#C5C5C5"/>
+            </svg>
+        <span class="section-title">{{config.title}}</span>
+    </header>
+    <ng-container #container></ng-container>
+</div>

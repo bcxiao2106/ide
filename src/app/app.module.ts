@@ -5,18 +5,37 @@ import { AngularSplitModule } from 'angular-split';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IdeComponent } from './components/ide/ide.component';
+import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { SiderComponent } from './components/sider/sider.component';
+import { WorkspaceNavComponent } from './components/workspace-nav/workspace-nav.component';
+import { SectionComponent } from './components/section/section.component';
+import { ProjectInfoComponent } from './components/project-info/project-info.component';
+import { ComponentService } from './services/component.service';
+import { TreeMenuComponent } from './components/tree-menu/tree-menu.component';
+import { ListViewComponent } from './components/list-view/list-view.component';
+import { TreeViewService } from './services/tree-view.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IdeComponent
+    IdeComponent,
+    TopNavComponent,
+    SiderComponent,
+    WorkspaceNavComponent,
+    SectionComponent,
+    ProjectInfoComponent,
+    TreeMenuComponent,
+    ListViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularSplitModule
   ],
-  providers: [],
+  providers: [
+    ComponentService,
+    TreeViewService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,4 @@
+<div>{{config.text}}</div>
+<div *ngFor="let nodeId of config.children">
+    <tree-menu [config]="get(nodeId)"></tree-menu>
+</div>

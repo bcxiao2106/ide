@@ -1,14 +1,14 @@
 <div class="ide-root">
-    <nav class="top-nav"></nav>
+    <nav #topNav class="top-nav"></nav>
     <div class="workspace-root">
-        <div class="workspace-nav"></div>
+        <div #workspaceNav class="workspace-nav"></div>
         <div class="workspace-main">
             <div class="layout-root">
-                <div class="layout-panel" [ngStyle]="{'inset': '0% 80% 0% 0%'}"></div>
+                <div #sider class="layout-panel" [ngStyle]="{'inset': '0% 80% 0% 0%'}"></div>
                 <div class="layout-split" [ngStyle]="{'inset': '0% 0% 0% 20%'}"></div>
-                <div class="layout-panel" [ngStyle]="{'inset': '0% 32% 0% 20%'}"></div>
+                <div #editor class="layout-panel" [ngStyle]="{'inset': '0% 32% 0% 20%'}"></div>
                 <div class="layout-split" [ngStyle]="{'inset': '0% 0% 0% 68%'}"></div>
-                <div class="layout-panel" [ngStyle]="{'inset': '0% 0% 0% 68%'}"></div>
+                <div #functionPanel class="layout-panel" [ngStyle]="{'inset': '0% 0% 0% 68%'}"></div>
             </div>
             <div></div>
         </div>
