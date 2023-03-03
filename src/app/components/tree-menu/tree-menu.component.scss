@@ -4,13 +4,23 @@
     padding-left: 8px;
     padding-top: 3px;
 }
+
 .menu-item:hover {
     background-color: #2e3138;
 }
+
 .menu-icon {
     display: flex;
 }
+
 .menu-text {
     display: flex;
     padding-left: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.indent-space {
+    width: 15px;
 }

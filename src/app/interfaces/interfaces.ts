@@ -12,4 +12,5 @@ export interface ITreeNode {
     order?: number;
     icon?: string;
     isExpanded?: boolean;
+    parent?: string;
 }

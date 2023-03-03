@@ -59,3 +59,24 @@
 .sider-section {
     display: block;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    // background: #2e3138; 
+    background-color: #15181e;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #2e3138; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
