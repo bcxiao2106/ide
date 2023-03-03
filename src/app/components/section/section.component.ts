@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ISection } from 'src/app/interfaces/interfaces';
 import { ComponentService } from 'src/app/services/component.service';
 
@@ -8,26 +8,30 @@ import { ComponentService } from 'src/app/services/component.service';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent implements OnInit {
-  @Input('config') config!: ISection;
+  @Input('config') section!: ISection;
   @ViewChild('container', {read: ViewContainerRef, static: true}) containerRef!: ViewContainerRef;
 
   constructor(private componentService: ComponentService) { }
 
   ngOnInit(): void {
-    console.log(this.config);
+    console.log(this.section);
     this.load();
   }
 
   click() {
-    this.config.isExpanded = !this.config.isExpanded;
+    this.section.isExpanded = !this.section.isExpanded;
     this.load();
-    console.log(this.config);
+    console.log(this.section);
   }
 
   load() {
     this.containerRef && this.containerRef.clear();
-    if(this.config.isExpanded) {
-      this.containerRef.createComponent(this.componentService.get(this.config.component));
+    if(this.section.isExpanded) {
+      let componentRef: ComponentRef<any> = this.containerRef.createComponent(this.componentService.get(this.section.component));
+      if(this.section.config) {
+        componentRef.instance['config'] = this.section.config;
+        console.log(componentRef);
+      }
     }
   }
 }
