@@ -11,41 +11,21 @@ export class TreeMenuComponent implements OnInit {
   @Input('config') config: ITreeNode | undefined;
   @ViewChild('container', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
   @ViewChild('template', {static: true}) templateRef!: TemplateRef<any>;
-  indent: string = '8px';
-  level: number = 0;
-  isFolder: boolean = false;
 
   constructor(private treeService: TreeViewService) { }
 
   ngOnInit(): void {
     console.log(this.config);
-    if(this.config?.level) this.level = this.config?.level;
-    this.isFolder = (this.config?.children && Array.isArray(this.config.children) && this.config.children.length > 0) ? true: false;
-    this.indent = `${this.level * 8}px`;
     this.config?.children && this.config?.children.forEach(nodeId => {
       if(this.treeService.get(nodeId)) {
         let node: any = this.treeService.get(nodeId);
         node.parent = this.config?.id;
-        node.level = (this.config?.level ? this.config?.level : 0) + 1;
+        node.level = 1;
       }
     });
-    this.load();
   }
 
   get(nodeId: string): ITreeNode | undefined {
     return this.treeService.get(nodeId);
-  }
-
-  toggleSubMenu() {
-    if (!this.config?.children) return;
-    this.config.isExpanded = !this.config.isExpanded;
-    this.load();
-  }
-
-  load() {
-    this.containerRef && this.containerRef.clear();
-    if(this.config?.isExpanded) {
-      this.containerRef.createEmbeddedView(this.templateRef);
-    }
   }
 }

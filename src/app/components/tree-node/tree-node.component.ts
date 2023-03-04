@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { filter, Subscription } from 'rxjs';
 import { ITreeNode } from 'src/app/interfaces/interfaces';
 import { TreeViewService } from 'src/app/services/tree-view.service';
@@ -10,10 +10,11 @@ import { TreeViewService } from 'src/app/services/tree-view.service';
 })
 export class TreeNodeComponent implements OnInit, OnDestroy {
   @Input('config') config: ITreeNode | undefined;
+  @ViewChild('element',  { static: true }) elRef?: ElementRef;
   @ViewChild('container', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
   @ViewChild('template', { static: true }) templateRef!: TemplateRef<any>;
   indent: string = '8px';
-  level: number = 0;
+  level!: number;
   isFolder: boolean = false;
   selected: boolean = false;
   private subscription: Subscription = new Subscription();
@@ -24,19 +25,17 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     console.log(this.config);
     if (this.config?.level) this.level = this.config?.level;
     this.isFolder = (this.config?.children && Array.isArray(this.config.children) && this.config.children.length > 0) ? true : false;
-    this.indent = `${this.level * 8}px`;
+    this.indent = `${this.level * 10}px`;
     this.config?.children && this.config?.children.forEach(nodeId => {
-      if (this.treeService.get(nodeId)) {
         let node: any = this.treeService.get(nodeId);
         node.parent = this.config?.id;
         node.level = (this.config?.level ? this.config?.level : 0) + 1;
-      }
     });
     this.subscribe();
     this.load();
   }
   subscribe() {
-    this.subscription.add(this.treeService.selected$.subscribe(selected => this.selected = selected == this.config?.id));
+    this.subscription.add(this.treeService.selected$.pipe(filter(id => id != this.config?.id)).subscribe(id => this.selected = id == this.config?.id));
   }
 
   get(nodeId: string): ITreeNode | undefined {
@@ -45,8 +44,13 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
 
   click() {
     this.selected = true;
+    this.setFocus();
     this.treeService.select(this.config?.id);
     this.toggleSubMenu();
+  }
+
+  setFocus() {
+    this.elRef?.nativeElement.focus();
   }
 
   toggleSubMenu() {

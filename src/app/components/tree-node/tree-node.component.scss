@@ -1,8 +1,8 @@
 .menu-item {
-    height: 19px;
+    height: 22px;
     display: flex;
-    padding-left: 8px;
-    padding-top: 3px;
+    flex-grow: 1;
+    align-items: center;
     cursor: pointer;
 }
 
@@ -16,22 +16,30 @@
 
 .menu-text {
     display: flex;
-    padding-left: 3px;
+    padding: 2px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    flex-grow: 1;
+    padding: 3px 0px 0px 4px;
 }
 
 .indent-space {
-    width: 15px;
+    width: 16px;
 }
 
 .selected {
-    background-color: #1389fd;
+    background-color: #434751;
     color: #ffffff;
-    span {
-        svg path {
+    div svg path {
             fill: #ffffff;
-        }
     }
+}
+
+.selected:focus {
+    background-color: #0068b3;
+}
+
+.flex-box {
+    display: flex;
 }
