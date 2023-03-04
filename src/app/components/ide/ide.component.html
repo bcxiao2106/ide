@@ -1,17 +1,18 @@
 <div class="ide-root">
-    <nav #topNav class="top-nav"></nav>
+    <nav class="top-nav"><ng-container #topNav></ng-container></nav>
     <div class="workspace-root">
-        <div #workspaceNav class="workspace-nav"></div>
+        <div class="workspace-nav"><ng-container #workspaceNav></ng-container></div>
         <div class="workspace-main">
             <div class="layout-root">
-                <div #sider class="layout-panel" [ngStyle]="{'inset': '0% 80% 0% 0%'}"></div>
+                <div class="layout-panel" [ngStyle]="{'inset': '0% 80% 0% 0%'}"><ng-container #sider></ng-container></div>
                 <div class="layout-split" [ngStyle]="{'inset': '0% 0% 0% 20%'}"></div>
-                <div #editor class="layout-panel" [ngStyle]="{'inset': '0% 32% 0% 20%'}"></div>
+                <div class="layout-panel" [ngStyle]="{'inset': '0% 32% 0% 20%'}"><ng-container #editor></ng-container></div>
                 <div class="layout-split" [ngStyle]="{'inset': '0% 0% 0% 68%'}"></div>
-                <div #functionPanel class="layout-panel" [ngStyle]="{'inset': '0% 0% 0% 68%'}"></div>
+                <div class="layout-panel" [ngStyle]="{'inset': '0% 0% 0% 68%'}"><ng-container #functionPanel></ng-container></div>
             </div>
             <div></div>
         </div>
     </div>
+    <div></div>
     <div></div>
 </div>

@@ -15,6 +15,8 @@ import { TreeMenuComponent } from './components/tree-menu/tree-menu.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { TreeViewService } from './services/tree-view.service';
 import { TreeNodeComponent } from './components/tree-node/tree-node.component';
+import { EditorPanelComponent } from './components/editor-panel/editor-panel.component';
+import { FunctionalPanelComponent } from './components/functional-panel/functional-panel.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { TreeNodeComponent } from './components/tree-node/tree-node.component';
     ProjectInfoComponent,
     TreeMenuComponent,
     ListViewComponent,
-    TreeNodeComponent
+    TreeNodeComponent,
+    EditorPanelComponent,
+    FunctionalPanelComponent
   ],
   imports: [
     BrowserModule,

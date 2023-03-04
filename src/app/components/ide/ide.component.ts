@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { SiderComponent, TopNavComponent, WorkspaceNavComponent } from '../components';
+import { EditorPanelComponent } from '../editor-panel/editor-panel.component';
+import { FunctionalPanelComponent } from '../functional-panel/functional-panel.component';
 
 @Component({
   selector: 'ide',
@@ -19,5 +21,7 @@ export class IdeComponent implements OnInit {
     this.topNavContainer.createComponent(TopNavComponent);
     this.workspaceNavContainer.createComponent(WorkspaceNavComponent);
     this.siderContainer.createComponent(SiderComponent);
+    this.editor.createComponent(EditorPanelComponent);
+    this.functionPanelContainer.createComponent(FunctionalPanelComponent);
   }
 }
