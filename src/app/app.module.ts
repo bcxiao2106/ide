@@ -14,6 +14,7 @@ import { ComponentService } from './services/component.service';
 import { TreeMenuComponent } from './components/tree-menu/tree-menu.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { TreeViewService } from './services/tree-view.service';
+import { TreeNodeComponent } from './components/tree-node/tree-node.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TreeViewService } from './services/tree-view.service';
     SectionComponent,
     ProjectInfoComponent,
     TreeMenuComponent,
-    ListViewComponent
+    ListViewComponent,
+    TreeNodeComponent
   ],
   imports: [
     BrowserModule,

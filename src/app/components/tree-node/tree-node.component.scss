@@ -1,0 +1,37 @@
+.menu-item {
+    height: 19px;
+    display: flex;
+    padding-left: 8px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+.menu-item:hover:not(.selected) {
+    background-color: #2e3138;
+}
+
+.menu-icon {
+    display: flex;
+}
+
+.menu-text {
+    display: flex;
+    padding-left: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.indent-space {
+    width: 15px;
+}
+
+.selected {
+    background-color: #1389fd;
+    color: #ffffff;
+    span {
+        svg path {
+            fill: #ffffff;
+        }
+    }
+}
