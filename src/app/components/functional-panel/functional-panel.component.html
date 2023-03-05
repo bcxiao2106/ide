@@ -1,1 +1,8 @@
-<p>functional-panel works!</p>
+<aside class="function-pane-root">
+    <div class="sider-body">
+        <div *ngFor="let section of sections" class="sider-section">
+            <app-section [config]="section"></app-section>
+        </div>
+        
+    </div>
+</aside>

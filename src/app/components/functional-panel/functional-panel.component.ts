@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ISection } from 'src/app/interfaces/interfaces';
+import { FunctionalSections } from 'src/app/config/functional-sections.config';
 
 @Component({
   selector: 'app-functional-panel',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class FunctionalPanelComponent {
 
+  sections: ISection[] = FunctionalSections;
 }

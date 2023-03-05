@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AngularSplitModule } from 'angular-split';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IdeComponent } from './components/ide/ide.component';
@@ -19,6 +17,7 @@ import { EditorPanelComponent } from './components/editor-panel/editor-panel.com
 import { FunctionalPanelComponent } from './components/functional-panel/functional-panel.component';
 import { EditorsManagerService } from './services/editors-manager.service';
 import { ViewCacheService } from './services/view-cache.service';
+import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +32,12 @@ import { ViewCacheService } from './services/view-cache.service';
     ListViewComponent,
     TreeNodeComponent,
     EditorPanelComponent,
-    FunctionalPanelComponent
+    FunctionalPanelComponent,
+    MonacoEditorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    AngularSplitModule
+    AppRoutingModule
   ],
   providers: [
     ComponentService,
