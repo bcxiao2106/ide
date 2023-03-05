@@ -17,6 +17,8 @@ import { TreeViewService } from './services/tree-view.service';
 import { TreeNodeComponent } from './components/tree-node/tree-node.component';
 import { EditorPanelComponent } from './components/editor-panel/editor-panel.component';
 import { FunctionalPanelComponent } from './components/functional-panel/functional-panel.component';
+import { EditorsManagerService } from './services/editors-manager.service';
+import { ViewCacheService } from './services/view-cache.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { FunctionalPanelComponent } from './components/functional-panel/function
   ],
   providers: [
     ComponentService,
-    TreeViewService
+    TreeViewService,
+    EditorsManagerService,
+    ViewCacheService
   ],
   bootstrap: [AppComponent]
 })

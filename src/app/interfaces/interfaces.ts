@@ -14,3 +14,12 @@ export interface ITreeNode {
     isExpanded?: boolean;
     parent?: string;
 }
+export interface IEditorTab {
+    id: string;
+    text: string;
+    group: number;
+    isPreview?: boolean;
+    changed?: boolean;
+    focused?: boolean;
+    attachedConfig?: any;
+}

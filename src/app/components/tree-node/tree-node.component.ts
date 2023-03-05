@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { filter, Subscription } from 'rxjs';
 import { ITreeNode } from 'src/app/interfaces/interfaces';
+import { EditorsManagerService } from 'src/app/services/editors-manager.service';
 import { TreeViewService } from 'src/app/services/tree-view.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
   selected: boolean = false;
   private subscription: Subscription = new Subscription();
 
-  constructor(private treeService: TreeViewService) { }
+  constructor(private treeService: TreeViewService,
+    private ems: EditorsManagerService) { }
 
   ngOnInit(): void {
     console.log(this.config);
@@ -47,6 +49,7 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     this.setFocus();
     this.treeService.select(this.config?.id);
     this.toggleSubMenu();
+    if(!this.config?.children) this.ems.open(this.config!);
   }
 
   setFocus() {
