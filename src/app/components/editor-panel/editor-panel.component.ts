@@ -32,11 +32,20 @@ export class EditorPanelComponent implements OnInit, OnDestroy {
     }));
   }
 
+  onTabClick(tab: IEditorTab) {
+    this.ems.setFocus(tab.id);
+  }
+
   load() {
     this.editorPaneRef && this.editorPaneRef.clear();
     let componentRef: ComponentRef<any> = this.editorPaneRef.createComponent(this.componentService.get('MonacoEditorComponent'));
-    let focusedTab = this.editorTabs.find(tab => tab.focused = true);
+    let focusedTab = this.editorTabs.find(tab => tab.focused == true);
+    console.log(this.editorTabs, focusedTab);
     componentRef.instance['config'] = focusedTab?.attachedConfig;
+  }
+
+  close(tab: IEditorTab) {
+    this.ems.remove(tab.id);
   }
 
   ngOnDestroy(): void {

@@ -36,5 +36,5 @@ export const SiderMenu: ITreeNode[] = [
     { id: '3-07', text: 'PricesheetDefaultColumns.cs' },
     { id: '3-08', text: 'IPricesheetPublishService.cs' },
     { id: '3-09', text: 'PricesheetDefaultModels.cs' },
-    { id: '3-10', text: 'ResponseSummaryDefaultColumns.cs' },
+    { id: '3-10', text: 'ResponseSummaryDefaultColumns.cs' }
 ];

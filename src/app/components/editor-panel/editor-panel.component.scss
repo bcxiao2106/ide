@@ -78,3 +78,16 @@
     right: 0px;
     bottom: 0px;
 }
+.focused {
+    background-color: #1E1E1E;
+    color: white;
+    div svg path {
+        fill: #ffffff;
+    }
+}
+.show-action {
+    opacity: 1;
+    svg path {
+        fill: #ffffff;
+    }
+}
