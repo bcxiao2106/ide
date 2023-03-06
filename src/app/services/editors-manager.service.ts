@@ -68,7 +68,7 @@ export function getEditorConfig(id: string): any {
     return {
         options: {
           theme: 'vs-dark',
-          language: 'typescript',
+          language: 'csharp',
           readOnly: false
         },
         code: CODE[id]

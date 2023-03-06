@@ -7,11 +7,12 @@ export class CsharpCompletionService {
 
     private async sendRequest(type: string, request: any) {
         let endPoint: any;
+        let baseUrl: string = 'http://192.168.68.131:5280';
         switch (type) {
-            case 'complete': endPoint = 'http://localhost:5280/completion/complete'; break;
-            case 'signature': endPoint = 'http://localhost:5280/completion/signature'; break;
-            case 'hover': endPoint = 'http://localhost:5280/completion/hover'; break;
-            case 'codeCheck': endPoint = 'http://localhost:5280/completion/codeCheck'; break;
+            case 'complete': endPoint = `${baseUrl}/completion/complete`; break;
+            case 'signature': endPoint = `${baseUrl}/completion/signature`; break;
+            case 'hover': endPoint = `${baseUrl}/completion/hover`; break;
+            case 'codeCheck': endPoint = `${baseUrl}/completion/codeCheck`; break;
         }
         return await axios.post(endPoint, JSON.stringify(request))
     }
