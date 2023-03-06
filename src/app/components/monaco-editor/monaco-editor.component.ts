@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, forwardRef, Inject, Injector, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { Subscription, filter, take } from 'rxjs';
+import { CsharpCompletionService } from 'src/app/services/csharp-completion.service';
 import {IMonacoEditor, IMonacoJsonSchemaOptions, MonacoEditorConstructionOptions, MonacoStandaloneCodeEditor} from './interfaces/interfaces';
 import { MonacoEditorLoaderService } from './monaco-editor-loader.service';
 
@@ -55,7 +56,8 @@ export class MonacoEditorComponent implements OnInit, OnChanges, OnDestroy, Cont
     this._monacoLoader = v;
   }
 
-  constructor(@Inject(Injector) private ngInjector: Injector) { }
+  constructor(@Inject(Injector) private ngInjector: Injector,
+  private completionService: CsharpCompletionService) { }
 
   ngOnInit(): void {
     if (!this.config.interactionDebounceTime) this.config.interactionDebounceTime = 2000;
@@ -153,6 +155,7 @@ export class MonacoEditorComponent implements OnInit, OnChanges, OnDestroy, Cont
   }
 
   private initEditor() {
+    this.completionService.registerCsharpProvider();
     const options: MonacoEditorConstructionOptions = {
       value: [this.value].join('\n'),
       language: 'text',
