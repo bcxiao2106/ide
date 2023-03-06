@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IEditorTab } from 'src/app/interfaces/interfaces';
+import { ComponentService } from 'src/app/services/component.service';
 import { EditorsManagerService } from 'src/app/services/editors-manager.service';
 
 @Component({
@@ -15,17 +16,27 @@ export class EditorPanelComponent implements OnInit, OnDestroy {
   groupId: number = 0;
   private subscription: Subscription = new Subscription();
 
-  constructor(private ems: EditorsManagerService) { }
+  constructor(private ems: EditorsManagerService,
+    private componentService: ComponentService) { }
 
   ngOnInit(): void {
     this.editorTabs = this.ems.get(this.groupId)!;
     this.subscribe();
+    this.load();
   }
 
   subscribe() {
     this.subscription.add(this.ems.change$.subscribe(activeGroup => {
       this.editorTabs = this.ems.get(this.groupId)!;
+      this.load();
     }));
+  }
+
+  load() {
+    this.editorPaneRef && this.editorPaneRef.clear();
+    let componentRef: ComponentRef<any> = this.editorPaneRef.createComponent(this.componentService.get('MonacoEditorComponent'));
+    let focusedTab = this.editorTabs.find(tab => tab.focused = true);
+    componentRef.instance['config'] = focusedTab?.attachedConfig;
   }
 
   ngOnDestroy(): void {

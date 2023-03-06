@@ -18,6 +18,8 @@ import { FunctionalPanelComponent } from './components/functional-panel/function
 import { EditorsManagerService } from './services/editors-manager.service';
 import { ViewCacheService } from './services/view-cache.service';
 import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.component';
+import { MonacoEditorLoaderService } from './components/monaco-editor/monaco-editor-loader.service';
+import { MonacoEditorLoaderDirective } from './components/monaco-editor/monaco-editor-loader.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.
     TreeNodeComponent,
     EditorPanelComponent,
     FunctionalPanelComponent,
-    MonacoEditorComponent
+    MonacoEditorComponent,
+    MonacoEditorLoaderDirective
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.
     ComponentService,
     TreeViewService,
     EditorsManagerService,
-    ViewCacheService
+    ViewCacheService,
+    MonacoEditorLoaderService
   ],
   bootstrap: [AppComponent]
 })

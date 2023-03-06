@@ -1,3 +1,9 @@
+.editor-pane-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
 .editor-tabbar {
     --tab-height: 38px;
     display: flex;
@@ -60,4 +66,15 @@
 }
 .tab-status:hover {
     background-color: #454952;
+}
+.editor-main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    position: absolute;
+    top: 38px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
