@@ -5212,8 +5212,8 @@ export const CODE: any = {
             }
         }
     }`, 
-    "3-07": "PricesheetDefaultColumns.cs", 
-    "3-08": "IPricesheetPublishService.cs", 
+    "3-07": "", 
+    "3-08": "", 
     "3-09": `namespace Leo.RFxPricesheetV2.Core.Utilities
     {
         using Leo.RFxCommonV2.Constants;
