@@ -4,7 +4,7 @@
     width: 100%;
 }
 .section-header {
-    background-color: #2f3138;
+    background-color: var(--ide-section-header-bgcolor);
     align-items: stretch;
     cursor: pointer;
     display: flex;

@@ -37,7 +37,7 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     this.load();
   }
   subscribe() {
-    this.subscription.add(this.treeService.selected$.pipe(filter(id => id != this.config?.id)).subscribe(id => this.selected = id == this.config?.id));
+    this.subscription.add(this.treeService.selected$.subscribe(id => this.selected = id == this.config?.id));
   }
 
   get(nodeId: string): ITreeNode | undefined {

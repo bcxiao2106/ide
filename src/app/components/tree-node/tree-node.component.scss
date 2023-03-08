@@ -4,10 +4,13 @@
     flex-grow: 1;
     align-items: center;
     cursor: pointer;
+    div svg path {
+        fill: var(--ide-color);
+    }
 }
 
 .menu-item:hover:not(.selected) {
-    background-color: #2e3138;
+    background-color: var(--ide-menu-item-hover-bgcolor);
 }
 
 .menu-icon {
@@ -29,15 +32,17 @@
 }
 
 .selected {
-    background-color: #434751;
-    color: #ffffff;
+    background-color: var(--ide-tree-node-selected-bgcolor);
+    color: var(--ide-tree-node-selected-color);
+
     div svg path {
-            fill: #ffffff;
+        fill: var(--ide-tree-node-selected-color);
     }
 }
 
 .selected:focus {
-    background-color: #0068b3;
+    background-color: var(--ide-tree-node-selected-focused-bgcolor);
+    color: var(--ide-tree-node-selected-focused-color);
 }
 
 .flex-box {

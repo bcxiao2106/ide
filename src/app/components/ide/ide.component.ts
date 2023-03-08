@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Themes } from 'src/app/config/themes.config';
+import { ThemesService } from 'src/app/services/themes.service';
 import { SiderComponent, TopNavComponent, WorkspaceNavComponent } from '../components';
 import { EditorPanelComponent } from '../editor-panel/editor-panel.component';
 import { FunctionalPanelComponent } from '../functional-panel/functional-panel.component';
@@ -15,9 +17,10 @@ export class IdeComponent implements OnInit {
   @ViewChild('editor', { read: ViewContainerRef, static: true }) editor!: ViewContainerRef;
   @ViewChild('functionPanel', { read: ViewContainerRef, static: true }) functionPanelContainer!: ViewContainerRef;
 
-  constructor() { }
+  constructor(private themes: ThemesService) { }
 
   ngOnInit(): void {
+    this.themes.init(Themes);
     this.topNavContainer.createComponent(TopNavComponent);
     this.workspaceNavContainer.createComponent(WorkspaceNavComponent);
     this.siderContainer.createComponent(SiderComponent);

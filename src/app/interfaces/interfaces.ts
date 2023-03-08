@@ -23,3 +23,8 @@ export interface IEditorTab {
     focused?: boolean;
     attachedConfig?: any;
 }
+export interface IThemesConfig {
+    themes: string[];
+    default: string;
+    map: Record<string, Record<string, string>>;
+}

@@ -1,5 +1,5 @@
 .ws-nav-root {
-    background-color: #2e3138;
+    background-color: var(--ide-ws-nav-bgcolor);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -32,7 +32,10 @@
     position: relative;
     left: 12px;
     top: 12px;
+    path {
+        fill: var(--ide-ws-nav-btn-fill);
+    }
 }
 .nav-btn:hover svg path{
-    fill: white;
+    fill: var(--ide-ws-nav-btn-hover-fill);
 }

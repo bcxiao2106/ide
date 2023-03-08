@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CODE } from "../config/csharp.code";
 import { IEditorTab, ITreeNode } from "../interfaces/interfaces";
+import { ThemesService } from "./themes.service";
 
 @Injectable()
 export class EditorsManagerService {
@@ -11,7 +12,7 @@ export class EditorsManagerService {
     private subject: Subject<number>;
     public change$: Observable<number>;
 
-    constructor() {
+    constructor(private themeService: ThemesService) {
         this.map = new Map<number, IEditorTab[]>();
         this.subject = new Subject()
         this.change$ = this.subject.asObservable();
@@ -24,7 +25,7 @@ export class EditorsManagerService {
             id: node.id,
             text: node.text,
             group: this.activeGroup,
-            attachedConfig: getEditorConfig(node.id)
+            attachedConfig: getEditorConfig(this, node.id)
         });
         this.setFocus(node.id, tabs!);
         this.map.set(this.activeGroup, tabs!);
@@ -64,10 +65,11 @@ export class EditorsManagerService {
     }
 }
 
-export function getEditorConfig(id: string): any {
+export function getEditorConfig(scope: any, id: string): any {
+    let theme: string = scope.themeService.theme;
     return {
         options: {
-          theme: 'vs-dark',
+          theme: theme,
           language: 'csharp',
           readOnly: false
         },

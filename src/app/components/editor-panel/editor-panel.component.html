@@ -1,7 +1,7 @@
 <div class="editor-pane-root">
     <div class="editor-tabbar">
         <div class="editor-tabs">
-            <div #tabs class="tab-item" *ngFor="let tab of editorTabs" [ngClass]="{'focused': tab.focused}" (click)="onTabClick(tab)">
+            <div #tabs class="tab-item" *ngFor="let tab of editorTabs" [ngClass]="{'focused': tab.focused}" [id]="tab.id" (click)="onTabClick(tab)">
                 <div class="tab-content">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"

@@ -21,6 +21,7 @@ import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.
 import { MonacoEditorLoaderService } from './components/monaco-editor/monaco-editor-loader.service';
 import { MonacoEditorLoaderDirective } from './components/monaco-editor/monaco-editor-loader.directive';
 import { CsharpCompletionService } from './services/csharp-completion.service';
+import { ThemesService } from './services/themes.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CsharpCompletionService } from './services/csharp-completion.service';
     EditorsManagerService,
     ViewCacheService,
     MonacoEditorLoaderService,
-    CsharpCompletionService
+    CsharpCompletionService,
+    ThemesService
   ],
   bootstrap: [AppComponent]
 })

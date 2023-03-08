@@ -7,7 +7,7 @@
 .editor-tabbar {
     --tab-height: 38px;
     display: flex;
-    background-color: #202327;
+    background-color: var(--ide-editor-tabbar-bgcolor);
     display: flex;
     flex-shrink: 0;
     height: var(--tab-height);
@@ -23,8 +23,8 @@
 }
 .tab-item {
     align-items: center;
-    background-color: #26292e;
-    color: #9e9e9e;
+    background-color: var(--ide-editor-tabitem-bgcolor);
+    color: var(--ide-editor-tabitem-color);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
@@ -63,9 +63,12 @@
     opacity: 0;
     padding: 2px;
     width: 16px;
+    svg path {
+        fill: var(--ide-editor-tabitem-color);
+    }
 }
 .tab-status:hover {
-    background-color: #454952;
+    background-color: var(--ide-editor-tabstatus-hover-bgcolor);
 }
 .editor-main {
     display: flex;
@@ -79,15 +82,15 @@
     bottom: 0px;
 }
 .focused {
-    background-color: #1E1E1E;
-    color: white;
+    background-color: var(--ide-editor-tab-focused-bgcolor);
+    color: var(--ide-editor-tab-focused-color);
     div svg path {
-        fill: #ffffff;
+        fill: var(--ide-editor-tab-focused-color);
     }
 }
 .show-action {
     opacity: 1;
     svg path {
-        fill: #ffffff;
+        fill: var(--ide-editor-tab-focused-color);
     }
 }
