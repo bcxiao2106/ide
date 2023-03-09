@@ -1,6 +1,17 @@
 import { ITreeNode } from "../interfaces/interfaces";
 
 export const SiderMenu: ITreeNode[] = [
+    { id: 'root', text: '', children: ['001', '002', '003'] },
+    { id: '001', text: 'Invoice-DG', children: ['1-01', '1-02'] },
+    { id: '002', text: 'Order-DG', children: ['2-01'] },
+    { id: '003', text: 'Contract-DG', children: ['3-01'] },
+    { id: '1-01', text: 'Invoice.Entry.cs' },
+    { id: '1-02', text: 'Invoice.Helpers.cs' },
+    { id: '2-01', text: 'Order.Entry.cs' },
+    { id: '3-01', text: 'Contract.Entry.cs' }
+];
+
+export const SiderMenu2: ITreeNode[] = [
     { id: 'root', text: '', children: ['001', '002', '003', '004', '005', '006'] },
     { id: '001', text: 'Constants', children: ['1-01', '1-02', '1-03', '1-04', '1-05', '1-06', '1-07', '1-08', '1-09'] },
     { id: '002', text: 'Interfaces', children: ['2-01', '2-02', '2-03', '2-04', '2-05', '2-06', '2-07', '2-08', '2-09', '2-10'] },
