@@ -24,30 +24,30 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     private ems: EditorsManagerService) { }
 
   ngOnInit(): void {
-    console.log(this.config);
     if (this.config?.level) this.level = this.config?.level;
     this.isFolder = (this.config?.children && Array.isArray(this.config.children) && this.config.children.length > 0) ? true : false;
     this.indent = `${this.level * 10}px`;
     this.config?.children && this.config?.children.forEach(nodeId => {
-        let node: any = this.treeService.get(nodeId);
+        let node: any = this.treeService.get(this.config?.viewId!, nodeId);
         node.parent = this.config?.id;
         node.level = (this.config?.level ? this.config?.level : 0) + 1;
+        node.path = this.config?.path?.concat(node.text);
     });
     this.subscribe();
     this.load();
   }
   subscribe() {
-    this.subscription.add(this.treeService.selected$.subscribe(id => this.selected = id == this.config?.id));
+    this.subscription.add(this.treeService.getSelected$(this.config?.viewId!).subscribe(node => this.selected = node?.id == this.config?.id));
   }
 
   get(nodeId: string): ITreeNode | undefined {
-    return this.treeService.get(nodeId);
+    return this.treeService.get(this.config?.viewId!, nodeId);
   }
 
   click() {
     this.selected = true;
     this.setFocus();
-    this.treeService.select(this.config?.id);
+    this.treeService.select(this.config?.viewId!, this.config?.id);
     this.toggleSubMenu();
     if(!this.config?.children) this.ems.open(this.config!);
   }

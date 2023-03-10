@@ -1,20 +1,33 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { ITreeNode } from "../interfaces/interfaces";
+import { TreeView } from '../classes/tree-view.class';
 
 @Injectable()
 export class TreeViewService {
-    private map: Map<string, ITreeNode> = new Map<string, ITreeNode>();
-    private selected: Subject<string> = new Subject<string>();
-    selected$: Observable<string>;
+    private map: Map<string, TreeView> = new Map<string, TreeView>();
 
-    constructor() {
-        this.selected$ = this.selected.asObservable();
+    constructor() {}
+
+    register(viewId: string) {
+        this.map.set(viewId, new TreeView(viewId));
+    }
+
+    deregister(viewId: string) {
+        this.map.delete(viewId);
+    }
+
+    getSelected$(viewId: string): Observable<ITreeNode> {
+        return this.map.get(viewId)?.selected$!;
     }
 
     set(node: ITreeNode) {
         if(!node) return;
-        this.map.set(node.id, node);
+        this.map.get(node.viewId)?.set(node);
+    }
+
+    has(viewId: string, id: string): boolean {
+        return this.map.get(viewId)?.has(id)!;
     }
 
     setRange(nodes: ITreeNode[]) {
@@ -23,11 +36,15 @@ export class TreeViewService {
         });
     }
 
-    get(id: string): ITreeNode | any {
-        return this.map.get(id);
+    get(viewId: string, id: string): ITreeNode | any {
+        return this.map.get(viewId)?.get(id);
     }
 
-    select(id: string | undefined) {
-        id && this.selected.next(id);
+    select(viewId: string, id: string | undefined) {
+        viewId && id && this.map.get(viewId)?.select(id);
+    }
+
+    appendChild(viewId: string, parentNodeId: string, node: ITreeNode) {
+        this.map.get(viewId)?.appendChild(parentNodeId, node);
     }
 }

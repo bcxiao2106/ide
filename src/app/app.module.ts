@@ -22,6 +22,7 @@ import { MonacoEditorLoaderService } from './components/monaco-editor/monaco-edi
 import { MonacoEditorLoaderDirective } from './components/monaco-editor/monaco-editor-loader.directive';
 import { CsharpCompletionService } from './services/csharp-completion.service';
 import { ThemesService } from './services/themes.service';
+import { EditorMarkersComponent } from './components/editor-markers/editor-markers.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ThemesService } from './services/themes.service';
     EditorPanelComponent,
     FunctionalPanelComponent,
     MonacoEditorComponent,
-    MonacoEditorLoaderDirective
+    MonacoEditorLoaderDirective,
+    EditorMarkersComponent
   ],
   imports: [
     BrowserModule,

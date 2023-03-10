@@ -11,7 +11,7 @@
 // declare let MonacoEnvironment: monaco.Environment | undefined;
 
 interface Window {
-    MonacoEnvironment?: monaco.Environment | undefined;
+    // MonacoEnvironment?: monaco.Environment | undefined;
   }
   
   declare namespace monaco {
@@ -924,7 +924,7 @@ interface Window {
      *
      * @returns list of markers
      */
-    export function getModelMarkers(filter: {
+    export function getModelMarkers(filter?: {
       owner?: string;
       resource?: Uri;
       take?: number;

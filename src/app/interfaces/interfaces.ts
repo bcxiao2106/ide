@@ -6,22 +6,28 @@ export interface ISection {
 }
 export interface ITreeNode {
     id: string;
+    viewId: string;
     level?: number;
     text: string;
+    uri?: string;
+    path?: string[];
     children?: string[];
     order?: number;
     icon?: string;
     isExpanded?: boolean;
     parent?: string;
 }
-export interface IEditorTab {
+export interface ITab {
     id: string;
     text: string;
-    group: number;
-    isPreview?: boolean;
     changed?: boolean;
     focused?: boolean;
+    component?: string;
     attachedConfig?: any;
+}
+export interface IEditorTab extends ITab {
+    group: number;
+    isPreview?: boolean;
 }
 export interface IThemesConfig {
     themes: string[];
