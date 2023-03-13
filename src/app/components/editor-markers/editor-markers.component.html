@@ -1,0 +1,19 @@
+<div class="markers-root">
+    <div class="markers-header">Problems<span>{{count}}</span></div>
+    <div class="markers-body">
+        <ng-container #markers></ng-container>
+    </div>
+</div>
+
+<ng-template #template let-rootNode = rootNode>
+    <div *ngFor="let nodeId of rootNode!.children">
+        <tree-node [config]="get(nodeId)"></tree-node>
+    </div>
+</ng-template>
+
+<!-- <ng-template #template let-markers = markers>
+    <div *ngFor="let marker of markers;let i=index" style="cursor: pointer;"
+    (click)="revealLine(marker)" 
+    [attr.title]="marker.message">{{marker.message}} <span class="marker-position-text">[Ln {{marker.startLineNumber}}, Col
+        {{marker.startColumn}}]</span></div>
+</ng-template> -->

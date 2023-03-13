@@ -1,0 +1,50 @@
+.menu-item {
+    height: 22px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    cursor: pointer;
+    div svg path {
+        fill: var(--ide-color);
+    }
+}
+
+.menu-item:hover:not(.selected) {
+    background-color: var(--ide-menu-item-hover-bgcolor);
+}
+
+.menu-icon {
+    display: flex;
+}
+
+.menu-text {
+    display: flex;
+    padding: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    padding: 3px 0px 0px 4px;
+}
+
+.indent-space {
+    width: 16px;
+}
+
+.selected {
+    background-color: var(--ide-tree-node-selected-bgcolor);
+    color: var(--ide-tree-node-selected-color);
+
+    div svg path {
+        fill: var(--ide-tree-node-selected-color);
+    }
+}
+
+.selected:focus {
+    background-color: var(--ide-tree-node-selected-focused-bgcolor);
+    color: var(--ide-tree-node-selected-focused-color);
+}
+
+.flex-box {
+    display: flex;
+}

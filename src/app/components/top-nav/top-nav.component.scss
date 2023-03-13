@@ -1,0 +1,44 @@
+.nav-root {
+    position: absolute;
+    display: flex;
+    align-items: stretch;
+    top: 0px;
+    height: 40px;
+    width: 100%;
+    z-index: 100;
+}
+.nav-root div {
+    align-items: center;
+}
+.nav-logo {
+    flex: none;
+    overflow: hidden;
+    font-family: system-ui;
+    font-size: 21px;
+    padding: 6px 6px 6px 10px;
+    color: #0086ff;
+    font-weight: 600;
+}
+.nav-start-group {
+    display: flex;
+    flex-basis: 200px;
+    flex-grow: 1;
+    padding: 0px 0px 0px 10px;
+}
+.nav-center-group {
+    display: flex;
+}
+.nav-end-group {
+    display: flex;
+    flex-basis: 250px;
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding: 0px 10px 0px 0px;
+}
+svg {
+    position: absolute;
+    width: 27px;
+    height: 30px;
+    top: 5px;
+    left: 9px;
+}

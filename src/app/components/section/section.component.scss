@@ -1,0 +1,25 @@
+.section-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.section-header {
+    background-color: var(--ide-section-header-bgcolor);
+    align-items: stretch;
+    cursor: pointer;
+    display: flex;
+    height: 19px;
+    user-select: none;
+    width: 100%;
+    padding-top: 3px;
+}
+.section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    line-height: 1.4545;
+    text-transform: uppercase;
+}
+.section-body {
+    font-size: 13px;
+}
