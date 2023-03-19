@@ -4,8 +4,8 @@ import axios from "axios";
 @Injectable()
 export class CsharpCompletionService {
     private socket!: WebSocket;
-    
-    constructor() { 
+
+    constructor() {
         this.initSocket();
     }
 
@@ -19,7 +19,7 @@ export class CsharpCompletionService {
         this.socket.onclose = this.onClose.bind(this);
         this.socket.onmessage = this.onMessage.bind(this);
         this.socket.onerror = this.onError.bind(this);
-        
+
     }
 
     private onOpen() {
@@ -46,14 +46,16 @@ export class CsharpCompletionService {
     private async sendRequest(type: string, request: any) {
         let endPoint: any;
         let baseUrl: string = 'http://192.168.68.113:5280';
+        // let baseUrl: string = 'http://localhost:5280';
         switch (type) {
             case 'complete': endPoint = `${baseUrl}/completion/complete`; break;
             case 'signature': endPoint = `${baseUrl}/completion/signature`; break;
             case 'hover': endPoint = `${baseUrl}/completion/hover`; break;
             case 'codeCheck': endPoint = `${baseUrl}/completion/codeCheck`; break;
         }
-        this.socket.send(JSON.stringify(request));
-        return await axios.post(endPoint, JSON.stringify(request));
+        // this.socket.send(JSON.stringify(request));
+        return await axios.post(endPoint, request);
+        // return await axios.post(endPoint, JSON.stringify(request));
     }
 
     registerCsharpProvider() {
@@ -67,8 +69,8 @@ export class CsharpCompletionService {
                     Code: model.getValue(),
                     Position: model.getOffsetAt(position),
                     Assemblies: assemblies,
-                    Language: 'csharp',
-                    Event: 'complete'
+                    // Language: 'csharp',
+                    // Event: 'complete'
                 }
 
                 let resultQ = await this.sendRequest("complete", request);
@@ -95,8 +97,8 @@ export class CsharpCompletionService {
                     Code: model.getValue(),
                     Position: model.getOffsetAt(position),
                     Assemblies: assemblies,
-                    Language: 'csharp',
-                    Event: 'signature'
+                    // Language: 'csharp',
+                    // Event: 'signature'
                 }
                 let resultQ = await this.sendRequest("signature", request);
                 if (!resultQ.data) return;
@@ -133,8 +135,8 @@ export class CsharpCompletionService {
                     Code: model.getValue(),
                     Position: model.getOffsetAt(position),
                     Assemblies: assemblies,
-                    Language: 'csharp',
-                    Event: 'hover'
+                    // Language: 'csharp',
+                    // Event: 'hover'
                 }
                 let resultQ = await this.sendRequest("hover", request);
                 if (resultQ.data) {
@@ -157,8 +159,8 @@ export class CsharpCompletionService {
                 let request = {
                     Code: model.getValue(),
                     Assemblies: assemblies,
-                    Language: 'csharp',
-                    Event: 'codeCheck'
+                    // Language: 'csharp',
+                    // Event: 'codeCheck'
                 }
                 let resultQ = await scope.sendRequest("codeCheck", request)
                 let markers = [];
