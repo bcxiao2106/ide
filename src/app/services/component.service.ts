@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { CloudSiderComponent } from "../components/cloud/cloud-sider/cloud-sider.component";
+import { SiderComponent, TopNavComponent, WorkspaceNavComponent } from "../components/components";
 import { EditorPanelComponent } from "../components/editor-panel/editor-panel.component";
 import { FunctionalPanelComponent } from "../components/functional-panel/functional-panel.component";
 import { ListViewComponent } from "../components/list-view/list-view.component";
@@ -14,8 +16,11 @@ export class ComponentService {
         TreeMenuComponent: TreeMenuComponent,
         EditorPanelComponent: EditorPanelComponent,
         FunctionalPanelComponent: FunctionalPanelComponent,
-        MonacoEditorComponent: MonacoEditorComponent
-
+        MonacoEditorComponent: MonacoEditorComponent,
+        TopNavComponent: TopNavComponent,
+        WorkspaceNavComponent: WorkspaceNavComponent,
+        SiderComponent: SiderComponent,
+        CloudSiderComponent: CloudSiderComponent
     }
 
     get(key: string): any {

@@ -1,41 +1,62 @@
 .ws-nav-root {
-    background-color: var(--ide-ws-nav-bgcolor);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    justify-content: space-between;
-    z-index: 10;
-    position: absolute;
-    width: 48px;
-    left: 0;
-    bottom: 0;
-    top: 0;
+  background-color: var(--ide-ws-nav-bgcolor);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: space-between;
+  z-index: 10;
+  position: absolute;
+  width: 48px;
+  left: 0;
+  bottom: 0;
+  top: 0;
 }
+
 .nav-actions {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 4px 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
 }
+
 .nav-end-actions {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 4px 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
 }
+
 .nav-btn {
-    width: 48px;
-    height: 48px;
-    cursor: pointer;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
 }
+
 .nav-btn svg {
-    position: relative;
-    left: 12px;
-    top: 12px;
-    path {
-        fill: var(--ide-ws-nav-btn-fill);
-    }
+  position: relative;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  fill: var(--ide-ws-nav-btn-fill);
+
+  use {
+    fill: var(--ide-ws-nav-btn-fill);
+  }
+
+  path {
+    fill: inherit;
+  }
 }
-.nav-btn:hover svg path{
+
+.nav-btn:hover svg {
+  fill: var(--ide-ws-nav-btn-hover-fill);
+
+  use {
     fill: var(--ide-ws-nav-btn-hover-fill);
+  }
+
+  path {
+    fill: inherit;
+  }
 }

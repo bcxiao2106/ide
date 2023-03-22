@@ -4,9 +4,9 @@ import axios from "axios";
 @Injectable()
 export class CsharpCompletionService {
     private socket!: WebSocket;
-    
-    constructor() { 
-        this.initSocket();
+
+    constructor() {
+        // this.initSocket();
     }
 
     private initSocket() {
@@ -19,7 +19,7 @@ export class CsharpCompletionService {
         this.socket.onclose = this.onClose.bind(this);
         this.socket.onmessage = this.onMessage.bind(this);
         this.socket.onerror = this.onError.bind(this);
-        
+
     }
 
     private onOpen() {
@@ -52,7 +52,7 @@ export class CsharpCompletionService {
             case 'hover': endPoint = `${baseUrl}/completion/hover`; break;
             case 'codeCheck': endPoint = `${baseUrl}/completion/codeCheck`; break;
         }
-        this.socket.send(JSON.stringify(request));
+        // this.socket.send(JSON.stringify(request));
         return await axios.post(endPoint, JSON.stringify(request));
     }
 

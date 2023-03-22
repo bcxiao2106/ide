@@ -23,6 +23,10 @@ import { MonacoEditorLoaderDirective } from './components/monaco-editor/monaco-e
 import { CsharpCompletionService } from './services/csharp-completion.service';
 import { ThemesService } from './services/themes.service';
 import { EditorMarkersComponent } from './components/editor-markers/editor-markers.component';
+import { ViewService } from './services/view.service';
+import { ActionService } from './services/action.service';
+import { CloudSiderComponent } from './components/cloud/cloud-sider/cloud-sider.component';
+import { SvgIconDirective } from './directives/svg-icon.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { EditorMarkersComponent } from './components/editor-markers/editor-marke
     FunctionalPanelComponent,
     MonacoEditorComponent,
     MonacoEditorLoaderDirective,
-    EditorMarkersComponent
+    EditorMarkersComponent,
+    CloudSiderComponent,
+    SvgIconDirective
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import { EditorMarkersComponent } from './components/editor-markers/editor-marke
     ViewCacheService,
     MonacoEditorLoaderService,
     CsharpCompletionService,
-    ThemesService
+    ThemesService,
+    ViewService,
+    ActionService
   ],
   bootstrap: [AppComponent]
 })

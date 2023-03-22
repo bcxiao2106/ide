@@ -1,3 +1,5 @@
+import { ViewContainerRef } from "@angular/core";
+
 export interface ISection {
     title: string;
     component: string;
@@ -33,4 +35,10 @@ export interface IThemesConfig {
     themes: string[];
     default: string;
     map: Record<string, Record<string, string>>;
+}
+export interface IAction {
+  target: string;
+  component: string;
+  config?: any;
+  priority?: number;
 }
