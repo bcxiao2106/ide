@@ -1,9 +1,9 @@
 <div class="ws-nav-root">
   <div class="nav-actions">
-    <div class="nav-btn" *ngFor="let item of config.start" (click)="execute(item)" [svgicon]="item.icon"></div>
+    <div class="nav-btn" *ngFor="let item of config.start" (click)="onClick(item)" [svgicon]="item.icon" [ngClass]="{'selected': item.selected}"></div>
   </div>
 
   <div class="nav-end-actions">
-    <div class="nav-btn" *ngFor="let item of config.end" (click)="execute(item)" [svgicon]="item.icon"></div>
+    <div class="nav-btn" *ngFor="let item of config.end" (click)="onClick(item)" [svgicon]="item.icon"></div>
   </div>
 </div>

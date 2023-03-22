@@ -19,7 +19,19 @@ export class WorkspaceNavComponent {
     this.themeService.switch(theme);
   }
 
-  execute(actions: IAction[]) {
+  onClick(item: any) {
+    this.toggleSelect(item, this.config.start);
+    this.toggleSelect(item, this.config.end);
+    this.execute(item.actions);
+  }
+
+  private execute(actions: IAction[]) {
     this.actionService.execute(actions);
+  }
+
+  private toggleSelect(selected: any, items: any[]) {
+    items.forEach(item => {
+      item.selected = item.id == selected.id;
+    });
   }
 }

@@ -38,25 +38,29 @@
   top: 12px;
   width: 24px;
   height: 24px;
-  fill: var(--ide-ws-nav-btn-fill);
-
   use {
     fill: var(--ide-ws-nav-btn-fill);
   }
+  path {
+    fill: inherit;
+  }
+}
 
+.selected svg {
+  use {
+    fill: var(--ide-ws-nav-btn-hover-fill);
+  }
   path {
     fill: inherit;
   }
 }
 
 .nav-btn:hover svg {
-  fill: var(--ide-ws-nav-btn-hover-fill);
-
   use {
     fill: var(--ide-ws-nav-btn-hover-fill);
   }
-
   path {
     fill: inherit;
   }
 }
+
