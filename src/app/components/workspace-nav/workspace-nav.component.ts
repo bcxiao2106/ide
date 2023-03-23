@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { WorkspaceNav } from 'src/app/config/workspace-nav.config';
-import { IAction } from 'src/app/interfaces/interfaces';
-import { ActionService } from 'src/app/services/action.service';
+import { IAction, IContext } from 'src/app/interfaces/interfaces';
 import { ThemesService } from 'src/app/services/themes.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { ThemesService } from 'src/app/services/themes.service';
 })
 export class WorkspaceNavComponent {
   config: any = WorkspaceNav;
-  constructor(private themeService: ThemesService,
-    private actionService: ActionService) {}
+  context!: IContext;
+  constructor(private themeService: ThemesService) { }
 
   switchTheme() {
     let theme: string = this.themeService.theme == 'vs-dark' ? 'vs-light' : 'vs-dark';
@@ -26,7 +25,7 @@ export class WorkspaceNavComponent {
   }
 
   private execute(actions: IAction[]) {
-    this.actionService.execute(actions);
+    this.context && this.context.actionManager.execute(actions);
   }
 
   private toggleSelect(selected: any, items: any[]) {

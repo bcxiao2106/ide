@@ -1,4 +1,5 @@
-import { Injectable, ViewContainerRef } from "@angular/core";
+import { ComponentRef, Injectable, ViewContainerRef } from "@angular/core";
+import { IContainerParams, ILoadComponentParams, IViewContainer } from "../interfaces/interfaces";
 
 @Injectable()
 export class ViewService {
@@ -8,17 +9,39 @@ export class ViewService {
     this.map = new Map<string, ViewContainerRef>();
   }
 
-  register(id: string, viewRef: ViewContainerRef) {
-    this.map.set(id, viewRef);
+  private registerContainer(container: IViewContainer) {
+    this.map.set(container.id, container.ref);
   }
 
-  registerInBulk(views: any[]) {
-    views && views.forEach(v => {
-      this.register(v.id, v.view);
+  registerContainers(params: IContainerParams) {
+    params.containers && params.containers.forEach(container => {
+      this.registerContainer(container);
     });
   }
 
-  get(id: string): ViewContainerRef {
+  deregisterContainers(params: IContainerParams) {
+    params.containers && params.containers.forEach(container => {
+      this.map.delete(container.id);
+    });
+  }
+
+  load(params: ILoadComponentParams) {
+    params && params.components && Array.isArray(params.components) && params.components.forEach(action => {
+      let container = this.getContainerRef(action.target);
+      let comp = params.context.component.get(action.component);
+      if(container && comp) {
+        container.clear();
+        let compRef: ComponentRef<any> = container.createComponent(comp);
+        compRef.instance['context'] = params.context;
+      }
+    });
+  }
+
+  getContainerRef(id: string): ViewContainerRef {
     return this.map.get(id)!;
+  }
+
+  clear(params: any) {
+    this.map.get(params.id)?.clear();
   }
 }

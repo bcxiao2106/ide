@@ -46,6 +46,10 @@
   }
 }
 
+.selected {
+  // background-color: var(--ide-sider-bgcolor);
+  border-left: 3px solid var(--ide-ws-nav-btn-fill);
+}
 .selected svg {
   use {
     fill: var(--ide-ws-nav-btn-hover-fill);

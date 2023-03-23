@@ -1,11 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Themes } from 'src/app/config/themes.config';
-import { ActionService } from 'src/app/services/action.service';
-import { ThemesService } from 'src/app/services/themes.service';
-import { ViewService } from 'src/app/services/view.service';
-import { SiderComponent, TopNavComponent, WorkspaceNavComponent } from '../components';
-import { EditorPanelComponent } from '../editor-panel/editor-panel.component';
-import { FunctionalPanelComponent } from '../functional-panel/functional-panel.component';
+import { ILoadComponent, IViewContainer } from 'src/app/interfaces/interfaces';
+import { ActionManagerService } from 'src/app/services/action-manager.service';
 
 @Component({
   selector: 'ide',
@@ -20,26 +16,28 @@ export class IdeComponent implements OnInit {
   @ViewChild('functionPanel', { read: ViewContainerRef, static: true }) functionPanelContainer!: ViewContainerRef;
   @ViewChild('popup', { read: ViewContainerRef, static: true }) popupContainer!: ViewContainerRef;
 
-  constructor(private themes: ThemesService,
-    private viewService: ViewService,
-    private actionService: ActionService) { }
+  constructor(private actionManager: ActionManagerService) { }
 
   ngOnInit(): void {
-    this.themes.init(Themes);
-    this.viewService.registerInBulk([
-      { id: 'topNav', view: this.topNavContainer },
-      { id: 'workspaceNav', view: this.workspaceNavContainer },
-      { id: 'sider', view: this.siderContainer },
-      { id: 'editor', view: this.editor },
-      { id: 'functionPanel', view: this.functionPanelContainer },
-      { id: 'popup', view: this.popupContainer }
-    ]);
-    this.actionService.execute([
+    let containers: IViewContainer[] = [
+      { id: 'topNav', ref: this.topNavContainer },
+      { id: 'workspaceNav', ref: this.workspaceNavContainer },
+      { id: 'sider', ref: this.siderContainer },
+      { id: 'editor', ref: this.editor },
+      { id: 'functionPanel', ref: this.functionPanelContainer },
+      { id: 'popup', ref: this.popupContainer }
+    ];
+    let views: ILoadComponent[] = [
       { target: 'topNav', component: 'TopNavComponent' },
       { target: 'workspaceNav', component: 'WorkspaceNavComponent' },
       { target: 'sider', component: 'SiderComponent' },
       { target: 'editor', component: 'EditorPanelComponent' },
       { target: 'functionPanel', component: 'FunctionalPanelComponent' }
+    ];
+    this.actionManager.execute([
+      { service: 'theme', method: 'init', params: { config: Themes } },
+      { service: 'view', method: 'registerContainers', params: { containers: containers } },
+      { service: 'view', method: 'load', params: { components: views } }
     ]);
   }
 }

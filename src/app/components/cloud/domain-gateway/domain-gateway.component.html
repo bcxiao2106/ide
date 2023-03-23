@@ -1,0 +1,109 @@
+<div>
+  <div>
+    <div class="section-header">Basic info</div>
+    <div class="section-container">
+      <table>
+        <tr>
+          <td>Service Name</td>
+          <td>Domain Gateway Service</td>
+        </tr>
+        <tr>
+          <td>PODs count</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Master Connection</td>
+          <td>4 Masters</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div class="section-header">PODs Status</div>
+    <div class="section-container">
+      <table>
+        <tr>
+          <th>Hostname</th>
+          <th>IP Adress</th>
+          <th>Age</th>
+          <th>Hit Count</th>
+          <th>Error Count</th>
+          <th>Status</th>
+          <th>CPU %</th>
+          <th>Memory %</th>
+          <th>Master Connections</th>
+        </tr>
+        <tr>
+          <td>POD-0x0122</td>
+          <td>172.55.1.22</td>
+          <td>05 D, 08 H, 51 M</td>
+          <td>32,950</td>
+          <td>29</td>
+          <td>Healthy</td>
+          <td>39</td>
+          <td>62</td>
+          <td>4:4 | Healthy</td>
+        </tr>
+        <tr>
+          <td>POD-0x0209</td>
+          <td>172.55.5.78</td>
+          <td>05 D, 08 H, 51 M</td>
+          <td>39,018</td>
+          <td>41</td>
+          <td>Healthy</td>
+          <td>65</td>
+          <td>76</td>
+          <td>4:4 | Healthy</td>
+        </tr>
+        <tr>
+          <td>POD-0x0107</td>
+          <td>172.41.7.99</td>
+          <td>05 D, 08 H, 51 M</td>
+          <td>8,950</td>
+          <td>6</td>
+          <td>Healthy</td>
+          <td>74</td>
+          <td>48</td>
+          <td>3:4 | At Risk</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div class="section-header">Serivce Plugins Manifest</div>
+    <div class="section-container">
+      <table>
+        <tr>
+          <th>Plugin Name</th>
+          <th>Plugin Version</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Budget-DG.dll</td>
+          <td>1.0.5</td>
+          <td>Activated</td>
+          <td>Migrate</td>
+        </tr>
+        <tr>
+          <td>Timesheet-DG.dll</td>
+          <td>1.0.3</td>
+          <td>Activated</td>
+          <td>Migrate</td>
+        </tr>
+        <tr>
+          <td>Invoice-DG.dll</td>
+          <td>1.0.0</td>
+          <td>Activated</td>
+          <td><span class="hyperlink" (click)="onClick()">Migrate</span></td>
+        </tr>
+        <tr>
+          <td>Timesheet-DG.dll</td>
+          <td>1.0.4</td>
+          <td>Inactive</td>
+          <td>Publish Events</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

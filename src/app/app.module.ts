@@ -24,9 +24,12 @@ import { CsharpCompletionService } from './services/csharp-completion.service';
 import { ThemesService } from './services/themes.service';
 import { EditorMarkersComponent } from './components/editor-markers/editor-markers.component';
 import { ViewService } from './services/view.service';
-import { ActionService } from './services/action.service';
 import { CloudSiderComponent } from './components/cloud/cloud-sider/cloud-sider.component';
 import { SvgIconDirective } from './directives/svg-icon.directive';
+import { DomainGatewayComponent } from './components/cloud/domain-gateway/domain-gateway.component';
+import { PopupComponent } from './components/shared/popup/popup.component';
+import { ActionManagerService } from './services/action-manager.service';
+import { MigratePluginComponent } from './components/cloud/migrate-plugin/migrate-plugin.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { SvgIconDirective } from './directives/svg-icon.directive';
     MonacoEditorLoaderDirective,
     EditorMarkersComponent,
     CloudSiderComponent,
-    SvgIconDirective
+    SvgIconDirective,
+    DomainGatewayComponent,
+    PopupComponent,
+    MigratePluginComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,7 @@ import { SvgIconDirective } from './directives/svg-icon.directive';
     CsharpCompletionService,
     ThemesService,
     ViewService,
-    ActionService
+    ActionManagerService
   ],
   bootstrap: [AppComponent]
 })
