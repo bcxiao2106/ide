@@ -34,6 +34,10 @@ export class PopupComponent implements OnInit, OnDestroy {
     ]);
   }
 
+  onElseClick(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
   ngOnDestroy(): void {
     this.context.actionManager.execute([
       { service: 'view', method: 'deregisterContainers', params: { containers: [this.container] } }

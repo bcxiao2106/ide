@@ -8,11 +8,11 @@ import { IContext } from 'src/app/interfaces/interfaces';
 })
 export class DomainGatewayComponent {
   context!: IContext;
-  constructor(){}
+  constructor() { }
 
   onClick() {
     this.context && this.context.actionManager.execute([
-      {service: 'view', method: 'load', params: { components: [{target: 'popup', component: 'PopupComponent'}]}}
+      { service: 'view', method: 'load', params: { components: [{ target: 'popup', component: 'PopupComponent', attachedConfig: { config: { title: 'Migrate Plugin Popup', component: 'MigratePluginComponent' } } }] } }
     ]);
   }
 }

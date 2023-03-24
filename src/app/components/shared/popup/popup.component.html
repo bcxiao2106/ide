@@ -1,15 +1,12 @@
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" (click)="close()">
 
   <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close" (click)="close()">&times;</span>
-    <div>
-      <div></div>
-      <div></div>
+  <div class="modal-content" (click)="onElseClick($event)">
+    <div class="popup-header">
+      <div class="popup-title">{{config.title}}</div>
+      <div class="popup-close"><span class="close" (click)="close()">&times;</span></div>
     </div>
-    <div>
-      <ng-container #container></ng-container>
-    </div>
+    <div class="popup-content" #container></div>
   </div>
 
 </div>

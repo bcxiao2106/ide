@@ -71,6 +71,7 @@ export interface IViewContainer {
 export interface ILoadComponent {
   target: string;
   component: string;
+  attachedConfig?: any;
 }
 export interface IActionParams {
   context: IContext;

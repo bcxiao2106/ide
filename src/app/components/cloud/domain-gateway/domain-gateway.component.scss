@@ -7,7 +7,7 @@ table {
 
 td,
 th {
-  border: 1px solid #414141;
+  border: 1px solid var(--ide-table-border-color);
   padding: 4px;
   height: 20px;
 }
@@ -20,8 +20,8 @@ tr:hover {
 
 th {
   text-align: left;
-  background-color: #2f3138;
-  color: #fff;
+  background-color: var(--ide-table-header-bgcolor);
+  color: var(--ide-table-header-color);
 }
 
 .section-container {
@@ -36,8 +36,9 @@ th {
   display: flex;
   text-transform: uppercase;
   font-size: 12px;
+  padding-left: 10px;
 }
 .hyperlink {
-  color: blue;
+  color: var(--ide-hyperlink-color);
   cursor: pointer;
 }

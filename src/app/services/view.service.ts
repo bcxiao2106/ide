@@ -33,6 +33,7 @@ export class ViewService {
         container.clear();
         let compRef: ComponentRef<any> = container.createComponent(comp);
         compRef.instance['context'] = params.context;
+        action.attachedConfig && Object.assign(compRef.instance, action.attachedConfig);
       }
     });
   }
