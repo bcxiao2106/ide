@@ -10,6 +10,7 @@ import { MonacoEditorComponent } from "../components/monaco-editor/monaco-editor
 import { ProjectInfoComponent } from "../components/project-info/project-info.component";
 import { PopupComponent } from "../components/shared/popup/popup.component";
 import { TreeMenuComponent } from "../components/tree-menu/tree-menu.component";
+import { GithubComponent } from "../components/github/github.component";
 
 @Injectable()
 export class ComponentService {
@@ -26,7 +27,8 @@ export class ComponentService {
         CloudSiderComponent: CloudSiderComponent,
         DomainGatewayComponent: DomainGatewayComponent,
         PopupComponent: PopupComponent,
-        MigratePluginComponent: MigratePluginComponent
+        MigratePluginComponent: MigratePluginComponent,
+        GithubComponent: GithubComponent
     }
 
     get(key: string): any {

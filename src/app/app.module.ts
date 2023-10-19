@@ -30,6 +30,12 @@ import { DomainGatewayComponent } from './components/cloud/domain-gateway/domain
 import { PopupComponent } from './components/shared/popup/popup.component';
 import { ActionManagerService } from './services/action-manager.service';
 import { MigratePluginComponent } from './components/cloud/migrate-plugin/migrate-plugin.component';
+import { GithubAuthService } from './services/github.auth.service';
+import { GithubService } from './services/github-service';
+import { GithubComponent } from './components/github/github.component';
+import { DateTimeProvider, OAuthLogger, OAuthService, SystemDateTimeProvider, UrlHelperService } from 'angular-oauth2-oidc';
+import { HttpClientModule } from '@angular/common/http';
+import { GitHubAuthLogger } from './classes/github.auth.class';
 
 @NgModule({
   declarations: [
@@ -52,10 +58,12 @@ import { MigratePluginComponent } from './components/cloud/migrate-plugin/migrat
     SvgIconDirective,
     DomainGatewayComponent,
     PopupComponent,
-    MigratePluginComponent
+    MigratePluginComponent,
+    GithubComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
@@ -67,7 +75,13 @@ import { MigratePluginComponent } from './components/cloud/migrate-plugin/migrat
     CsharpCompletionService,
     ThemesService,
     ViewService,
-    ActionManagerService
+    ActionManagerService,
+    GithubAuthService,
+    GithubService,
+    OAuthService,
+    UrlHelperService,
+    {provide: OAuthLogger, useClass: GitHubAuthLogger },
+    {provide: DateTimeProvider, useClass: SystemDateTimeProvider}
   ],
   bootstrap: [AppComponent]
 })
