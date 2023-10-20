@@ -36,6 +36,7 @@ import { GithubComponent } from './components/github/github.component';
 import { DateTimeProvider, OAuthLogger, OAuthService, SystemDateTimeProvider, UrlHelperService } from 'angular-oauth2-oidc';
 import { HttpClientModule } from '@angular/common/http';
 import { GitHubAuthLogger } from './classes/github.auth.class';
+import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redirect.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { GitHubAuthLogger } from './classes/github.auth.class';
     DomainGatewayComponent,
     PopupComponent,
     MigratePluginComponent,
-    GithubComponent
+    GithubComponent,
+    OauthRedirectComponent
   ],
   imports: [
     BrowserModule,
