@@ -5,7 +5,7 @@ import { IThemeParams, IThemesConfig } from "../interfaces/interfaces";
 export class ThemesService {
   private element: any;
   private map: Map<string, Map<string, string>>;
-  theme!: string;
+  currentTheme!: string;
 
   constructor() {
     this.map = new Map<string, Map<string, string>>();
@@ -22,8 +22,8 @@ export class ThemesService {
         this.map.get(theme)?.set(key, params.config.map[key][theme]);
       })
     });
-    this.theme = params.config.default;
-    this.applyTheme(this.theme);
+    this.currentTheme = params.config.default;
+    this.applyTheme(this.currentTheme);
     console.log(this.map);
   }
 
@@ -32,23 +32,23 @@ export class ThemesService {
   }
 
   set(key: string, value: string) {
-    this.map.get(this.theme)?.set(key, value);
+    this.map.get(this.currentTheme)?.set(key, value);
   }
 
   switch(theme: string) {
-    if (theme == this.theme) return;
+    if (theme == this.currentTheme) return;
     this.applyTheme(theme);
-    this.theme = theme;
+    this.currentTheme = theme;
     this.setMonacoTheme(theme);
   }
 
   toggle() {
-    let theme: string = (this.theme == 'vs-dark') ? 'vs-light' : 'vs-dark';
+    let theme: string = (this.currentTheme == 'vs-dark') ? 'vs-light' : 'vs-dark';
     this.switch(theme);
   }
 
   setMonacoTheme(theme: string) {
-    monaco.editor.setTheme(theme);
+    monaco && monaco.editor && monaco.editor.setTheme(theme);
   }
 
   private applyTheme(theme: string) {

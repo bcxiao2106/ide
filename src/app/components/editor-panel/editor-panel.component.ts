@@ -25,7 +25,7 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     this.editorTabs = this.context.editors.get(this.groupId)!;
     this.subscribe();
-    this.load();
+    // this.load();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,6 +51,7 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
     this.editorPaneRef && this.editorPaneRef.clear();
     if(!this.editorTabs || this.editorTabs.length == 0) return;
     let focusedTab = this.editorTabs.find(tab => tab.focused == true);
+    this.applyMonacoTheme(focusedTab);
     let componentRef: ComponentRef<any> = this.editorPaneRef.createComponent(this.context.component.get(focusedTab?.component!));
     componentRef.instance['config'] = focusedTab?.attachedConfig;
     componentRef.instance['context'] = this.context;
@@ -59,6 +60,11 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
 
   loadMarkers(markers: IMarker[]) {
 
+  }
+
+  private applyMonacoTheme(editorConfig: any) {
+    if(editorConfig.type != 'monaco') return;
+    editorConfig.attachedConfig.options.theme = this.context.theme.currentTheme;
   }
 
   close(tab: IEditorTab) {

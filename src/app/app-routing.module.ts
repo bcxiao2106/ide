@@ -4,7 +4,7 @@ import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redire
 
 const routes: Routes = [
   {
-    path: 'oauth', pathMatch: 'full', children: [
+    path: 'oauth/:code', pathMatch: 'full',  component: OauthRedirectComponent, children: [
       { path: 'redirect/:code', component: OauthRedirectComponent }
     ]
   }

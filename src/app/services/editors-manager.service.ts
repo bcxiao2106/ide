@@ -128,7 +128,7 @@ export function getEditorConfig(scope: any, node: ITreeNode): any {
 }
 
 export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
-  let theme: string = scope.themeService.theme;
+  let theme: string = scope.themeService.currentTheme;
   let uri: string = `a://${node.id}/${node.path?.join('/')}`!;
   console.log(node.path, uri);
   return {

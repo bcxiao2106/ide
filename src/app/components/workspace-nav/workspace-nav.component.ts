@@ -14,7 +14,7 @@ export class WorkspaceNavComponent {
   constructor(private themeService: ThemesService) { }
 
   switchTheme() {
-    let theme: string = this.themeService.theme == 'vs-dark' ? 'vs-light' : 'vs-dark';
+    let theme: string = this.themeService.currentTheme == 'vs-dark' ? 'vs-light' : 'vs-dark';
     this.themeService.switch(theme);
   }
 
