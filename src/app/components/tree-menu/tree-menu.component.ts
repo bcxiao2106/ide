@@ -48,8 +48,8 @@ export class TreeMenuComponent implements OnInit, OnDestroy {
         node.path = this.config?.path?.concat(node.text);
       }
     });
-    this.subscription.add(this.treeService.getSelected$(this.config?.viewId!).subscribe(node => {
-      this.ems.open(node);
+    this.subscription.add(this.treeService.getSelected$(this.config?.viewId!).subscribe(async (node) => {
+      await this.ems.open(node);
     }));
   }
 

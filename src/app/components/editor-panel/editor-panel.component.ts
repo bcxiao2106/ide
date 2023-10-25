@@ -2,8 +2,11 @@ import { Component, ComponentRef, ElementRef, Input, OnChanges, OnDestroy, OnIni
 import { Subscription } from 'rxjs';
 import { siderFilesTreeViewId } from 'src/app/config/sider-files.config';
 import { EditorType } from 'src/app/interfaces/enums';
+import { IRepo } from 'src/app/interfaces/github.interfaces';
 import { IContext, IEditorTab } from 'src/app/interfaces/interfaces';
 import { IMarker } from 'src/app/interfaces/monaco-marker.interface';
+import { EditorsManagerService } from 'src/app/services/editors-manager.service';
+import { GithubService } from 'src/app/services/github-service';
 
 @Component({
   selector: 'app-editor-panel',
@@ -20,7 +23,8 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
   treeViewId: string = siderFilesTreeViewId;
   private subscription: Subscription = new Subscription();
 
-  constructor() { }
+  constructor(private githubService: GithubService,
+    private ems: EditorsManagerService) { }
 
   ngOnInit(): void {
     this.editorTabs = this.context.editors.get(this.groupId)!;
@@ -33,12 +37,15 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   subscribe() {
-    this.subscription.add(this.context.editors.change$.subscribe(activeGroup => {
+    this.subscription.add(this.context.editors.change$.subscribe(async (activeGroup) => {
       this.editorTabs = this.context.editors.get(this.groupId)!;
       this.load();
     }));
     this.subscription.add(this.context.editors.markersStream$.subscribe(markers => {
       console.log(markers);
+    }));
+    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IRepo) => {
+      // this.closeAll();
     }));
   }
 
@@ -69,6 +76,10 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
 
   close(tab: IEditorTab) {
     this.context.editors.remove(tab.id);
+  }
+
+  private closeAll() {
+    this.ems.closeAll();
   }
 
   ngOnDestroy(): void {

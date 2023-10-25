@@ -5,30 +5,28 @@ import { IEditorTab, ITreeNode } from "../interfaces/interfaces";
 import { ThemesService } from "./themes.service";
 import { IMarker } from '../interfaces/monaco-marker.interface';
 import { EditorType } from "../interfaces/enums";
+import { GithubService } from "./github-service";
 
 @Injectable()
 export class EditorsManagerService {
   private groupId: number = 0;
   public activeGroup: number = 0;
-  private map: Map<number, IEditorTab[]>;
-  private editorsMap: Map<string, any>;
-  private subject: Subject<number>;
-  public change$: Observable<number>;
-  private markers: BehaviorSubject<IMarker[]>;
-  public markersStream$: Observable<IMarker[]>;
+  private map!: Map<number, IEditorTab[]>;
+  private editorsMap!: Map<string, any>;
+  private subject!: Subject<number>;
+  public change$!: Observable<number>;
+  private markers!: BehaviorSubject<IMarker[]>;
+  public markersStream$!: Observable<IMarker[]>;
   private monacoInitialized: boolean = false;
 
-  constructor(private themeService: ThemesService) {
-    this.map = new Map<number, IEditorTab[]>();
-    this.editorsMap = new Map<string, any>();
-    this.subject = new Subject()
-    this.change$ = this.subject.asObservable();
-    this.markers = new BehaviorSubject<IMarker[]>([]);
-    this.markersStream$ = this.markers.asObservable();
-    this.addGroup();
+  constructor(private themeService: ThemesService,
+    private githubService: GithubService) {
+    this.init();
   }
 
-  open(node: ITreeNode) {
+  async open(node: ITreeNode): Promise<void> {
+    if(node.editorType === EditorType.none) return;
+    await this.fetchReource(node);
     let tabs: IEditorTab[] | undefined = this.map.get(this.activeGroup);
     (!tabs?.find(tab => tab.id == node.id)) && tabs?.push(Object.assign({
       id: node.id,
@@ -97,7 +95,24 @@ export class EditorsManagerService {
     this.editorsMap.get(id).revealLine(marker.startLineNumber);
     let selection: monaco.Range = new monaco.Range(marker.startLineNumber, marker.startColumn, marker.endLineNumber, marker.endColumn);
     this.editorsMap.get(id).setSelection(selection);
+  }
 
+  closeAll() {
+    this.init();
+  }
+
+  init() {
+    this.map = new Map<number, IEditorTab[]>();
+    this.editorsMap = new Map<string, any>();
+    this.subject = new Subject()
+    this.change$ = this.subject.asObservable();
+    this.markers = new BehaviorSubject<IMarker[]>([]);
+    this.markersStream$ = this.markers.asObservable();
+    this.addGroup();
+  }
+
+  private async fetchReource(node: ITreeNode): Promise<void> {
+    await this.githubService.getResourceRaw(node);
   }
 
   private markerProcess(markers: IMarker[]) {
@@ -136,10 +151,10 @@ export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
     attachedConfig: {
       options: {
         theme: theme,
-        language: 'csharp',
+        language: 'typescript',
         readOnly: false
       },
-      code: CODE[node.id],
+      code: node.resource.textual ? node.resource.textual : '',
       uri: uri
     }
   }

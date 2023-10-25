@@ -8,12 +8,14 @@ export class TreeNode implements ITreeNode {
   editorType: EditorType | undefined;
   resource?: any;
   children?: string[] | undefined;
+  path?: string[] | undefined;
 
 
   constructor(id: string, viewId: string, text: string, type: string, resource?: any) {
     this.id = id;
     this.viewId = viewId;
     this.text = text;
+    this.path = text.length > 1 ? [text] : [];
     if(resource) this.resource = resource;
     if(type === 'dir') {
       this.children = [];

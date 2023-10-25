@@ -12,9 +12,9 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_CzDmjS7iS0F30AmwAuXmXIFhQ8g9Oa17LEdR",
+    "access_token": "ghu_5BxJEW6D0x4E0kaSJFtjvQPyvzP9An19BOCU",
     "expires_in": 28800,
-    "refresh_token": "ghr_WliuHXo3rGzg07CfmeM7oARSnpZs2zP2W03Of1CZV7W6mUaJ5PcZK4X1hQBThoZQ8oR3q94B2zKI",
+    "refresh_token": "ghr_KWEivi8e9hijQqKM5WnyD5kAxzESvjr9PZwhPWByXuyL8tJ81rzisYZCRQHzsXoEhwjEUR0QIdT8",
     "refresh_token_expires_in": 15811200,
     "token_type": "bearer",
     "scope": ""
@@ -60,6 +60,7 @@ export class GithubService {
     console.log(response);
     if (response?.data && Array.isArray(response.data)) {
       for (let i = 0; i < response.data.length; i++) {
+        response.data[i].repo = repo;
         let [id, text, type] = [response.data[i].sha, response.data[i].name, response.data[i].type];
         let treeNode: ITreeNode = new TreeNode(id, viewId, text, type, response.data[i]);
         this.map.get(repo)?.tree.push(treeNode);
@@ -80,5 +81,16 @@ export class GithubService {
 
   getRepo(repo: string): IRepo | undefined {
     return this.map.get(repo);
+  }
+
+  async getResourceRaw(node: ITreeNode): Promise<any> {
+    let response = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
+      owner: this.owner,
+      repo: node.resource.repo,
+      filePath: node.resource.path
+    });
+    node.resource.raw = response.data.content;
+    node.resource.textual = atob(node.resource.raw);
+    console.log(node);
   }
 }
