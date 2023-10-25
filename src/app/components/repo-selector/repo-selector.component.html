@@ -1,0 +1,9 @@
+<!-- <button (click)="login()">Login in</button> -->
+<!-- <span (click)="getRepositories()">Choose a repository:</span> -->
+<span>Choose a repository:</span>
+<ng-container #reposContainer></ng-container>
+<ng-template #reposTemplate>
+  <select (change)="onRepoSelect($event)" class="repo-select">
+    <option *ngFor="let repo of repositories" [value]="repo.id">{{repo.full_name}}</option>
+  </select>
+</ng-template>

@@ -27,6 +27,7 @@ export interface ITreeNode {
   isExpanded?: boolean;
   parent?: string;
   editorType?: EditorType;
+  resource?: any;
 }
 export interface ITab {
   id: string;

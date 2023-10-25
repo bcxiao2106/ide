@@ -121,10 +121,10 @@ export class EditorsManagerService {
 
 export function getEditorConfig(scope: any, node: ITreeNode): any {
   if (node.editorType == EditorType.monaco) return getMonacoEditorConfig(scope, node);
-  return {
-    component: 'DomainGatewayComponent',
-    attachedConfig: {}
-  }
+  // return {
+  //   component: 'DomainGatewayComponent',
+  //   attachedConfig: {}
+  // }
 }
 
 export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {

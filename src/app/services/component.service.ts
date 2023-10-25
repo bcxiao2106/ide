@@ -11,6 +11,7 @@ import { ProjectInfoComponent } from "../components/project-info/project-info.co
 import { PopupComponent } from "../components/shared/popup/popup.component";
 import { TreeMenuComponent } from "../components/tree-menu/tree-menu.component";
 import { GithubComponent } from "../components/github/github.component";
+import { RepoSelectorComponent } from "../components/repo-selector/repo-selector.component";
 
 @Injectable()
 export class ComponentService {
@@ -28,7 +29,8 @@ export class ComponentService {
         DomainGatewayComponent: DomainGatewayComponent,
         PopupComponent: PopupComponent,
         MigratePluginComponent: MigratePluginComponent,
-        GithubComponent: GithubComponent
+        GithubComponent: GithubComponent,
+        RepoSelectorComponent: RepoSelectorComponent
     }
 
     get(key: string): any {

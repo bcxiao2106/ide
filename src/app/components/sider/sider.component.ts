@@ -11,11 +11,11 @@ import { TreeViewService } from 'src/app/services/tree-view.service';
 })
 export class SiderComponent implements OnInit {
   constructor(private treeService: TreeViewService) { }
-  
+
   sections: ISection[] = SiderSections;
 
   ngOnInit(): void {
-    this.treeService.register(siderFilesTreeViewId);
-    this.treeService.setRange(SiderMenu);
+    // this.treeService.register(siderFilesTreeViewId);
+    // this.treeService.setRange(SiderMenu);
   }
 }

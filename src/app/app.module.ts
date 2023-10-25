@@ -37,6 +37,7 @@ import { DateTimeProvider, OAuthLogger, OAuthService, SystemDateTimeProvider, Ur
 import { HttpClientModule } from '@angular/common/http';
 import { GitHubAuthLogger } from './classes/github.auth.class';
 import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redirect.component';
+import { RepoSelectorComponent } from './components/repo-selector/repo-selector.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redire
     PopupComponent,
     MigratePluginComponent,
     GithubComponent,
-    OauthRedirectComponent
+    OauthRedirectComponent,
+    RepoSelectorComponent
   ],
   imports: [
     BrowserModule,
