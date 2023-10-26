@@ -12,9 +12,9 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_5BxJEW6D0x4E0kaSJFtjvQPyvzP9An19BOCU",
+    "access_token": "ghu_BixX6A85NGe3EsUyhR84ORxvU6yDsl3y7AS5",
     "expires_in": 28800,
-    "refresh_token": "ghr_KWEivi8e9hijQqKM5WnyD5kAxzESvjr9PZwhPWByXuyL8tJ81rzisYZCRQHzsXoEhwjEUR0QIdT8",
+    "refresh_token": "ghr_OxYk0zkee6i087WcNAycRxe9FJSPpi67Ts4E1qI9MGMUyqUgNYzOkZVyuefopMmNjx6xk24Enmbv",
     "refresh_token_expires_in": 15811200,
     "token_type": "bearer",
     "scope": ""

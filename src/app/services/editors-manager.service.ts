@@ -25,7 +25,7 @@ export class EditorsManagerService {
   }
 
   async open(node: ITreeNode): Promise<void> {
-    if(node.editorType === EditorType.none) return;
+    if (node.editorType === EditorType.none) return;
     await this.fetchReource(node);
     let tabs: IEditorTab[] | undefined = this.map.get(this.activeGroup);
     (!tabs?.find(tab => tab.id == node.id)) && tabs?.push(Object.assign({
@@ -145,13 +145,16 @@ export function getEditorConfig(scope: any, node: ITreeNode): any {
 export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
   let theme: string = scope.themeService.currentTheme;
   let uri: string = `a://${node.id}/${node.path?.join('/')}`!;
-  console.log(node.path, uri);
+  let fileName: string[] = node.resource.name.split('.');
+  let fileExt: string = fileName[fileName.length - 1];
+  let lang: string = FileTypeLanguageMapping[fileExt] ? FileTypeLanguageMapping[fileExt] : FileTypeLanguageMapping['*'];
+  console.log(node.path, uri, lang);
   return {
     component: 'MonacoEditorComponent',
     attachedConfig: {
       options: {
         theme: theme,
-        language: 'typescript',
+        language: lang,
         readOnly: false
       },
       code: node.resource.textual ? node.resource.textual : '',
@@ -159,3 +162,20 @@ export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
     }
   }
 }
+
+
+export const FileTypeLanguageMapping: Record<string, string> = {
+  'js': 'javascript',
+  "ts": "typescript",
+  "csharp": "csharp",
+  "java": "java",
+  "html": "html",
+  "css": "css",
+  "scss": "css",
+  "sql": "sql",
+  "json": "json",
+  "yaml": "yaml",
+  "md": "markdown",
+  "*": 'plaintext'
+}
+

@@ -155,7 +155,7 @@ export class MonacoEditorComponent implements OnInit, OnChanges, OnDestroy, Cont
   }
 
   private initEditor() {
-    this.completionService.registerCsharpProvider();
+    // this.completionService.registerCsharpProvider();
     const options: MonacoEditorConstructionOptions = {
       value: [this.value].join('\n'),
       language: 'text',
