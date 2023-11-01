@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production",
+    "gh-build": "ng build --configuration=production --base-href 'https://https://bcxiao2106.github.io/ide/'",
     "watch": "ng build --watch --configuration production --source-map",
     "test": "ng test",
     "mvdocs": "mv dist/ide/* docs/"
