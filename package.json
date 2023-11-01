@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --source-map",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration production --source-map",
-    "test": "ng test"
+    "test": "ng test",
+    "mvdocs": "mv dist/ide/* docs/"
   },
   "private": true,
   "dependencies": {
