@@ -3,6 +3,7 @@ import { ITreeNode } from "./interfaces";
 export interface IRepo {
   repository: Map<string, IRepository>;
   tree: ITreeNode[];
+  resources: Map<string, IResource>;
   name: string;
 }
 
@@ -25,4 +26,9 @@ export interface IRepositoryLinks {
   self: string;
   git: string;
   html: string;
+}
+
+export interface IResource {
+  raw: string;
+  code: string;
 }
