@@ -12,9 +12,9 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_9tDTNtnG0zdhBQbgE1DQMIlHLlNfZf2UxTVg",
+    "access_token": "ghu_2wLuvWgLqeqw9fgQfnFc0D9JatOB3M35xaGd",
     "expires_in": 28800,
-    "refresh_token": "ghr_uYAyqAvqfyRysI9JTOcLWsLvYTYT3G6FOIONXJFtP9MReLVNHaS6NQ3c1yRw9yejcOO6PJ0nTX6A",
+    "refresh_token": "ghr_pTFxtXGxTi4x8B0QQBPV1pEub0VLhEOEG9mEdttnYJPCOglzb96uvXWZkNcXlCAiqj6wHO3eCe2s",
     "refresh_token_expires_in": 15724800,
     "token_type": "bearer",
     "scope": ""
@@ -22,6 +22,7 @@ export class GithubService {
   private owner: string = 'bcxiao2106'; //will fetch from login user
   private repositories: any[] = [];
   private repoSelectionSubject: Subject<IRepo>;
+  private selectedRepo!: string;
   repoChange$: Observable<IRepo>;
 
   constructor() {
@@ -43,12 +44,25 @@ export class GithubService {
     }
   }
 
+  async loadBranches(repo: string): Promise<void> {
+    let response = await this.octokit.request("GET /repos/{owner}/{repo}/branches", {
+      owner: this.owner,
+      repo: repo
+    });
+    console.log('loadBranches', response.data);
+    if(response && response.data && Array.isArray(response.data)) this.map.get(repo)?.branches = response.data;
+  }
+
   async loadRepo(repo: string): Promise<void> {
     if (!this.map.has(repo)) {
       await this.loadContents(repo, '', `tree_${repo}`);
+      await this.loadBranches(repo);
     }
     let repository: IRepo = this.map.get(repo)!;
-    if (repository) this.repoSelectionSubject.next(repository);
+    if (repository) {
+      this.repoSelectionSubject.next(repository);
+      this.selectedRepo = repo;
+    }
   }
 
   private async loadContents(repo: string, path: string, viewId: string, parentNode?: ITreeNode): Promise<void> {
@@ -94,6 +108,10 @@ export class GithubService {
     return this.map.get(repo);
   }
 
+  getSelectedRepo(): string {
+    return this.selectedRepo;
+  }
+
   async getResourceRaw(node: ITreeNode): Promise<any> {
     if(!this.map.get(node.resource.repo)?.resources.has(node.id)) {
       let response = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
@@ -113,6 +131,7 @@ export class GithubService {
     return {
       name: repo,
       repository: new Map<string, any>(),
+      branches: [],
       tree: [],
       resources: new Map<string, IResource>()
     }

@@ -17,8 +17,8 @@ export class GithubComponent {
 
   login() {
     // this.githubAuth.login();
-    window.open('https://github.com/login/oauth/authorize?client_id=Iv1.82426621cb1861d3&redirect_uri=https://bcxiao2106.github.io/ide', '_self');
-    // window.open('https://github.com/login/oauth/authorize?client_id=Iv1.f7f5f7931416304c&redirect_uri=http://localhost:3000', '_self');
+    // window.open('https://github.com/login/oauth/authorize?client_id=Iv1.82426621cb1861d3&redirect_uri=https://bcxiao2106.github.io/ide', '_self');
+    window.open('https://github.com/login/oauth/authorize?client_id=Iv1.f7f5f7931416304c&redirect_uri=http://localhost:3000', '_self');
     // window.open('https://github.com/login/oauth/authorize?client_id=Iv1.949259aaa2168657&redirect_uri=http://localhost:3000/');
   }
 

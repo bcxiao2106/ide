@@ -5,8 +5,8 @@ import axios from "axios";
 
 @Injectable()
 export class GithubAuthService {
-    private clientId: string = 'Iv1.82426621cb1861d3';//Iv1.82426621cb1861d3 //Iv1.f7f5f7931416304c
-    private clientSecret: string = '2133159c19f146b54e2539490ec2b27210feeec9';//2133159c19f146b54e2539490ec2b27210feeec9 //d5e56492375016352fb522e8ad61ddd170566d8f
+    private clientId: string = 'Iv1.f7f5f7931416304c';//Iv1.82426621cb1861d3 //Iv1.f7f5f7931416304c
+    private clientSecret: string = 'd5e56492375016352fb522e8ad61ddd170566d8f';//2133159c19f146b54e2539490ec2b27210feeec9 //d5e56492375016352fb522e8ad61ddd170566d8f
     private code: string | undefined;
 
     constructor(private oauthService: OAuthService) {

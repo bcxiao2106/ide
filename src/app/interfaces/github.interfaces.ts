@@ -2,6 +2,7 @@ import { ITreeNode } from "./interfaces";
 
 export interface IRepo {
   repository: Map<string, IRepository>;
+  branches: any[];
   tree: ITreeNode[];
   resources: Map<string, IResource>;
   name: string;
