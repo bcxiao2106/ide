@@ -33,6 +33,7 @@ export class GithubAuthService {
           accept: 'application/json'
         }
       });
+      console.log('TOKEN#####', tokenResponse);
     }
 
     login() {
