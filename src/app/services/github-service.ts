@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { OctokitResponse } from "@octokit/types";
 import { Octokit } from "octokit";
-import { IRepo } from "../interfaces/github.interfaces";
+import { IRepo, IResource } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { siderFilesTreeViewId } from "../config/sider-files.config";
@@ -12,9 +12,9 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_BixX6A85NGe3EsUyhR84ORxvU6yDsl3y7AS5",
+    "access_token": "ghu_6cKmzlRexDSrV2dOhYOEiIH1z9IJqA44iAdn",
     "expires_in": 28800,
-    "refresh_token": "ghr_OxYk0zkee6i087WcNAycRxe9FJSPpi67Ts4E1qI9MGMUyqUgNYzOkZVyuefopMmNjx6xk24Enmbv",
+    "refresh_token": "ghr_A96GaUR6ahRRTHXE7aK6caTVmiZpuM6nBW7sxPXNI4Or6YRrrTtUHS5EAMwosG3ZSWnRZi31pMCd",
     "refresh_token_expires_in": 15811200,
     "token_type": "bearer",
     "scope": ""
@@ -40,7 +40,9 @@ export class GithubService {
   }
 
   async loadRepo(repo: string): Promise<void> {
-    await this.loadContents(repo, '', `tree_${repo}`);
+    if (!this.map.has(repo)) {
+      await this.loadContents(repo, '', `tree_${repo}`);
+    }
     let repository: IRepo = this.map.get(repo)!;
     if (repository) this.repoSelectionSubject.next(repository);
   }
@@ -48,7 +50,7 @@ export class GithubService {
   private async loadContents(repo: string, path: string, viewId: string, parentNode?: ITreeNode): Promise<void> {
     //GET /repos/{owner}/{repo}/contents/{filePath}
     if (!this.map.has(repo)) {
-      this.map.set(repo, { name: repo, repository: new Map<string, any>(), tree: [] });
+      this.map.set(repo, this.getNewRepo(repo));
       if (!parentNode) parentNode = new TreeNode('root', viewId, '', 'dir');
       this.map.get(repo)?.tree.push(parentNode);
     }
@@ -58,6 +60,7 @@ export class GithubService {
       filePath: path
     });
     console.log(response);
+    let subDirs: any[] = [];
     if (response?.data && Array.isArray(response.data)) {
       for (let i = 0; i < response.data.length; i++) {
         response.data[i].repo = repo;
@@ -68,9 +71,13 @@ export class GithubService {
         this.map.get(repo)?.repository.set(id, response.data[i]);
         console.log(this.map);
         if (type === 'dir') {
-          await this.loadContents(repo, response.data[i].path, viewId, treeNode);
+          subDirs.push({ repo: repo, path: response.data[i].path, viewId: viewId, treeNode: treeNode });
         }
       }
+    }
+    this.repoSelectionSubject.next(this.map.get(repo)!);
+    for (let i = 0; i < subDirs.length; i++) {
+      await this.loadContents(subDirs[i].repo, subDirs[i].path, subDirs[i].viewId, subDirs[i].treeNode);
     }
   }
 
@@ -89,8 +96,18 @@ export class GithubService {
       repo: node.resource.repo,
       filePath: node.resource.path
     });
+
     node.resource.raw = response.data.content;
     node.resource.textual = atob(node.resource.raw);
-    console.log(node);
+    this.map.get(node.resource.repo)?.resources.set(node.resource.path, { raw: node.resource.raw, code: node.resource.textual });
+  }
+
+  private getNewRepo(repo: string): IRepo {
+    return {
+      name: repo,
+      repository: new Map<string, any>(),
+      tree: [],
+      resources: new Map<string, IResource>()
+    }
   }
 }
