@@ -12,13 +12,13 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_6cKmzlRexDSrV2dOhYOEiIH1z9IJqA44iAdn",
+    "access_token": "ghu_9tDTNtnG0zdhBQbgE1DQMIlHLlNfZf2UxTVg",
     "expires_in": 28800,
-    "refresh_token": "ghr_A96GaUR6ahRRTHXE7aK6caTVmiZpuM6nBW7sxPXNI4Or6YRrrTtUHS5EAMwosG3ZSWnRZi31pMCd",
-    "refresh_token_expires_in": 15811200,
+    "refresh_token": "ghr_uYAyqAvqfyRysI9JTOcLWsLvYTYT3G6FOIONXJFtP9MReLVNHaS6NQ3c1yRw9yejcOO6PJ0nTX6A",
+    "refresh_token_expires_in": 15724800,
     "token_type": "bearer",
     "scope": ""
-  };
+};
   private owner: string = 'bcxiao2106'; //will fetch from login user
   private repositories: any[] = [];
   private repoSelectionSubject: Subject<IRepo>;
@@ -31,11 +31,15 @@ export class GithubService {
   }
 
   async loadRepositories(owner?: string): Promise<void> {
-    let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
-      owner: owner ? owner : this.owner
-    });
-    if (response && response.data && Array.isArray(response.data)) {
-      this.repositories = response.data;
+    try {
+      let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
+        owner: owner ? owner : this.owner
+      });
+      if (response && response.data && Array.isArray(response.data)) {
+        this.repositories = response.data;
+      }
+    } catch (error) {
+      console.log(typeof error, JSON.stringify(error));
     }
   }
 
@@ -91,15 +95,18 @@ export class GithubService {
   }
 
   async getResourceRaw(node: ITreeNode): Promise<any> {
-    let response = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
-      owner: this.owner,
-      repo: node.resource.repo,
-      filePath: node.resource.path
-    });
+    if(!this.map.get(node.resource.repo)?.resources.has(node.id)) {
+      let response = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
+        owner: this.owner,
+        repo: node.resource.repo,
+        filePath: node.resource.path
+      });
 
-    node.resource.raw = response.data.content;
-    node.resource.textual = atob(node.resource.raw);
-    this.map.get(node.resource.repo)?.resources.set(node.resource.path, { raw: node.resource.raw, code: node.resource.textual });
+      node.resource.raw = response.data.content;
+      node.resource.textual = atob(node.resource.raw);
+      this.map.get(node.resource.repo)?.resources.set(node.resource.sha, { raw: node.resource.raw, code: node.resource.textual });
+      console.log(this.map);
+    }
   }
 
   private getNewRepo(repo: string): IRepo {
