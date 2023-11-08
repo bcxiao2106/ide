@@ -2,7 +2,7 @@ import { Component, ComponentRef, ElementRef, Input, OnChanges, OnDestroy, OnIni
 import { Subscription } from 'rxjs';
 import { siderFilesTreeViewId } from 'src/app/config/sider-files.config';
 import { EditorType } from 'src/app/interfaces/enums';
-import { IRepo } from 'src/app/interfaces/github.interfaces';
+import { IBranch, IRepo } from 'src/app/interfaces/github.interfaces';
 import { IContext, IEditorTab } from 'src/app/interfaces/interfaces';
 import { IMarker } from 'src/app/interfaces/monaco-marker.interface';
 import { EditorsManagerService } from 'src/app/services/editors-manager.service';
@@ -44,7 +44,7 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription.add(this.context.editors.markersStream$.subscribe(markers => {
       console.log(markers);
     }));
-    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IRepo) => {
+    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IBranch) => {
       // this.closeAll();
     }));
   }

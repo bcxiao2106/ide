@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { IRepo } from 'src/app/interfaces/github.interfaces';
 import { GithubService } from 'src/app/services/github-service';
 import { GithubAuthService } from 'src/app/services/github.auth.service';
 
@@ -11,6 +12,9 @@ export class RepoSelectorComponent implements OnInit {
   @ViewChild('reposContainer', { read: ViewContainerRef, static: true }) reposContainer!: ViewContainerRef;
   @ViewChild('reposTemplate', { static: true }) reposTemplate!: TemplateRef<any>;
   repositories: any[] | undefined;
+  branches: any[] | undefined;
+  repoName: string = '';
+  branchName: string = '';
   constructor(private githubAuth: GithubAuthService,
     private githubService: GithubService) { }
 
@@ -32,8 +36,16 @@ export class RepoSelectorComponent implements OnInit {
 
   async onRepoSelect(event: any) {
     let selectedRepo = this.repositories?.find(repo => repo.id == event.target.value);
+    this.repoName = selectedRepo.name;
     await this.githubService.loadRepo(selectedRepo.name);
-    console.log(event.target.value, selectedRepo);
+    let repo: IRepo = this.githubService.getRepo(selectedRepo.name)!;
+    this.branches = repo.branches;
+    console.log(event.target.value, selectedRepo, repo);
+  }
+
+  async onBranchSelect(event: any) {
+    this.branchName = event.target.value;
+    this.githubService.switchToBranch(this.repoName, this.branchName);
   }
 }
 
