@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IRepo } from 'src/app/interfaces/github.interfaces';
+import { IBranch, IRepo } from 'src/app/interfaces/github.interfaces';
 import { ITreeNode } from 'src/app/interfaces/interfaces';
 import { EditorsManagerService } from 'src/app/services/editors-manager.service';
 import { GithubService } from 'src/app/services/github-service';
@@ -28,7 +28,7 @@ export class TreeMenuComponent implements OnInit, OnDestroy {
   }
 
   subscribe() {
-    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IRepo) => {
+    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IBranch) => {
       repo.tree[0].level = 0;
       this.config = repo.tree[0];
       this.treeNodes = repo.tree;

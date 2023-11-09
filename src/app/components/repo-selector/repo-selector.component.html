@@ -6,4 +6,8 @@
   <select (change)="onRepoSelect($event)" class="repo-select">
     <option *ngFor="let repo of repositories" [value]="repo.id">{{repo.full_name}}</option>
   </select>
+  <span>Choose a branch:</span>
+  <select (change)="onBranchSelect($event)" class="repo-select">
+    <option *ngFor="let branch of branches" [value]="branch.name">{{branch.name}}</option>
+  </select>
 </ng-template>
