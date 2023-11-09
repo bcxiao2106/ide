@@ -6,15 +6,17 @@ import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { siderFilesTreeViewId } from "../config/sider-files.config";
 import { Observable, Subject } from "rxjs";
+import { getHostingContext } from "../config/hosting-context.config";
 
 @Injectable()
 export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
+  private context = getHostingContext();
   private fetchTokenResponse: any = {
-    "access_token": "Z2h1X3hQSjl0aWlob0JmOUtPQXVYQldEcXdOZm5uYTM1VjBiV05HSQ==",
+    "access_token": this.context.tk,
     "expires_in": 28800,
-    "refresh_token": "Z2hyX3FPaWxHbFFHQU9OcVJLak1ydEszMkpEVnV0d2hXSTgwWE9SQjRnbnhLeHZHYXhzTDNxWEhQN1ltTlViTDlGMlo0QVZCdVMwMGtVNVg=",
+    "refresh_token": this.context.rtk,
     "refresh_token_expires_in": 15724800,
     "token_type": "bearer",
     "scope": ""
