@@ -9,7 +9,7 @@ export const getHostingContext: any = () => {
         callbackUrl: 'http://localhost:3000/'
     };
     return {
-        cid: 'XYxLjgyNDI2NjIxY2IxODYxZDM=',
+        cid: 'SXYxLjgyNDI2NjIxY2IxODYxZDM=',
         sid: 'MjEzMzE1OWMxOWYxNDZiNTRlMjUzOTQ5MGVjMmIyNzIxMGZlZWVjOQ==',
         tk: '',
         rtk: '',
