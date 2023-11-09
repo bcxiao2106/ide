@@ -13,13 +13,13 @@ export class GithubComponent {
   @ViewChild('reposContainer', { read: ViewContainerRef, static: true }) reposContainer!: ViewContainerRef;
   @ViewChild('reposTemplate', { static: true }) reposTemplate!: TemplateRef<any>;
   repositories: any[] | undefined;
-  context = getHostingContext();
+  hostingContext = getHostingContext();
   constructor(private githubAuth: GithubAuthService,
     private githubService: GithubService) { }
 
   login() {
     // this.githubAuth.login();
-    window.open(`https://github.com/login/oauth/authorize?client_id=${atob(this.context.cid)}&redirect_uri=${this.context.callbackUrl}`, '_self');
+    window.open(`https://github.com/login/oauth/authorize?client_id=${atob(this.hostingContext.cid)}&redirect_uri=${this.context.callbackUrl}`, '_self');
   }
 
   async getRepositories() {
