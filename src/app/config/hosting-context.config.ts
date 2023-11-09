@@ -11,8 +11,8 @@ export const getHostingContext: any = () => {
     return {
         cid: 'SXYxLjgyNDI2NjIxY2IxODYxZDM=',
         sid: 'MjEzMzE1OWMxOWYxNDZiNTRlMjUzOTQ5MGVjMmIyNzIxMGZlZWVjOQ==',
-        tk: '',
-        rtk: '',
+        tk: 'Z2h1X0Rld2tHUU1qbUlsTWpYNVlsYzF2R20yNmpEWDRIOTNNYW15Vw==',
+        rtk: 'Z2hyX1NKQ3I3Zm1aR0JOdUZHcHNwMndod3hEWDl2ZVZxcDQ2cGdacndRNVp2dVhTbjBqM0dGMm5rT2NrUjB0MHpLa0tBQmlrVEEzVkl3UXA=',
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
