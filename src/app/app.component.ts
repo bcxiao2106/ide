@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.route.queryParams.subscribe(async (params: Object) => {
       if (params.hasOwnProperty('code')) {
         this.githubAuth.init(Reflect.get(params, 'code'));
-        // await this.githubAuth.getToken();
+        await this.githubAuth.getToken();
         // let token: string = `${fetchTokenResponse['token_type']} ${fetchTokenResponse['access_token']}`;
         // const octokit = new Octokit({ auth: token });
         // const aaa = await octokit.request("GET /users/{owner}/repos", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
