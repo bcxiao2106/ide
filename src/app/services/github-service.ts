@@ -12,9 +12,9 @@ export class GithubService {
   private map: Map<string, IRepo> = new Map<string, IRepo>();
   private octokit: Octokit;
   private fetchTokenResponse: any = {
-    "access_token": "ghu_eiS8fE9v3yUicl5cUgmhIvFp2rfKAy1UmCCT",
+    "access_token": "Z2h1X3hQSjl0aWlob0JmOUtPQXVYQldEcXdOZm5uYTM1VjBiV05HSQ==",
     "expires_in": 28800,
-    "refresh_token": "ghr_Hr65UY1rorLRVQMN6Ahm4BvMRzIvoLT8vsVP3rC0Ic0KaaqKF2aBATl5DEDWg3NHw97Yjo1oN5aA",
+    "refresh_token": "Z2hyX3FPaWxHbFFHQU9OcVJLak1ydEszMkpEVnV0d2hXSTgwWE9SQjRnbnhLeHZHYXhzTDNxWEhQN1ltTlViTDlGMlo0QVZCdVMwMGtVNVg=",
     "refresh_token_expires_in": 15724800,
     "token_type": "bearer",
     "scope": ""
@@ -28,7 +28,7 @@ export class GithubService {
   constructor() {
     this.repoSelectionSubject = new Subject<IBranch>();
     this.repoChange$ = this.repoSelectionSubject.asObservable();
-    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${this.fetchTokenResponse['access_token']}` });
+    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${atob(this.fetchTokenResponse['access_token'])}` });
   }
 
   async loadRepositories(owner?: string): Promise<void> {
