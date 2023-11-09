@@ -19,7 +19,7 @@ export class GithubComponent {
 
   login() {
     // this.githubAuth.login();
-    window.open(`https://github.com/login/oauth/authorize?client_id=${atob(this.hostingContext.cid)}&redirect_uri=${this.context.callbackUrl}`, '_self');
+    window.open(`https://github.com/login/oauth/authorize?client_id=${atob(this.hostingContext.cid)}&redirect_uri=${this.hostingContext.callbackUrl}`, '_self');
   }
 
   async getRepositories() {
