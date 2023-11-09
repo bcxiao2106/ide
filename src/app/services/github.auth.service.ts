@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { OAuthLogger, OAuthService } from "angular-oauth2-oidc";
 import { authConfig } from "../config/github.auth.config";
 import axios from "axios";
+import { getHostingContext } from "../config/hosting-context.config";
 
 @Injectable()
 export class GithubAuthService {
-    private clientId: string = atob('SXYxLmY3ZjVmNzkzMTQxNjMwNGM=');
-    private clientSecret: string = atob('ZDVlNTY0OTIzNzUwMTYzNTJmYjUyMmU4YWQ2MWRkZDE3MDU2NmQ4Zg==');
+    private context = getHostingContext();
+    private clientId: string = atob(this.context.cid);
+    private clientSecret: string = atob(this.context.sid);
     private code: string | undefined;
 
     constructor(private oauthService: OAuthService) {

@@ -1,5 +1,6 @@
 import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import axios from 'axios';
+import { getHostingContext } from 'src/app/config/hosting-context.config';
 import { GithubService } from 'src/app/services/github-service';
 import { GithubAuthService } from 'src/app/services/github.auth.service';
 
@@ -12,14 +13,13 @@ export class GithubComponent {
   @ViewChild('reposContainer', { read: ViewContainerRef, static: true }) reposContainer!: ViewContainerRef;
   @ViewChild('reposTemplate', { static: true }) reposTemplate!: TemplateRef<any>;
   repositories: any[] | undefined;
+  context = getHostingContext();
   constructor(private githubAuth: GithubAuthService,
     private githubService: GithubService) { }
 
   login() {
     // this.githubAuth.login();
-    // window.open('https://github.com/login/oauth/authorize?client_id=Iv1.82426621cb1861d3&redirect_uri=https://bcxiao2106.github.io/ide', '_self');
-    window.open('https://github.com/login/oauth/authorize?client_id=Iv1.f7f5f7931416304c&redirect_uri=http://localhost:3000', '_self');
-    // window.open('https://github.com/login/oauth/authorize?client_id=Iv1.949259aaa2168657&redirect_uri=http://localhost:3000/');
+    window.open(`https://github.com/login/oauth/authorize?client_id=${atob(this.context.cid)}&redirect_uri=${this.context.callbackUrl}`, '_self');
   }
 
   async getRepositories() {
