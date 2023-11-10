@@ -14,6 +14,7 @@ export interface IBranch {
   fs: Map<string, IRepoFs>;
   tree: ITreeNode[];
   resources: Map<string, IResource>;
+  changes: string[];
 }
 
 export interface IRepoBasics {
@@ -128,6 +129,7 @@ export interface IResource {
   raw: string;
   code: string;
   local?: string;
+  changed?: boolean;
 }
 
 export interface IBranchBasic {

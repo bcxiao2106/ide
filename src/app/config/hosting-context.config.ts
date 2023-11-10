@@ -1,10 +1,10 @@
-export const ENV: string = 'pages'; //pages
+export const ENV: string = 'local'; //pages
 export const getHostingContext: any = () => {
     if(ENV == 'local') return {
         cid: 'SXYxLmY3ZjVmNzkzMTQxNjMwNGM=',
         sid: 'ZDVlNTY0OTIzNzUwMTYzNTJmYjUyMmU4YWQ2MWRkZDE3MDU2NmQ4Zg==',
-        tk: 'Z2h1X0czTVNubnQ2cnVkQ2JhakZLazE5MGVGczdteFFsMTNLM3E5MA==',
-        rtk: 'Z2hyXzlQc0R2RElRTVJkUmh2UWpXVk5zTFdqdjJVQ2JnNHB4dUM0U2hva2t0NEhNazdHemJ0TGZiNE5RbjU2WWplNnpVc2IxUmowTGQ4b0I=',
+        tk: 'Z2h1X1FubG93MXJXS2ttbmk2Sk9zOTJDQ0JXWkZQaHg3UDJGcGpCeQ==',
+        rtk: 'Z2hyX0lxaGl4QnVobE9IUGNQQXlSRUN5T0dPOVV4R2d2bVBBS2FmYWQxMlE4SkdNeG1rMUNxWU50b0MwbUlFWURURnJiOWZFdzUwR0R6NHY=',
         baseHref: '/',
         callbackUrl: 'http://localhost:3000/'
     };
@@ -16,4 +16,4 @@ export const getHostingContext: any = () => {
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
-}
+}   
