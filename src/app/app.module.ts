@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GitHubAuthLogger } from './classes/github.auth.class';
 import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redirect.component';
 import { RepoSelectorComponent } from './components/repo-selector/repo-selector.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,9 @@ import { RepoSelectorComponent } from './components/repo-selector/repo-selector.
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     ComponentService,

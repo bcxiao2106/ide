@@ -44,12 +44,12 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     return this.treeService.get(this.config?.viewId!, nodeId);
   }
 
-  click() {
+  async click() {
     this.selected = true;
     this.setFocus();
-    this.treeService.select(this.config?.viewId!, this.config?.id);
     this.toggleSubMenu();
-    if(!this.config?.children) this.ems.open(this.config!);
+    if(!this.config?.children) await this.ems.open(this.config!);
+    this.treeService.select(this.config?.viewId!, this.config?.id);
   }
 
   setFocus() {

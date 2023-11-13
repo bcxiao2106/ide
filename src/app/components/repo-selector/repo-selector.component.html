@@ -1,13 +1,17 @@
 <!-- <button (click)="login()">Login in</button> -->
 <!-- <span (click)="getRepositories()">Choose a repository:</span> -->
-<span>Choose a repository:</span>
 <ng-container #reposContainer></ng-container>
 <ng-template #reposTemplate>
+  <span>Choose a repository:</span>
   <select (change)="onRepoSelect($event)" class="repo-select">
     <option *ngFor="let repo of repositories" [value]="repo.id">{{repo.full_name}}</option>
   </select>
+</ng-template>
+
+<ng-container #branchContainer></ng-container>
+<ng-template #branchTemplate>
   <span>Choose a branch:</span>
   <select (change)="onBranchSelect($event)" class="repo-select">
-    <option *ngFor="let branch of branches" [value]="branch.name">{{branch.name}}</option>
+    <option *ngFor="let branch of branches" [value]="branch.name" [selected]="branch.name == selectedBranch.name">{{branch.name}}</option>
   </select>
 </ng-template>

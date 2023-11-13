@@ -178,8 +178,6 @@ export class MonacoEditorComponent implements OnInit, OnChanges, OnDestroy, Cont
         this.modelUriInstance = monaco.editor.createModel(this.value, this.config.options.language || 'text', uri);
         this.editor.setModel(this.modelUriInstance);
       }
-
-
     }
 
     this.registerEditorListeners();

@@ -143,11 +143,11 @@ export function getEditorConfig(scope: any, node: ITreeNode): any {
 }
 
 export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
-  let theme: string = scope.themeService.currentTheme;
-  let uri: string = `a://${node.id}/${node.path?.join('/')}`!;
-  let fileName: string[] = node.resource.name.split('.');
-  let fileExt: string = fileName[fileName.length - 1];
-  let lang: string = FileTypeLanguageMapping[fileExt] ? FileTypeLanguageMapping[fileExt] : FileTypeLanguageMapping['*'];
+  let theme: string = scope.themeService.currentTheme,
+    uri: string = `a://${node.id}/${node.path?.join('/')}`!,
+    fileName: string[] = node.resource.name.split('.'),
+    fileExt: string = fileName[fileName.length - 1],
+    lang: string = FileTypeLanguageMapping[fileExt] ? FileTypeLanguageMapping[fileExt] : FileTypeLanguageMapping['*'];
   console.log(node.path, uri, lang);
   return {
     component: 'MonacoEditorComponent',
@@ -157,7 +157,7 @@ export function getMonacoEditorConfig(scope: any, node: ITreeNode): any {
         language: lang,
         readOnly: false
       },
-      code: node.resource.textual ? node.resource.textual : '',
+      code: node.resource.local ? node.resource.local : '',
       uri: uri
     }
   }

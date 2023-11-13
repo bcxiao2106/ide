@@ -4,7 +4,6 @@ import { Octokit } from "octokit";
 import { IBranch, IRepo, IRepoBasics, IResource } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
-import { siderFilesTreeViewId } from "../config/sider-files.config";
 import { Observable, Subject } from "rxjs";
 import { getHostingContext } from "../config/hosting-context.config";
 
@@ -30,12 +29,12 @@ export class GithubService {
   constructor() {
     this.repoSelectionSubject = new Subject<IBranch>();
     this.repoChange$ = this.repoSelectionSubject.asObservable();
-    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${atob(this.fetchTokenResponse['access_token'])}` });
+    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${this.fetchTokenResponse['access_token']}` });
   }
 
   async loadRepositories(owner?: string): Promise<void> {
     try {
-      let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
+      let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {
         owner: owner ? owner : this.owner
       });
       if (response && response.data && Array.isArray(response.data)) {
@@ -57,24 +56,14 @@ export class GithubService {
       console.log(response);
       this.updateRepo(repo, response.data, ref);
       let rootNode = this.map.get(repo)?.branchMap.get(ref)?.tree[0];
-      await this.loadContents(repo, ref, '', rootNode?.viewId!, rootNode);
       if(!branch) await this.loadBranches(repo);
+      await this.loadContents(repo, ref, '', rootNode?.viewId!, rootNode);
     }
-    let repository: IBranch = this.getCurrent(repo)!;
-    if (repository) {
-      this.repoSelectionSubject.next(repository);
-      this.selectedRepo = repo;
-    }
+    this.emitChange(repo);
   }
 
   private async loadContents(repo: string, branch: string, path: string, viewId: string, parentNode?: ITreeNode): Promise<void> {
-    //GET /repos/{owner}/{repo}/contents/{filePath}
-    // if (!this.map.has(repo)) {
-    //   this.map.set(repo, this.getNewRepo(repo));
-    //   if (!parentNode) parentNode = new TreeNode('root', viewId, '', 'dir');
-    //   this.map.get(repo)?.tree.push(parentNode);
-    // }
-    let response: OctokitResponse<any> = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
+    let response: OctokitResponse<any> = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {
       owner: this.owner,
       repo: repo,
       filePath: path,
@@ -136,7 +125,7 @@ export class GithubService {
     });
     if(!repository.branchMap.has(branch)) {
       await this.loadRepo(repo, branch);
-    }
+    } else this.emitChange(repo);
   }
 
   private getCurrent(repo: string): IBranch {
@@ -150,15 +139,18 @@ export class GithubService {
 
   async getResourceRaw(node: ITreeNode): Promise<any> {
     if (!this.getCurrent(node.resource.repo)?.resources.has(node.id)) {
+      let branch: string = this.getCurrentBranchName(node.resource.repo);
       let response = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {//GET /users/{username}/repos //GET /repos/{owner}/{repo}/contents/{filePath}
         owner: this.owner,
         repo: node.resource.repo,
-        filePath: node.resource.path
+        filePath: node.resource.path,
+        ref: branch
       });
-
       node.resource.raw = response.data.content;
       node.resource.textual = atob(node.resource.raw);
-      this.getCurrent(node.resource.repo)?.resources.set(node.resource.sha, { raw: node.resource.raw, code: node.resource.textual });
+      node.resource.local = atob(node.resource.raw);
+      node.resource.changed = false;
+      this.getCurrent(node.resource.repo)?.resources.set(node.resource.sha, { raw: node.resource.raw, code: node.resource.textual, local: node.resource.local, changed: node.resource.changed });
       console.log(this.map);
     }
   }
@@ -191,7 +183,16 @@ export class GithubService {
       branch: branch,
       fs: new Map<string, any>(),
       tree: [rootNode],
-      resources: new Map<string, IResource>()
+      resources: new Map<string, IResource>(),
+      changes: []
     };
+  }
+
+  private emitChange(repo: string) {
+    let repository: IBranch = this.getCurrent(repo)!;
+    if (repository) {
+      this.repoSelectionSubject.next(repository);
+      this.selectedRepo = repo;
+    }
   }
 }
