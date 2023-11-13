@@ -3,8 +3,8 @@ export const getHostingContext: any = () => {
     if(ENV == 'local') return {
         cid: 'SXYxLmY3ZjVmNzkzMTQxNjMwNGM=',
         sid: 'ZDVlNTY0OTIzNzUwMTYzNTJmYjUyMmU4YWQ2MWRkZDE3MDU2NmQ4Zg==',
-        tk: 'Z2h1X1FubG93MXJXS2ttbmk2Sk9zOTJDQ0JXWkZQaHg3UDJGcGpCeQ==',
-        rtk: 'Z2hyX0lxaGl4QnVobE9IUGNQQXlSRUN5T0dPOVV4R2d2bVBBS2FmYWQxMlE4SkdNeG1rMUNxWU50b0MwbUlFWURURnJiOWZFdzUwR0R6NHY=',
+        tk: 'Z2h1X3F2RGZWaVl6ZEowVDdqU3NPWTlLOTA3WUM4WXZ1RjRPQ2hYUA==',
+        rtk: 'Z2hyX1pZVDVwV2VTOVJIc0tRMFV5NnBhZ0VYcWJIeDlYTmRFTllrZzZMc2Q5a0d6ZHBpazlwSzlJM24yYVRUWTN4Vkt3czZObVg0NzljRms=',
         baseHref: '/',
         callbackUrl: 'http://localhost:3000/'
     };
