@@ -7,8 +7,8 @@ import { getHostingContext } from "../config/hosting-context.config";
 @Injectable()
 export class GithubAuthService {
     private context = getHostingContext();
-    private clientId: string = atob(this.context.cid);
-    private clientSecret: string = atob(this.context.sid);
+    private clientId: string = this.context.cid;
+    private clientSecret: string = this.context.sid;
     private code: string | undefined;
 
     constructor(private oauthService: OAuthService) {

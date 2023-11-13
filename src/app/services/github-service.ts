@@ -29,7 +29,7 @@ export class GithubService {
   constructor() {
     this.repoSelectionSubject = new Subject<IBranch>();
     this.repoChange$ = this.repoSelectionSubject.asObservable();
-    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${atob(this.fetchTokenResponse['access_token'])}` });
+    this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${this.fetchTokenResponse['access_token']}` });
   }
 
   async loadRepositories(owner?: string): Promise<void> {
