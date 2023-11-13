@@ -2,8 +2,8 @@ import * as cryptojs from 'crypto-js';
 export const ENV: string = 'pages'; //pages, local
 export const ENCRYPT_KEY = 'ayden';
 export const getHostingContext: any = () => {
-    let aa: string = 'Iv1.82426621cb1861d3';
-    let bb: string = '2133159c19f146b54e2539490ec2b27210feeec9';
+    let aa: string = 'ghu_KRvIsb9nITTpiL2p1rrgwZ9o9NiRmi1pfZpc';
+    let bb: string = 'ghr_Tzxd1z9S5rwLidTAplCiYnFRoHpwEzPJhp47cx5MefYnIQBbeFzY69xR1AwFlNsUAJLTBW0GC8T5';
     let enA: string = cryptojs.AES.encrypt(aa, ENCRYPT_KEY).toString();
     let enB: string = cryptojs.AES.encrypt(bb, ENCRYPT_KEY).toString();
     console.log('XXXXXXX', enA, enB);
@@ -18,8 +18,8 @@ export const getHostingContext: any = () => {
     return {
         cid: decrypt('U2FsdGVkX18eQBlQ62xAKJOZG38fhlbUk5kYDjpYyR9RWov02oV6+xoTWCdPRPTk'),
         sid: decrypt('U2FsdGVkX1/CTcKyFkPHR5yfHlMAT+OOoJsmIU4LgNVscfd1+Xo09AQpjToRb5q+r5Qt3rBl8RpTuuLC0d4v4Q=='),
-        tk: 'Z2h1X1dERnlQRWVURUNXWEdGbEZERTFLaTI3ZXpjTXpVQjJ2SkR4aA==',
-        rtk: 'Z2hyX09vMU4xTVgxZGxTZWJyYTk0T1V1YkNiU3VlVlBBbDNmNnA4Vm9iRW1PY3JoaDZ6S1Q3VFU0R0xzUGVCT2NObnhhQ3Q3VlEwdmFnUm0=',
+        tk: decrypt('U2FsdGVkX1+cLhSl/XfZh6mROzG7C+zTckwyuiVyf0cnptIE1dOnJBjYnIbpEdxplG3IcRxt9IC9npOF+frc6g=='),
+        rtk: decrypt('U2FsdGVkX19NBkkg6NEq3CNJr7L6bmynVMemoVb6ZFzsstNJO+4A/vLWrmhefHH7Qc4EXiMSZK6Tw3oqCXsn3V8zlp+CMs7y/virQSe+tFgHPdSfpAsFvXCL3+oaWoRiitdr7Xtp6HvP1J4lmZgNwQ=='),
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
