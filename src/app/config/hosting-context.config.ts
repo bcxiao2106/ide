@@ -18,8 +18,8 @@ export const getHostingContext: any = () => {
     return {
         cid: decrypt('U2FsdGVkX18eQBlQ62xAKJOZG38fhlbUk5kYDjpYyR9RWov02oV6+xoTWCdPRPTk'),
         sid: decrypt('U2FsdGVkX1/CTcKyFkPHR5yfHlMAT+OOoJsmIU4LgNVscfd1+Xo09AQpjToRb5q+r5Qt3rBl8RpTuuLC0d4v4Q=='),
-        tk: decrypt('U2FsdGVkX1/2olbKwhu9OEKZyttZfWWoEpa6aD1H/M3nql2WRoLeApiqeSzpfQPBja6C6MrRP6LliESwUTGIUg=='),
-        rtk: decrypt('U2FsdGVkX1+ctwYsLXJ1rF6HBv2F7MFf03u+Q2lDh8jLTHTy4CSxnf4TDO75Yz6Dcr1v2+4GyxxInOPgiwqNehzBBhA395gd86X9JUZO8p0eBfFmd5wF4UOdCPI3Xaijo7Ie3GzT8vuakIFt5X4ZVQ=='),
+        tk: decrypt('U2FsdGVkX184HZLCRz4Mw1+m0UuIx2xzh6LYO6Xi6dRY4FzQY5PMS9DfuSCDGISdOvg4ck09tkMifM35NlcUJA=='),
+        rtk: decrypt('U2FsdGVkX19L0liPTSrnuAPJrKuqRWDI2t0c2TOZphdS3dO909d08tbgCUmughbBCSnzVLDBCecZCBx/UjzSP3ogSGjM2xuHWnbmRuTa/m3sv1uII74/UPog3arB8VAN1ZCEMJuTLRxqBoVzJP1sHw=='),
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
