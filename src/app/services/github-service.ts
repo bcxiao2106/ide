@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { OctokitResponse } from "@octokit/types";
 import { Octokit } from "octokit";
-import { IBranch, IRepo, IRepoBasics, IResource } from "../interfaces/github.interfaces";
+import { IBranch, IRepo, IRepoBasics, IResource, IResourceChange } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { Observable, Subject } from "rxjs";
@@ -23,12 +23,16 @@ export class GithubService {
   private owner: string = 'bcxiao2106'; //will fetch from login user
   private repositories: any[] = [];
   private repoSelectionSubject: Subject<IBranch>;
+  private resourceChangeSubject: Subject<IResourceChange>;
   private selectedRepo!: string;
   repoChange$: Observable<IBranch>;
+  resourceChange$: Observable<IResourceChange>
 
   constructor() {
     this.repoSelectionSubject = new Subject<IBranch>();
     this.repoChange$ = this.repoSelectionSubject.asObservable();
+    this.resourceChangeSubject = new Subject<IResourceChange>();
+    this.resourceChange$ = this.resourceChangeSubject.asObservable();
     this.octokit = new Octokit({ auth: `${this.fetchTokenResponse['token_type']} ${this.fetchTokenResponse['access_token']}` });
   }
 
@@ -56,13 +60,13 @@ export class GithubService {
       console.log(response);
       this.updateRepo(repo, response.data, ref);
       let rootNode = this.map.get(repo)?.branchMap.get(ref)?.tree[0];
-      if(!branch) await this.loadBranches(repo);
-      await this.loadContents(repo, ref, '', rootNode?.viewId!, rootNode);
+      if (!branch) await this.loadBranches(repo);
+      await this.loadContents(repo, ref, '', rootNode?.viewId!, rootNode!);
     }
     this.emitChange(repo);
   }
 
-  private async loadContents(repo: string, branch: string, path: string, viewId: string, parentNode?: ITreeNode): Promise<void> {
+  private async loadContents(repo: string, branch: string, path: string, viewId: string, parentNode: ITreeNode): Promise<void> {
     let response: OctokitResponse<any> = await this.octokit.request("GET /repos/{owner}/{repo}/contents/{filePath}", {
       owner: this.owner,
       repo: repo,
@@ -75,7 +79,7 @@ export class GithubService {
       for (let i = 0; i < response.data.length; i++) {
         response.data[i].repo = repo;
         let [id, text, type] = [response.data[i].sha, response.data[i].name, response.data[i].type];
-        let treeNode: ITreeNode = new TreeNode(id, viewId, text, type, response.data[i]);
+        let treeNode: ITreeNode = new TreeNode(id, viewId, text, type, parentNode.id, response.data[i]);
         this.getCurrent(repo)?.tree.push(treeNode);
         parentNode?.children?.push(id);
         this.getCurrent(repo)?.fs.set(id, response.data[i]);
@@ -92,12 +96,12 @@ export class GithubService {
   }
 
   async loadBranches(repo: string): Promise<void> {
-    if(this.map.get(repo)?.branches && this.map.get(repo)?.branches.length == 0) {
+    if (this.map.get(repo)?.branches && this.map.get(repo)?.branches.length == 0) {
       let response = await this.octokit.request("GET /repos/{owner}/{repo}/branches", {
         owner: this.owner,
         repo: repo
       });
-  
+
       console.log('loadBranches', response.data);
       this.map.get(repo)?.branches.push(...response.data);
     }
@@ -109,8 +113,8 @@ export class GithubService {
     return this.repositories.filter(repo => repo.name.includes(filter));
   }
 
-  getRepo(repo: string): IRepo | undefined {
-    return this.map.get(repo);
+  getRepo(repo?: string): IRepo | undefined {
+    return this.map.get(repo ? repo : this.selectedRepo);
   }
 
   getSelectedRepo(): string {
@@ -123,13 +127,14 @@ export class GithubService {
     repository.branches.forEach(b => {
       b.current = b.name == branch;
     });
-    if(!repository.branchMap.has(branch)) {
+    if (!repository.branchMap.has(branch)) {
       await this.loadRepo(repo, branch);
     } else this.emitChange(repo);
   }
 
-  private getCurrent(repo: string): IBranch {
-    return this.map.get(repo)?.branchMap.get(this.getCurrentBranchName(repo))!;
+  getCurrent(repo?: string): IBranch {
+    let currentRepo: string = repo ? repo : this.selectedRepo;
+    return this.map.get(currentRepo)?.branchMap.get(this.getCurrentBranchName(currentRepo))!;
   }
 
   private getCurrentBranchName(repo: string): string {
@@ -146,21 +151,38 @@ export class GithubService {
         filePath: node.resource.path,
         ref: branch
       });
+      node.resource.name = response.data.name;
       node.resource.raw = response.data.content;
       node.resource.textual = atob(node.resource.raw);
-      node.resource.local = atob(node.resource.raw);
+      node.resource.local = node.resource.textual;
       node.resource.changed = false;
-      this.getCurrent(node.resource.repo)?.resources.set(node.resource.sha, { raw: node.resource.raw, code: node.resource.textual, local: node.resource.local, changed: node.resource.changed });
+      this.getCurrent(node.resource.repo)?.resources.set(node.resource.sha, this.createNewResource(node.resource));
       console.log(this.map);
     }
   }
 
+  setChange(rid: string, changed: boolean, newValue?: string) {
+    let current: IBranch = this.getCurrent();
+    let resource: IResource = current.resources.get(rid)!;
+    resource.changed = changed;
+    if (changed) {
+      current.changes[rid] = newValue!;
+    } else delete current.changes[rid];
+    this.resourceChangeSubject.next({ rid: rid, isDirty: changed });
+    console.log(this.getCurrent());
+  }
+
+  getResource(rid: string): IResource {
+    let current = this.getCurrent();
+    return current.resources.get(rid)!;
+  }
+
   private updateRepo(repo: string, basics: IRepoBasics, branch: string) {
     let viewId: string = `tree_${repo}`;
-    let rootNode = new TreeNode('root', viewId, '', 'dir');
-    if(!this.map.has(repo)) {
+    let rootNode = new TreeNode('root', viewId, '', 'dir', undefined);
+    if (!this.map.has(repo)) {
       this.map.set(repo, this.getNewRepo(repo, basics, rootNode));
-    } else if(!this.map.get(repo)?.branchMap.has(branch)) {
+    } else if (!this.map.get(repo)?.branchMap.has(branch)) {
       this.map.get(repo)?.branchMap.set(branch, this.getNewBranch(repo, branch, rootNode));
     }
   }
@@ -184,8 +206,20 @@ export class GithubService {
       fs: new Map<string, any>(),
       tree: [rootNode],
       resources: new Map<string, IResource>(),
-      changes: []
+      changes: {}
     };
+  }
+
+  private createNewResource(resource: any): IResource {
+    return {
+      rid: resource.sha,
+      name: resource.name,
+      path: resource.path,
+      raw: resource.raw,
+      code: resource.textual,
+      local: resource.local,
+      changed: resource.changed
+    }
   }
 
   private emitChange(repo: string) {

@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild
 import { filter, Subscription } from 'rxjs';
 import { ITreeNode } from 'src/app/interfaces/interfaces';
 import { EditorsManagerService } from 'src/app/services/editors-manager.service';
+import { GithubService } from 'src/app/services/github-service';
 import { TreeViewService } from 'src/app/services/tree-view.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   constructor(private treeService: TreeViewService,
-    private ems: EditorsManagerService) { }
+    private ems: EditorsManagerService,
+    private githubService: GithubService) { }
 
   ngOnInit(): void {
     if (this.config?.level) this.level = this.config?.level;
@@ -38,6 +40,9 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
   }
   subscribe() {
     this.subscription.add(this.treeService.getSelected$(this.config?.viewId!).subscribe(node => this.selected = node?.id == this.config?.id));
+    this.subscription.add(this.githubService.resourceChange$.subscribe(resChange => {
+      if(this.config?.id == resChange.rid) this.config.isDirty = resChange.isDirty;
+    }));
   }
 
   get(nodeId: string): ITreeNode | undefined {

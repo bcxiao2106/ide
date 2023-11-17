@@ -23,6 +23,7 @@
         </svg>
     </div>
     <div class="menu-text">{{config!.text}}</div>
+    <div class="menu-marks"><span *ngIf="config!.isDirty" class="dirty-mark"></span></div>
 </div>
 <ng-container #container></ng-container>
 <ng-template #template>

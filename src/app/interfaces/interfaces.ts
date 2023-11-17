@@ -28,6 +28,7 @@ export interface ITreeNode {
   parent?: string;
   editorType?: EditorType;
   resource?: any;
+  isDirty?: boolean;
 }
 export interface ITab {
   id: string;
@@ -36,6 +37,7 @@ export interface ITab {
   focused?: boolean;
   component?: string;
   attachedConfig?: any;
+  isDirty?: boolean;
 }
 export interface IEditorTab extends ITab {
   type: EditorType;

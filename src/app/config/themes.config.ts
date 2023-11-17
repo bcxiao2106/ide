@@ -57,6 +57,8 @@ export const Themes: IThemesConfig = {
         // '--ide-btn-confirm-color': {'vs-dark': '#7acbf3', 'vs-light': '#5177fc'},
         '--ide-btn-confirm-bgcolor': {'vs-dark': '#98d9ff', 'vs-light': '#98d9ff'},
         '--ide-btn-cancel-bgcolor': {'vs-dark': '#f7afaf', 'vs-light': '#f7afaf'},
+        '--ide-btn-bgcolor': {'vs-dark': '#0179cb', 'vs-light': '#0179cb'},
+        '--ide-btn-color': {'vs-dark': '#ececec', 'vs-light': '#ececec'},
 
         //list grid table
         '--ide-table-header-bgcolor': {'vs-dark': '#2f3138', 'vs-light': '#f3f3f3'},

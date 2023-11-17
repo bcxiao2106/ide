@@ -39,6 +39,8 @@ import { GitHubAuthLogger } from './classes/github.auth.class';
 import { OauthRedirectComponent } from './components/oauth-redirect/oauth-redirect.component';
 import { RepoSelectorComponent } from './components/repo-selector/repo-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RepoChangesComponent } from './components/repo-changes/repo-changes.component';
+import { RepoPullRequestsComponent } from './components/repo-pull-requests/repo-pull-requests.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MigratePluginComponent,
     GithubComponent,
     OauthRedirectComponent,
-    RepoSelectorComponent
+    RepoSelectorComponent,
+    RepoChangesComponent,
+    RepoPullRequestsComponent
   ],
   imports: [
     BrowserModule,

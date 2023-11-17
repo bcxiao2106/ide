@@ -6,3 +6,8 @@ export const SiderSections: ISection[] = [
   { title: 'Files', component: 'TreeMenuComponent', isExpanded: true },
   { title: 'Dependencies', component: 'ListViewComponent', isExpanded: true }
 ];
+
+export const GitSiderSections: ISection[] = [
+  { title: 'Commit Changes', component: 'RepoChangesComponent', isExpanded: true },
+  { title: 'Pull Requests', component: 'RepoPullRequestsComponent', isExpanded: true }
+];

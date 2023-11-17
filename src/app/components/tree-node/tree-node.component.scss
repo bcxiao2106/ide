@@ -27,6 +27,11 @@
     padding: 3px 0px 0px 4px;
 }
 
+.menu-marks {
+    display: flex;
+    padding: 3px;
+}
+
 .indent-space {
     width: 16px;
 }
@@ -48,4 +53,12 @@
 .flex-box {
     display: flex;
     flex-direction: column;
+}
+.dirty-mark {
+    display: inline-block;
+    background-color: var(--ide-color);
+    border-radius: 6px;
+    width: 6px;
+    height: 6px;
+    margin-bottom: 4px;
 }

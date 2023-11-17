@@ -1,17 +1,20 @@
 import * as cryptojs from 'crypto-js';
-export const ENV: string = 'pages'; //pages, local
+export const ENV: string = 'local'; //pages, local
 export const ENCRYPT_KEY = 'ayden';
 export const getHostingContext: any = () => {
-    let aa: string = 'AAA';
-    let bb: string = 'BBB';
-    let enA: string = cryptojs.AES.encrypt(aa, ENCRYPT_KEY).toString();
-    let enB: string = cryptojs.AES.encrypt(bb, ENCRYPT_KEY).toString();
-    console.log('XXXXXXX', enA, enB);
-    if(ENV == 'local') return {
+    let localTks: string[] = [
+        'U2FsdGVkX1+++2HVTlKAcWU4rif6Q6iG5RDNE/6XYy3Wp64JecDhbzwMrnLqyQVg09Ua9l5gZ2+D96fcB5kqjg==',
+        'U2FsdGVkX1+aV2JPH+gOvLGdMvPJ5IdoGUUnSEhBHEnxgCpmseFOQ/wd0c4c2RBZSzbTWN00+ez6g7DZdKT5z/wimHsa4oFs/ucRkXClC9l6+sbWL2lpcHd4OUCDAxC2xxSqmIiT99fcQOYnbvsTwg=='
+    ];
+    let pagesTks: string[] = [
+        'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
+        'U2FsdGVkX1+McjFUbhUa2QpP79BFloA9kErSFk1Q/aBlWb+qSyNMQOazZBvhR/oUkMC0//soZ0dvMAp0kufECKOFL/oOiiRIjBQu2BSMxhgn60TAO0ImlTBnN7nkAiCWu3a5+JEkVcuP6kiceY7CnQ=='
+    ];
+    if (ENV == 'local') return {
         cid: decrypt('U2FsdGVkX1+NFuIhxPdNS+QkfU2i5xQHpZTsegzqQYm+3s1ujHrRimK5zjJIGQGB'),
         sid: decrypt('U2FsdGVkX196FhXCAfM7Qi/xq35RLC3KhdC1yHn76O45PBCGwZcfYHlti7D5Oq0m/htUrKV5Sx0sEU6Y8Zg+4g=='),
-        tk: decrypt('U2FsdGVkX180CY56oT5gwYYStdgEEEjurKdHb/PXvtSUBkTDzEn63MVsju5LKYtXIGy48v8oxGbNuekW9wp7Ag=='),
-        rtk: decrypt('U2FsdGVkX1+Dn2bSYCc7E8irtAs9YtYv2wUzMPmTnnvdY6MF5DbfdEx07JJKSc3T86fCAahwRyZR2PnyDqV9x8rjavn3hrJgcxuTVsiK7j5SBRjw4dq7KmWdPL8TXWqW7UNaV/YNq09QsR2z+ucmog=='),
+        tk: decrypt(localTks[0]),
+        rtk: decrypt(localTks[1]),
         baseHref: '/',
         callbackUrl: 'http://localhost:3000/'
     };
@@ -23,7 +26,7 @@ export const getHostingContext: any = () => {
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
-}  
+}
 export const decrypt = (original: string): string => {
     return cryptojs.AES.decrypt(original, ENCRYPT_KEY).toString(cryptojs.enc.Utf8);
 }
