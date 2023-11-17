@@ -172,6 +172,10 @@ export class GithubService {
     console.log(this.getCurrent());
   }
 
+  async commit(resources: string[]) {
+    
+  }
+
   getResource(rid: string): IResource {
     let current = this.getCurrent();
     return current.resources.get(rid)!;

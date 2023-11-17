@@ -22,6 +22,10 @@ export class RepoChangesComponent implements OnInit, OnDestroy {
     this.getChanges(this.githubService.getCurrent().changes);
   }
 
+  async commit() {
+    await this.githubService.commit([]);
+  }
+
   getChanges(changes: Record<string, string>) {
     this.changes = [];
     for(let id in changes) {
