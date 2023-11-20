@@ -3,16 +3,16 @@ export const ENV: string = 'local'; //pages, local
 export const ENCRYPT_KEY = 'ayden';
 export const getHostingContext: any = () => {
     let localTks: string[] = [
-        'U2FsdGVkX19uS61+N6tHAVKmhvyM0Lv4ZJk4KArtD1g1IIVQJzs3XsZcgkxUN11RxBkR2ev/+kPP+cWmZi3Nwg==',
-        'U2FsdGVkX1/+V26sqRQuWuV8oKSKIEA+v97oHbsJ/NPIA1mvNuHNWvmShghDrAb+0DiTjm20aPOkUfDZ9oN4sVIgNJwRije4OBf2PceXSmbSi1V4HohT0eF+A1nsH94F8iw080r2h0DwrfiIXM+38Q=='
+        'U2FsdGVkX1/t9+AJmE7rIli2izLqAGBHlf4RvKuSRc1iPA0D9TSYLjdOgtTU8rOaeF4DfrW3fEhfQGFFVAcPOg==',
+        'U2FsdGVkX1+kePFCD9loKnUoeHT9spYbih6VjKdRMpXgLg34NGdt/18UfaRYcNkyOiIlBRnc+SVtzjIsIoDFa/himi5E9OtzBy0BEZSFliwvXFIB1w5WHltw65PqQJPAXjNnCNfFHYF53fDYngVkUg=='
     ];
     let pagesTks: string[] = [
         'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
         'U2FsdGVkX1+McjFUbhUa2QpP79BFloA9kErSFk1Q/aBlWb+qSyNMQOazZBvhR/oUkMC0//soZ0dvMAp0kufECKOFL/oOiiRIjBQu2BSMxhgn60TAO0ImlTBnN7nkAiCWu3a5+JEkVcuP6kiceY7CnQ=='
     ];
     if (ENV == 'local') return {
-        cid: decrypt('U2FsdGVkX1+NFuIhxPdNS+QkfU2i5xQHpZTsegzqQYm+3s1ujHrRimK5zjJIGQGB'),
-        sid: decrypt('U2FsdGVkX1+9u/vhjHb5dLPEMQwW3DHB0lA247eVdQ3VgS1Etj//cDjHuFKPAZ7eRGqN6xQiRkAIVuXqvBH5gg=='),
+        cid: decrypt('U2FsdGVkX1/ELeOwnYD4/3d2b0o30Pknyjb0wExdfF/qgSLZVLrMdXuU7rP1fRS8'),
+        sid: decrypt('U2FsdGVkX19CL5rbJF6/q9hyjpEFGvvOoMoSjnzwqBchmbt77Iq+u3+HIwIGIggv5OlDiwMmDoHeARVrHkdthQ=='),
         tk: decrypt(localTks[0]),
         rtk: decrypt(localTks[1]),
         baseHref: '/',
