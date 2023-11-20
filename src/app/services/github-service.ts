@@ -183,12 +183,21 @@ export class GithubService {
         path: this.getResourcePathById(id),
         message: message,
         content: contentBase64,
-        branch: this.getCurrentBranch(),
+        branch: this.getCurrentBranch(), //`heads/${this.getCurrentBranch()}`,
         sha: id
       };
       console.log(params);
       try {
-        const response = await this.octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", params);
+        const res = await this.octokit.rest.repos.createOrUpdateFileContents({
+          owner: this.owner,
+          repo: this.selectedRepo,
+          path: this.getResourcePathById(id),
+          message: message,
+          content: contentBase64,
+          branch: this.getCurrentBranch(), //`heads/${this.getCurrentBranch()}`,
+          sha: id
+        });
+        // const response = await this.octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", params);
       } catch (error) {
         console.log(error);
       }
