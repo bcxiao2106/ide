@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { OctokitResponse } from "@octokit/types";
+import { OctokitResponse, RequestParameters } from "@octokit/types";
+import { Buffer } from 'buffer';
 import { Octokit } from "octokit";
 import { IBranch, IRepo, IRepoBasics, IResource, IResourceChange } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
@@ -172,8 +173,26 @@ export class GithubService {
     console.log(this.getCurrent());
   }
 
-  async commit(resources: string[]) {
-    
+  async commit(resources: any[], message: string) {
+    for (let i = 0; i < resources.length; i++) {
+      let id: string = resources[i].id;
+      const contentBase64 = Buffer.from(this.getModifiedContentById(id)).toString('base64');
+      let params: any = {
+        owner: this.owner,
+        repo: this.selectedRepo,
+        path: this.getResourcePathById(id),
+        message: message,
+        content: contentBase64,
+        branch: this.getCurrentBranch(),
+        sha: id
+      };
+      console.log(params);
+      try {
+        const response = await this.octokit.request("PUT /repos/{owner}/{repo}/contents/{path}", params);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   getResource(rid: string): IResource {
@@ -224,6 +243,18 @@ export class GithubService {
       local: resource.local,
       changed: resource.changed
     }
+  }
+
+  private getResourcePathById(rid: string): string {
+    return this.getCurrent().resources.get(rid)?.path!;
+  }
+
+  private getModifiedContentById(rid: string): string {
+    return this.getCurrent().changes[rid];
+  }
+
+  private getCurrentBranch(): string {
+    return this.getCurrent().branch;
   }
 
   private emitChange(repo: string) {

@@ -1,6 +1,6 @@
 <div class="repo-changes-root">
     <div class="flex-row">
-        <textarea maxlength="50" placeholder="Commit message" class="commit-message"></textarea>
+        <textarea maxlength="50" placeholder="Commit message" class="commit-message" (blur)="onMessageChange($event)" [value]="message"></textarea>
     </div>
     <div class="flex-row">
         <button class="commit-btn" (click)="commit()">Commit</button>

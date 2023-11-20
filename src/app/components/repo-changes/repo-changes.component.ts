@@ -11,6 +11,7 @@ import { GithubService } from 'src/app/services/github-service';
 export class RepoChangesComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   changes: any[] = [];
+  message: string = '';
   constructor(private githubService: GithubService) {}
 
   ngOnInit(): void {
@@ -23,7 +24,8 @@ export class RepoChangesComponent implements OnInit, OnDestroy {
   }
 
   async commit() {
-    await this.githubService.commit([]);
+    if(!this.changes || this.changes.length == 0) return;
+    await this.githubService.commit(this.changes, this.message);
   }
 
   getChanges(changes: Record<string, string>) {
@@ -38,6 +40,11 @@ export class RepoChangesComponent implements OnInit, OnDestroy {
         content: changes[id]
       });
     }
+  }
+
+  onMessageChange(event: any) {
+    console.log(event.target.value);
+    this.message = event.target.value;
   }
 
   ngOnDestroy(): void {
