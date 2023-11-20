@@ -1,9 +1,14 @@
 
 <button (click)="login()">Login in</button>
-<span (click)="getRepositories()">Lode Repositories</span>
-<ng-container #reposContainer></ng-container>
-<ng-template #reposTemplate>
-  <select (change)="onRepoSelect($event)">
-    <option *ngFor="let repo of repositories" [value]="repo.id">{{repo.full_name}}</option>
-  </select>
-</ng-template>
+<aside class="sider-root">
+  <header class="sider-header">{{title}}</header>
+  <div class="sider-body">
+      <div *ngFor="let section of sections" class="sider-section">
+          <app-section [config]="section"></app-section>
+      </div>
+      
+  </div>
+  <footer class="sider-footer">
+      <span class="footer-link" href="#">Report a bug?</span>
+  </footer>
+</aside>

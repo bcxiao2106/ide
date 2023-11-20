@@ -14,7 +14,7 @@ export interface IBranch {
   fs: Map<string, IRepoFs>;
   tree: ITreeNode[];
   resources: Map<string, IResource>;
-  changes: string[];
+  changes: Record<string, string>;
 }
 
 export interface IRepoBasics {
@@ -126,10 +126,18 @@ export interface IRepositoryLinks {
 }
 
 export interface IResource {
+  rid: string;
+  name: string;
+  path: string;
   raw: string;
   code: string;
   local?: string;
   changed?: boolean;
+}
+
+export interface IResourceChange {
+  rid: string;
+  isDirty: boolean;
 }
 
 export interface IBranchBasic {
@@ -142,3 +150,4 @@ export interface ICommit {
   sha: string;
   url: string;
 }
+

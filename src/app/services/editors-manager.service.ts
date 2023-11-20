@@ -81,7 +81,21 @@ export class EditorsManagerService {
       monaco.editor.onDidChangeMarkers(this.onDidChangeMarkers.bind(this));
       this.monacoInitialized = true;
     }
+    editor.onDidChangeModelContent((change: any) => this.onDidChangeModelContent(change, editorId, editor));
+    editor.onDidChangeModel(this.onDidChangeModel.bind(this));
   }
+
+  onDidChangeModelContent(change: any, rid: string, editor: any) {
+    let versionId: number = editor.getModel().getAlternativeVersionId();
+    let value: string = editor.getModel().getValue();
+    this.githubService.setChange(rid, versionId > 1, value);
+    console.log(change, editor, versionId, value);
+  }
+
+  onDidChangeModel(change: any) {
+    console.log(change);
+  }
+
 
   onDidChangeMarkers([uri]: any) {
     let markers: IMarker[] = monaco.editor.getModelMarkers();

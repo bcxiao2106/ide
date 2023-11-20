@@ -47,6 +47,11 @@ export class EditorPanelComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription.add(this.githubService.repoChange$.subscribe((repo: IBranch) => {
       // this.closeAll();
     }));
+    this.subscription.add(this.githubService.resourceChange$.subscribe(resChange => {
+      this.editorTabs.forEach(tab => {
+        if(resChange.rid == tab.id) tab.isDirty = resChange.isDirty;
+      });
+    }));
   }
 
   onTabClick(tab: IEditorTab) {

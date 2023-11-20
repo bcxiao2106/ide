@@ -1,0 +1,14 @@
+<div class="repo-changes-root">
+    <div class="flex-row">
+        <textarea maxlength="50" placeholder="Commit message" class="commit-message" (blur)="onMessageChange($event)" [value]="message"></textarea>
+    </div>
+    <div class="flex-row">
+        <button class="commit-btn" (click)="commit()">Commit</button>
+    </div>
+    <div class="flex-row">
+        <div class="changes-header">CHANGES</div>
+        <div class="changed-files">
+            <div *ngFor="let change of changes" class="changed-item">{{change.name}}</div>
+        </div>
+    </div>
+</div>

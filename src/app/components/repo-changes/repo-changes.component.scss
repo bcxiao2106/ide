@@ -1,0 +1,28 @@
+.repo-changes-root {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+.commit-message {
+    background-color: var(--ide-bgcolor);
+    color: var(--ide-color);
+}
+.commit-btn {
+    width: 100%;
+    background-color: var(--ide-btn-bgcolor);
+    color: var(--ide-btn-color);
+}
+.changes-header {
+    background-color: var(--ide-section-header-bgcolor);
+}
+.changed-files {
+    padding-left: 8px;
+}
+.changed-item {
+    padding: 2px;
+}

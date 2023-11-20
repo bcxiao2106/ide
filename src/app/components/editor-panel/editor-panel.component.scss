@@ -109,3 +109,11 @@
     max-height: 40%;
     min-height: 28px;
 }
+.dirty-mark {
+    display: inline-block;
+    background-color: var(--ide-color);
+    border-radius: 6px;
+    width: 6px;
+    height: 6px;
+    margin-bottom: 4px;
+}

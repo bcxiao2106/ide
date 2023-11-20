@@ -12,6 +12,8 @@ import { PopupComponent } from "../components/shared/popup/popup.component";
 import { TreeMenuComponent } from "../components/tree-menu/tree-menu.component";
 import { GithubComponent } from "../components/github/github.component";
 import { RepoSelectorComponent } from "../components/repo-selector/repo-selector.component";
+import { RepoChangesComponent } from "../components/repo-changes/repo-changes.component";
+import { RepoPullRequestsComponent } from "../components/repo-pull-requests/repo-pull-requests.component";
 
 @Injectable()
 export class ComponentService {
@@ -30,7 +32,9 @@ export class ComponentService {
         PopupComponent: PopupComponent,
         MigratePluginComponent: MigratePluginComponent,
         GithubComponent: GithubComponent,
-        RepoSelectorComponent: RepoSelectorComponent
+        RepoSelectorComponent: RepoSelectorComponent,
+        RepoChangesComponent: RepoChangesComponent,
+        RepoPullRequestsComponent: RepoPullRequestsComponent
     }
 
     get(key: string): any {

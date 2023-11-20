@@ -9,13 +9,15 @@ export class TreeNode implements ITreeNode {
   resource?: any;
   children?: string[] | undefined;
   path?: string[] | undefined;
+  parent?: string | undefined;
 
 
-  constructor(id: string, viewId: string, text: string, type: string, resource?: any) {
+  constructor(id: string, viewId: string, text: string, type: string, parent?: string, resource?: any) {
     this.id = id;
     this.viewId = viewId;
     this.text = text;
     this.path = text.length > 1 ? [text] : [];
+    this.parent = parent;
     if(resource) this.resource = resource;
     if(type === 'dir') {
       this.children = [];

@@ -1,17 +1,20 @@
 import * as cryptojs from 'crypto-js';
-export const ENV: string = 'pages'; //pages, local
+export const ENV: string = 'local'; //pages, local
 export const ENCRYPT_KEY = 'ayden';
 export const getHostingContext: any = () => {
-    let aa: string = 'AAA';
-    let bb: string = 'BBB';
-    let enA: string = cryptojs.AES.encrypt(aa, ENCRYPT_KEY).toString();
-    let enB: string = cryptojs.AES.encrypt(bb, ENCRYPT_KEY).toString();
-    console.log('XXXXXXX', enA, enB);
-    if(ENV == 'local') return {
+    let localTks: string[] = [
+        'U2FsdGVkX19uS61+N6tHAVKmhvyM0Lv4ZJk4KArtD1g1IIVQJzs3XsZcgkxUN11RxBkR2ev/+kPP+cWmZi3Nwg==',
+        'U2FsdGVkX1/+V26sqRQuWuV8oKSKIEA+v97oHbsJ/NPIA1mvNuHNWvmShghDrAb+0DiTjm20aPOkUfDZ9oN4sVIgNJwRije4OBf2PceXSmbSi1V4HohT0eF+A1nsH94F8iw080r2h0DwrfiIXM+38Q=='
+    ];
+    let pagesTks: string[] = [
+        'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
+        'U2FsdGVkX1+McjFUbhUa2QpP79BFloA9kErSFk1Q/aBlWb+qSyNMQOazZBvhR/oUkMC0//soZ0dvMAp0kufECKOFL/oOiiRIjBQu2BSMxhgn60TAO0ImlTBnN7nkAiCWu3a5+JEkVcuP6kiceY7CnQ=='
+    ];
+    if (ENV == 'local') return {
         cid: decrypt('U2FsdGVkX1+NFuIhxPdNS+QkfU2i5xQHpZTsegzqQYm+3s1ujHrRimK5zjJIGQGB'),
-        sid: decrypt('U2FsdGVkX196FhXCAfM7Qi/xq35RLC3KhdC1yHn76O45PBCGwZcfYHlti7D5Oq0m/htUrKV5Sx0sEU6Y8Zg+4g=='),
-        tk: decrypt('U2FsdGVkX180CY56oT5gwYYStdgEEEjurKdHb/PXvtSUBkTDzEn63MVsju5LKYtXIGy48v8oxGbNuekW9wp7Ag=='),
-        rtk: decrypt('U2FsdGVkX1+Dn2bSYCc7E8irtAs9YtYv2wUzMPmTnnvdY6MF5DbfdEx07JJKSc3T86fCAahwRyZR2PnyDqV9x8rjavn3hrJgcxuTVsiK7j5SBRjw4dq7KmWdPL8TXWqW7UNaV/YNq09QsR2z+ucmog=='),
+        sid: decrypt('U2FsdGVkX1+9u/vhjHb5dLPEMQwW3DHB0lA247eVdQ3VgS1Etj//cDjHuFKPAZ7eRGqN6xQiRkAIVuXqvBH5gg=='),
+        tk: decrypt(localTks[0]),
+        rtk: decrypt(localTks[1]),
         baseHref: '/',
         callbackUrl: 'http://localhost:3000/'
     };
@@ -23,7 +26,7 @@ export const getHostingContext: any = () => {
         baseHref: 'https://bcxiao2106.github.io/ide/',
         callbackUrl: 'https://bcxiao2106.github.io/ide/'
     }
-}  
+}
 export const decrypt = (original: string): string => {
     return cryptojs.AES.decrypt(original, ENCRYPT_KEY).toString(cryptojs.enc.Utf8);
 }
