@@ -15,6 +15,7 @@ export interface IBranch {
   tree: ITreeNode[];
   resources: Map<string, IResource>;
   changes: Record<string, string>;
+  changeTree: ITreeNode[];
 }
 
 export interface IRepoBasics {

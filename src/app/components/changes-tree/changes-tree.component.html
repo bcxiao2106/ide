@@ -1,0 +1,6 @@
+<ng-container #container></ng-container>
+<ng-template #template>
+  <div *ngFor="let nodeId of config!.children">
+    <tree-node [config]="get(nodeId)"></tree-node>
+  </div>
+</ng-template>

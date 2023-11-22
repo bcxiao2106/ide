@@ -170,6 +170,8 @@ export class GithubService {
       current.changes[rid] = newValue!;
     } else delete current.changes[rid];
     this.resourceChangeSubject.next({ rid: rid, isDirty: changed });
+    this.markDirtyRecussively(rid);
+    // this.generateChangesTree();
     console.log(this.getCurrent());
   }
 
@@ -210,7 +212,7 @@ export class GithubService {
   }
 
   private updateRepo(repo: string, basics: IRepoBasics, branch: string) {
-    let viewId: string = `tree_${repo}`;
+    let viewId: string = `fs_tree_${repo}`;
     let rootNode = new TreeNode('root', viewId, '', 'dir', undefined);
     if (!this.map.has(repo)) {
       this.map.set(repo, this.getNewRepo(repo, basics, rootNode));
@@ -238,7 +240,8 @@ export class GithubService {
       fs: new Map<string, any>(),
       tree: [rootNode],
       resources: new Map<string, IResource>(),
-      changes: {}
+      changes: {},
+      changeTree: [rootNode]
     };
   }
 
@@ -272,5 +275,37 @@ export class GithubService {
       this.repoSelectionSubject.next(repository);
       this.selectedRepo = repo;
     }
+  }
+
+  private generateChangesTree() {
+    let current = this.getCurrent();
+    let tree = current.tree;
+    let changesTree = [current?.changeTree[0]];
+    for (let id in current.changes) {
+      let node = tree.find(node => node.id == id)!;
+      changesTree.push(node);
+    }
+    current.changeTree = changesTree;
+  }
+
+  private markDirtyRecussively(rid: string) {
+    let node = this.getCurrent().tree.find(n => n.id == rid)!;
+    if (node.id == 'root') return;
+    if (node.children)  {
+      if(node.isDirty != this.hasDirtyChild(node.children)) {
+        node.isDirty = this.hasDirtyChild(node.children);
+        this.resourceChangeSubject.next({ rid: rid, isDirty: node.isDirty });
+      }
+    }
+    this.markDirtyRecussively(node.parent!);
+  }
+
+  private hasDirtyChild(children: string[]): boolean {
+    let current = this.getCurrent();
+    for (let rid of children) {
+      if (current.tree.find(node => node.id == rid)?.isDirty)
+        return true;
+    }
+    return false;
   }
 }

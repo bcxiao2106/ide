@@ -9,18 +9,18 @@ import { ListViewComponent } from "../components/list-view/list-view.component";
 import { MonacoEditorComponent } from "../components/monaco-editor/monaco-editor.component";
 import { ProjectInfoComponent } from "../components/project-info/project-info.component";
 import { PopupComponent } from "../components/shared/popup/popup.component";
-import { TreeMenuComponent } from "../components/tree-menu/tree-menu.component";
 import { GithubComponent } from "../components/github/github.component";
 import { RepoSelectorComponent } from "../components/repo-selector/repo-selector.component";
 import { RepoChangesComponent } from "../components/repo-changes/repo-changes.component";
 import { RepoPullRequestsComponent } from "../components/repo-pull-requests/repo-pull-requests.component";
+import { FsTreeComponent } from "../components/fs-tree/fs-tree.component";
 
 @Injectable()
 export class ComponentService {
     private map: any = {
         ProjectInfoComponent: ProjectInfoComponent,
         ListViewComponent: ListViewComponent,
-        TreeMenuComponent: TreeMenuComponent,
+        FsTreeComponent: FsTreeComponent,
         EditorPanelComponent: EditorPanelComponent,
         FunctionalPanelComponent: FunctionalPanelComponent,
         MonacoEditorComponent: MonacoEditorComponent,
