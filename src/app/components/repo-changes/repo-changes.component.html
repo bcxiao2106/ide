@@ -7,8 +7,6 @@
     </div>
     <div class="flex-row">
         <div class="changes-header">CHANGES</div>
-        <div class="changed-files">
-            <div *ngFor="let change of changes" class="changed-item">{{change.name}}</div>
-        </div>
+        <changes-tree></changes-tree>
     </div>
 </div>

@@ -9,7 +9,6 @@ import { WorkspaceNavComponent } from './components/workspace-nav/workspace-nav.
 import { SectionComponent } from './components/section/section.component';
 import { ProjectInfoComponent } from './components/project-info/project-info.component';
 import { ComponentService } from './services/component.service';
-import { TreeMenuComponent } from './components/tree-menu/tree-menu.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { TreeViewService } from './services/tree-view.service';
 import { TreeNodeComponent } from './components/tree-node/tree-node.component';
@@ -41,6 +40,8 @@ import { RepoSelectorComponent } from './components/repo-selector/repo-selector.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RepoChangesComponent } from './components/repo-changes/repo-changes.component';
 import { RepoPullRequestsComponent } from './components/repo-pull-requests/repo-pull-requests.component';
+import { FsTreeComponent } from './components/fs-tree/fs-tree.component';
+import { ChangesTreeComponent } from './components/changes-tree/changes-tree.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,6 @@ import { RepoPullRequestsComponent } from './components/repo-pull-requests/repo-
     WorkspaceNavComponent,
     SectionComponent,
     ProjectInfoComponent,
-    TreeMenuComponent,
     ListViewComponent,
     TreeNodeComponent,
     EditorPanelComponent,
@@ -68,7 +68,9 @@ import { RepoPullRequestsComponent } from './components/repo-pull-requests/repo-
     OauthRedirectComponent,
     RepoSelectorComponent,
     RepoChangesComponent,
-    RepoPullRequestsComponent
+    RepoPullRequestsComponent,
+    FsTreeComponent,
+    ChangesTreeComponent
   ],
   imports: [
     BrowserModule,

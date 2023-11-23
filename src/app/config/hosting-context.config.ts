@@ -3,8 +3,8 @@ export const ENV: string = 'local'; //pages, local
 export const ENCRYPT_KEY = 'ayden';
 export const getHostingContext: any = () => {
     let localTks: string[] = [
-        'U2FsdGVkX1/t9+AJmE7rIli2izLqAGBHlf4RvKuSRc1iPA0D9TSYLjdOgtTU8rOaeF4DfrW3fEhfQGFFVAcPOg==',
-        'U2FsdGVkX1+kePFCD9loKnUoeHT9spYbih6VjKdRMpXgLg34NGdt/18UfaRYcNkyOiIlBRnc+SVtzjIsIoDFa/himi5E9OtzBy0BEZSFliwvXFIB1w5WHltw65PqQJPAXjNnCNfFHYF53fDYngVkUg=='
+        'U2FsdGVkX19BuzRJAVBo4tNaeBiuqsctjLtMYA4EcoC4s+N8E8t9v2ShY2efz6uEO9s5CMiUAbUDA0IXnINJxA==',
+        'U2FsdGVkX18AaLeh2YxLaCSBiwsAhd3HnUkpL33KJAb6V0UFVnMJTobhs4rlyuQZtOOJtO4HvUtWw/kO7DptFy3hCXe/ukSmtJdZXpsjVr+yexuGyR1kxLu1hDYMfDiBUzIF3P7nenaxuFYxCspo1g=='
     ];
     let pagesTks: string[] = [
         'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
