@@ -33,10 +33,16 @@ export class RepoChangesComponent implements OnInit, OnDestroy {
     for(let id in changes) {
       console.log(id);
       let resource = this.githubService.getResource(id);
+      let pathSegments: string[] = resource.path.split('/');
+      let path: string = '';
+      if(pathSegments.length > 1) {
+        path = pathSegments.splice(0, pathSegments.length - 1).join('/');
+      }
       this.changes.push({
         id: id,
         name: resource.name,
         path: resource.path,
+        parent: path,
         content: changes[id]
       });
     }

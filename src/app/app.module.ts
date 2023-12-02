@@ -42,6 +42,7 @@ import { RepoChangesComponent } from './components/repo-changes/repo-changes.com
 import { RepoPullRequestsComponent } from './components/repo-pull-requests/repo-pull-requests.component';
 import { FsTreeComponent } from './components/fs-tree/fs-tree.component';
 import { ChangesTreeComponent } from './components/changes-tree/changes-tree.component';
+import { RepoPullsComponent } from './components/repo-pulls/repo-pulls.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ChangesTreeComponent } from './components/changes-tree/changes-tree.com
     RepoChangesComponent,
     RepoPullRequestsComponent,
     FsTreeComponent,
-    ChangesTreeComponent
+    ChangesTreeComponent,
+    RepoPullsComponent
   ],
   imports: [
     BrowserModule,

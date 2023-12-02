@@ -1,0 +1,39 @@
+.section-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-row {
+    display: flex;
+    padding-bottom: 5px;
+}
+
+.flex-col {
+    display: flex;
+    padding: 2px 2px 1px 2px;
+}
+
+.pr-text {
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #4573c9;
+    cursor: pointer;
+}
+
+.flex-shrink {
+    flex: 0 1 auto;
+}
+
+.flex_grow {
+    flex: 1;
+}
+.flex_2 {
+    flex: 2;
+}
+
+.no-flex {
+    flex: 0 0 auto;
+}

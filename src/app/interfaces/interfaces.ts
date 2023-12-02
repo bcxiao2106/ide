@@ -13,6 +13,7 @@ export interface ISection {
   component: string;
   config?: any;
   isExpanded?: boolean;
+  style?: IUIStyle;
 }
 export interface ITreeNode {
   id: string;
@@ -87,4 +88,8 @@ export interface IContainerParams extends IActionParams {
 }
 export interface ILoadComponentParams extends IActionParams {
   components: ILoadComponent[];
+}
+export interface IUIStyle {
+  'min-height'?: string;
+  'max-height'?: string;
 }

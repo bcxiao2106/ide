@@ -1,1 +1,25 @@
-<p>repo-pull-requests works!</p>
+<div class="section-container">
+    <div class="section-row">
+        <div class="flex-col">
+            <select class="branch-select" (change)="onBaseSelect($event)">
+                <option *ngFor="let branch of baseBranches" [value]="branch.name" [selected]="branch.isDefault">{{branch.name}}</option>
+            </select>
+        </div>
+        <div class="flex-col"><<<</div>
+        <div class="flex-col">
+            <select class="branch-select" (change)="onCompareSelect($event)">
+                <option *ngFor="let branch of baseBranches" [value]="branch.name" [selected]="branch.current">
+                    {{branch.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="section-row">
+        <input type="text" placeholder="title" class="pr-title" [value]="title" (change)="onTitleChange($event)">
+    </div>
+    <div class="section-row">
+        <textarea placeholder="description" class="pr-description" (change)="onDescChange($event)"></textarea>
+    </div>
+    <div class="section-row">
+        <button class="action-btn" [ngClass]="{'disabled': base == compare}" (click)="createPullRequest()">Create pull request</button>
+    </div>
+</div>

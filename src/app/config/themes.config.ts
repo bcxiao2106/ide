@@ -7,6 +7,7 @@ export const Themes: IThemesConfig = {
         //ide
         '--ide-bgcolor': { 'vs-dark': '#000000', 'vs-light': '#ffffff'},
         '--ide-color': { 'vs-dark': '#cccccc', 'vs-light': '#666666'},
+        '--ide-silent-color': { 'vs-dark': '#7b7b7a', 'vs-light': '#a6a6a6'},
 
         //worspace nav
         '--ide-ws-nav-bgcolor': { 'vs-dark': '#2e3138', 'vs-light': '#eaeaea'},
