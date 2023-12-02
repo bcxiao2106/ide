@@ -6,7 +6,7 @@ import { IBranch, IPullRequest, IRepo, IRepoBasics, IResource, IResourceChange, 
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { Observable, Subject } from "rxjs";
-import { OWNER, getHostingContext } from "../config/hosting-context.config";
+import { ACCOUNT_TYPE, OWNER, getHostingContext } from "../config/hosting-context.config";
 import { RestEndpointMethodTypes } from "@octokit/rest";
 
 @Injectable()
@@ -48,16 +48,23 @@ export class GithubService {
       //   owner: owner ? owner : this.owner,
       //   per_page: 5000
       // });
-      let response = await this.octokit.rest.search.repos({
-        q: 'nexxe.ng',
-        per_page: 100
-      })
-      // let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {
-      //   owner: owner ? owner : this.owner
-      // });
-      if (response && response.data.items && Array.isArray(response.data.items)) {
-        this.repositories = response.data.items;
+      if(ACCOUNT_TYPE == 'orgs') {
+        let response = await this.octokit.rest.search.repos({
+          q: 'T',
+          per_page: 100
+        });
+        if (response && response.data.items && Array.isArray(response.data.items)) {
+          this.repositories = response.data.items;
+        }
+      } else  {
+        let response: OctokitResponse<any> = await this.octokit.request("GET /users/{owner}/repos", {
+          owner: owner ? owner : this.owner
+        });
+        if (response && response.data && Array.isArray(response.data)) {
+          this.repositories = response.data;
+        }
       }
+
     } catch (error) {
       console.log('loadRepositories', typeof error, JSON.stringify(error));
     }
