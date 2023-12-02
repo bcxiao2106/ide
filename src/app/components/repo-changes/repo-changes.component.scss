@@ -1,28 +1,52 @@
 .repo-changes-root {
-    padding: 5px;
     display: flex;
     flex-direction: column;
 }
+
 .flex-row {
     display: flex;
     flex-direction: column;
     padding-bottom: 5px;
 }
+
 .commit-message {
     background-color: var(--ide-bgcolor);
     color: var(--ide-color);
 }
+
 .commit-btn {
     width: 100%;
     background-color: var(--ide-btn-bgcolor);
     color: var(--ide-btn-color);
+    border: 1px solid var(--ide-silent-color);
+    height: 22px;
+    cursor: pointer;
 }
+
 .changes-header {
     background-color: var(--ide-section-header-bgcolor);
 }
+
 .changed-files {
-    padding-left: 8px;
+    // padding-left: 8px;
 }
+
 .changed-item {
-    padding: 2px;
+    padding: 2px 5px 2px 10px;
+    cursor: pointer;
+}
+
+.changed-item:hover {
+    background-color: var(--ide-menu-item-hover-bgcolor);
+}
+
+.path-text {
+    font-size: 11px;
+    color: var(--ide-silent-color);
+    padding: 4px;
+    font-style: italic;
+}
+.disabled {
+    background-color: var(--ide-silent-color);
+    pointer-events: none;
 }

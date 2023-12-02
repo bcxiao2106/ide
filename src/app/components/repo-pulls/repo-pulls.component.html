@@ -1,0 +1,8 @@
+<div class="section-container">
+    <div *ngFor="let pr of pulls" class="section-row" >
+        <div class="flex-col no_flex" [title]="pr?.html_url"><span>{{pr?.number}}</span></div>
+        <div class="flex-col pr-text flex_2" [title]="pr?.title"><a [href]="pr?.html_url" target="_blank">{{pr?.title}}</a></div>
+        <div class="flex-col pr-text flex_grow" [title]="pr?.user?.login">{{pr?.user?.login}}</div>
+        <div class="flex-col no_flex" (click)="closePullRequest(pr)">cancel</div>
+    </div>
+</div>

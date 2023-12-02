@@ -1,4 +1,7 @@
+import { IncomingHttpStatusHeader } from "http2";
 import { ITreeNode } from "./interfaces";
+import { RestEndpointMethodTypes } from "@octokit/rest";
+import { Endpoints } from "@octokit/types";
 
 export interface IRepo {
   name: string;
@@ -6,6 +9,7 @@ export interface IRepo {
   branches: IBranchBasic[];
   branchMap: Map<string, IBranch>;
   currentBranch: string;
+  pulls?: PullRequest[];
 }
 
 export interface IBranch {
@@ -146,9 +150,18 @@ export interface IBranchBasic {
   name: string;
   protected: boolean;
   current?: boolean;
+  isDefault?: boolean;
 }
 export interface ICommit {
   sha: string;
   url: string;
 }
+export interface IPullRequest {
+  url: string;
+  number: number;
+  title: string;
+  html_url: string;
+  [key: string]: any;
+}
+export type PullRequest = Endpoints["GET /repos/{owner}/{repo}/pulls"]["response"]["data"];
 

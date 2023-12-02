@@ -3,10 +3,12 @@
         <textarea maxlength="50" placeholder="Commit message" class="commit-message" (blur)="onMessageChange($event)" [value]="message"></textarea>
     </div>
     <div class="flex-row">
-        <button class="commit-btn" (click)="commit()">Commit</button>
+        <button class="commit-btn"  [ngClass]="{'disabled': changes.length == 0 || message == ''}" (click)="commit()">Commit</button>
     </div>
     <div class="flex-row">
         <div class="changes-header">CHANGES</div>
-        <changes-tree></changes-tree>
+        <div class="changed-files">
+            <div *ngFor="let change of changes" class="changed-item" [title]="change.path">{{change.name}}<span class="path-text">{{change.parent}}</span></div>
+        </div>
     </div>
 </div>

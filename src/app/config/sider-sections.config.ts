@@ -8,6 +8,7 @@ export const SiderSections: ISection[] = [
 ];
 
 export const GitSiderSections: ISection[] = [
-  { title: 'Commit Changes', component: 'RepoChangesComponent', isExpanded: true },
-  { title: 'Pull Requests', component: 'RepoPullRequestsComponent', isExpanded: true }
+  { title: 'Commit Changes', component: 'RepoChangesComponent', isExpanded: true, style: {"min-height": "100px"} },
+  { title: 'New Pull Request', component: 'RepoPullRequestsComponent', isExpanded: true, style: {"min-height": "100px"} },
+  { title: 'Pull Requests', component: 'RepoPullsComponent', isExpanded: false, style: {"min-height": "100px"} }
 ];

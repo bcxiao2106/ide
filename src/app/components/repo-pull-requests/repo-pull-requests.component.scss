@@ -1,0 +1,48 @@
+.action-btn {
+    width: 100%;
+    background-color: var(--ide-btn-bgcolor);
+    color: var(--ide-btn-color);
+    border: 1px solid var(--ide-silent-color);
+    height: 22px;
+}
+.branch-select {
+    width: 100%;
+    height: 25px;
+    font-size: 15px;
+    background-color: var(--ide-bgcolor);
+    color: var(--ide-color);
+    border: 1px solid var(--ide-silent-color);
+}
+.section-container {
+    display: flex;
+    flex-direction: column;
+}
+.section-row {
+    display: flex;
+    padding-bottom: 5px;
+}
+.flex-col {
+    display: flex;
+    flex-grow: 1;
+    margin: auto;
+}
+.width0 {
+    width: 0px;
+}
+.pr-description {
+    background-color: var(--ide-bgcolor);
+    color: var(--ide-color);
+    width: 100%;
+    border: 1px solid var(--ide-silent-color);
+}
+.pr-title {
+    background-color: var(--ide-bgcolor);
+    color: var(--ide-color);
+    width: 100%;
+    border: 1px solid var(--ide-silent-color);
+    height: 25px;
+}
+.disabled {
+    background-color: var(--ide-silent-color);
+    pointer-events: none;
+}
