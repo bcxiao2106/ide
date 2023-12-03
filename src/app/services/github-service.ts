@@ -44,6 +44,7 @@ export class GithubService {
 
   async loadRepositories(owner?: string): Promise<void> {
     try {
+      if(this.repositories.length > 0) return;
       // let response: OctokitResponse<any> = await this.octokit.request("GET /orgs/{owner}/repos", {
       //   owner: owner ? owner : this.owner,
       //   per_page: 5000

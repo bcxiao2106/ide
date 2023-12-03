@@ -23,21 +23,26 @@ export class FsTreeComponent implements OnInit, OnDestroy {
     private githubService: GithubService) { }
 
   ngOnInit(): void {
+    let current = this.githubService.getCurrent();
+    if(current) {
+      this.init(current);
+    }
     this.subscribe();
-    // this.init();
   }
 
-  subscribe() {
-    this.subscription.add(this.githubService.repoChange$.subscribe((repo: IBranch) => {
-      repo.tree[0].level = 0;
-      this.config = repo.tree[0];
-      this.treeNodes = repo.tree;
-      this.init();
-      this.load();
-    }));
+  private subscribe() {
+    this.subscription.add(this.githubService.repoChange$.subscribe(this.init.bind(this)));
   }
 
-  init() {
+  private init(repo: IBranch) {
+    repo.tree[0].level = 0;
+    this.config = repo.tree[0];
+    this.treeNodes = repo.tree;
+    this.initTree();
+    this.load();
+  }
+
+  private initTree() {
     this.treeService.register(this.config?.viewId!);
     this.treeService.setRange(this.treeNodes);
     this.config?.children && this.config?.children.forEach(nodeId => {
@@ -53,7 +58,7 @@ export class FsTreeComponent implements OnInit, OnDestroy {
     }));
   }
 
-   load() {
+   private load() {
     this.containerRef && this.containerRef.clear();
     this.containerRef.createEmbeddedView(this.templateRef);
    }

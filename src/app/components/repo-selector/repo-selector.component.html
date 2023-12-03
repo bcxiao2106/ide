@@ -4,7 +4,7 @@
 <ng-template #reposTemplate>
   <span>Choose a repository:</span>
   <select (change)="onRepoSelect($event)" class="repo-select">
-    <option *ngFor="let repo of repositories" [value]="repo.id">{{repo.full_name}}</option>
+    <option *ngFor="let repo of repositories" [value]="repo.id" [selected]="repo.name == selectedRepo">{{repo.full_name}}</option>
   </select>
 </ng-template>
 
