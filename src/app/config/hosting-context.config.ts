@@ -1,16 +1,16 @@
 import * as cryptojs from 'crypto-js';
-export const ENV: string = 'local'; //pages, local, console
+export const ENV: string = 'console'; //pages, local, console
 export const ENCRYPT_KEY: string = 'ayden';
-export const OWNER: string = 'bcxiao2106'; //GEP-GitHub aydenxiao-gep bcxiao2106
-export const ACCOUNT_TYPE: string = 'users'; //orgs
+export const OWNER: string = 'GEP-GitHub'; //GEP-GitHub aydenxiao-gep bcxiao2106
+export const ACCOUNT_TYPE: string = 'orgs'; //orgs users
 export const getHostingContext: any = () => {
     let localTks: string[] = [
         'U2FsdGVkX1/Io20/0PMuxLjBiFy1cupXdeyILTjwrvks4N9GIm0dmgV3JkMvZZgWqG5UcgCj3R+q66xEo51wTQ==',
         'U2FsdGVkX19b9J9CtDXD4VYNi5/n/7Skp7pSE7Oyri/KaCON4dY+ff2X8Q+WJjAjMjc9+mHI0r9lKqJIlcO51zf/h2u8nUb/2fXKxaiO4LV7Ff5GSxoDxXzCHTb0MmES9DZQWl3S6EXa3yiRMeXl+g=='
     ];
     let consoleTks: string[] = [
-        'U2FsdGVkX19P89W0Y+9ztbcFJ3BggnIUyvr7gUdRuFpPTgIJcIjcxg5Q9jpGVdPJ6EO9Yp7PSwh3nu67ULsTMQ==',
-        'U2FsdGVkX1+qWJgR6EuSVMwL9GPd2wWp+8p1zM6KW/rB0+jvmI+rhgzDaAQ7b1ayiHeGRoxgPoLTUq0kxEF2jeWqV9MDpAqY5rhGDlYe/RFdwiwZRp0r1czz6+vvEgGK4mPFhI4TPVpzF872Ch5Y3g=='
+        'U2FsdGVkX18seA+KciWXba2cYhecfhDrqWcQqfMiB9XNKFT2S9Dk4ZziFVu4dGUnce9kBg8MyJDzI/iFnQvH1w==',
+        'U2FsdGVkX1/+21Mm0W8Ujv0YMyj8Lzg5Zt8zyTyomcP0QFHy8j+CSnq+V5hVWCNFSxOuRF6rLZVZ11onLLdOA3TEqaf3L6WbDowos7TdkHPD6c1VNDVn+fx3CcjodITgvZ/B32qlMLRGv9vNyCgmgw=='
     ];
     let pagesTks: string[] = [
         'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
@@ -31,8 +31,10 @@ export const getHostingContext: any = () => {
             sid: decrypt('U2FsdGVkX18qgRawXIbmZZ5gJEl4Nn6XfmC9S9JrQzym/wB+8Eu6qunIhICW9IG7CkDFtcs4ptyLzzhnHa/csA=='),
             tk: decrypt(consoleTks[0]),
             rtk: decrypt(consoleTks[1]),
-            baseHref: '/',
-            callbackUrl: 'http://localhost:3000/'
+            baseHref: 'https://bcxiao2106.github.io/ide/',
+            callbackUrl: 'https://bcxiao2106.github.io/ide/'
+            // baseHref: '/',
+            // callbackUrl: 'http://localhost:3000/'
         }
     } else return {
         cid: decrypt('U2FsdGVkX18eQBlQ62xAKJOZG38fhlbUk5kYDjpYyR9RWov02oV6+xoTWCdPRPTk'),
