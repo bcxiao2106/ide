@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { OctokitResponse, RequestParameters } from "@octokit/types";
 import { Buffer } from 'buffer';
 import { Octokit } from "octokit";
-import { IBranch, IPullRequest, IRepo, IRepoBasics, IResource, IResourceChange, PullRequest } from "../interfaces/github.interfaces";
+import { IBranch, IRepo, IRepoBasics, IResource, IResourceChange, PullRequest } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { Observable, Subject } from "rxjs";
 import { ACCOUNT_TYPE, OWNER, getHostingContext } from "../config/hosting-context.config";
-import { RestEndpointMethodTypes } from "@octokit/rest";
 
 @Injectable()
 export class GithubService {
@@ -51,7 +50,7 @@ export class GithubService {
       // });
       if(ACCOUNT_TYPE == 'orgs') {
         let response = await this.octokit.rest.search.repos({
-          q: 'T',
+          q: 'nexxe.ng',
           per_page: 100
         });
         if (response && response.data.items && Array.isArray(response.data.items)) {
@@ -136,7 +135,8 @@ export class GithubService {
         let response = await this.octokit.request("GET /repos/{owner}/{repo}/branches", {
           owner: this.owner,
           repo: repo,
-          per_page: 1000
+          per_page: 1000,
+          
         });
         console.log('loadBranches', response.data);
         this.map.get(repo)?.branches.push(...response.data);
@@ -479,7 +479,6 @@ export class GithubService {
         parentPath = item.path.substring(0, item.path.lastIndexOf('/'));
       }
       let parent = pathMap.get(parentPath);
-      console.log(pathMap.size);
       current.fs.set(item.sha, item);
       let type = item.type == 'tree' ? 'dir' : 'file';
       let node = new TreeNode(item.sha, current.tree[0].viewId, item.name, type, parent?.id, item);
@@ -489,7 +488,6 @@ export class GithubService {
       parent?.children?.push(node.id);
       current.tree.push(node);
     });
-    console.log(current);
   }
 
   // private async createOrUpdateFile(resource: any, message: string): Promise<any> {
