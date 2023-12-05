@@ -9,8 +9,8 @@ export const getHostingContext: any = () => {
         'U2FsdGVkX19b9J9CtDXD4VYNi5/n/7Skp7pSE7Oyri/KaCON4dY+ff2X8Q+WJjAjMjc9+mHI0r9lKqJIlcO51zf/h2u8nUb/2fXKxaiO4LV7Ff5GSxoDxXzCHTb0MmES9DZQWl3S6EXa3yiRMeXl+g=='
     ];
     let consoleTks: string[] = [
-        'U2FsdGVkX18seA+KciWXba2cYhecfhDrqWcQqfMiB9XNKFT2S9Dk4ZziFVu4dGUnce9kBg8MyJDzI/iFnQvH1w==',
-        'U2FsdGVkX1/+21Mm0W8Ujv0YMyj8Lzg5Zt8zyTyomcP0QFHy8j+CSnq+V5hVWCNFSxOuRF6rLZVZ11onLLdOA3TEqaf3L6WbDowos7TdkHPD6c1VNDVn+fx3CcjodITgvZ/B32qlMLRGv9vNyCgmgw=='
+        'U2FsdGVkX18VgIrMsOCv4v7ZnHeZ0DrnZf+ltIW275miaei41jUAS5PRxVrSfaPm10V0h00OMaduxRY0by0TYA==',
+        'U2FsdGVkX18ESnh7rYLadnil893m7PFCW23B6sno4FtGihe3ZtfC5f49j01g2T3eaQvd2ftH/OG46j9UtsH5U0hvyVEs0IK8CtWnDCGLRT/7K3romZRswVinBK1BRFhvZGXYSGNHFKfHqxk97boIDA=='
     ];
     let pagesTks: string[] = [
         'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',
