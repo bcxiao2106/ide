@@ -1,12 +1,12 @@
 import * as cryptojs from 'crypto-js';
-export const ENV: string = 'console'; //pages, local, console
+export const ENV: string = 'local'; //pages, local, console
 export const ENCRYPT_KEY: string = 'ayden';
-export const OWNER: string = 'GEP-GitHub'; //GEP-GitHub aydenxiao-gep bcxiao2106
-export const ACCOUNT_TYPE: string = 'orgs'; //orgs users
+export const OWNER: string = 'bcxiao2106'; //GEP-GitHub aydenxiao-gep bcxiao2106
+export const ACCOUNT_TYPE: string = 'users'; //orgs users
 export const getHostingContext: any = () => {
     let localTks: string[] = [
-        'U2FsdGVkX1/Io20/0PMuxLjBiFy1cupXdeyILTjwrvks4N9GIm0dmgV3JkMvZZgWqG5UcgCj3R+q66xEo51wTQ==',
-        'U2FsdGVkX19b9J9CtDXD4VYNi5/n/7Skp7pSE7Oyri/KaCON4dY+ff2X8Q+WJjAjMjc9+mHI0r9lKqJIlcO51zf/h2u8nUb/2fXKxaiO4LV7Ff5GSxoDxXzCHTb0MmES9DZQWl3S6EXa3yiRMeXl+g=='
+        'U2FsdGVkX1/MLkji5VLytbPDiCfxj4pWImFEnFKi2/OX5KWGmXAjREDvHk85AqMFuMYCQ7Z02HDD8jDXIt+awg==',
+        'U2FsdGVkX18BdJZpBuKKZzkxPl5aKoZZoGfDD5VO0QBrm0d3heO+yY0SXDgpHd0+fg+9DpBE7NB/NnC+8zkcGDe27uj2D1TKP1+hL461M9cGmYenyZX9zITpLCZ67noB0cA5+nPm1LYvG6OvLczEcg=='
     ];
     let consoleTks: string[] = [
         'U2FsdGVkX18VgIrMsOCv4v7ZnHeZ0DrnZf+ltIW275miaei41jUAS5PRxVrSfaPm10V0h00OMaduxRY0by0TYA==',
@@ -31,10 +31,10 @@ export const getHostingContext: any = () => {
             sid: decrypt('U2FsdGVkX18qgRawXIbmZZ5gJEl4Nn6XfmC9S9JrQzym/wB+8Eu6qunIhICW9IG7CkDFtcs4ptyLzzhnHa/csA=='),
             tk: decrypt(consoleTks[0]),
             rtk: decrypt(consoleTks[1]),
-            baseHref: 'https://bcxiao2106.github.io/ide/',
-            callbackUrl: 'https://bcxiao2106.github.io/ide/'
-            // baseHref: '/',
-            // callbackUrl: 'http://localhost:3000/'
+            // baseHref: 'https://bcxiao2106.github.io/ide/',
+            // callbackUrl: 'https://bcxiao2106.github.io/ide/'
+            baseHref: '/',
+            callbackUrl: 'http://localhost:3000/'
         }
     } else return {
         cid: decrypt('U2FsdGVkX18eQBlQ62xAKJOZG38fhlbUk5kYDjpYyR9RWov02oV6+xoTWCdPRPTk'),

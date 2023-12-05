@@ -89,7 +89,7 @@ export class GithubService {
           owner: this.owner,
           repo: repo,
           tree_sha: ref, // Use the commit SHA of the branch
-          recursive: 'false',
+          recursive: 'false'
         });
         console.log('processTreeSturcture'.toUpperCase(), repos);
         this.processTreeSturcture(repos.data.tree);
