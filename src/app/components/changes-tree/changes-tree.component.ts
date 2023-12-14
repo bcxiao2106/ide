@@ -32,7 +32,7 @@ export class ChangesTreeComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    this.treeService.register(this.config?.viewId!);
+    this.treeService.register(this.config?.viewId!, []);
     this.treeService.setRange(this.treeNodes);
     this.config?.children && this.config?.children.forEach(nodeId => {
       let node: any = this.treeService.get(this.config?.viewId!, nodeId);

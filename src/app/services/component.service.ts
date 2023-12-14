@@ -15,6 +15,7 @@ import { RepoChangesComponent } from "../components/repo-changes/repo-changes.co
 import { RepoPullRequestsComponent } from "../components/repo-pull-requests/repo-pull-requests.component";
 import { FsTreeComponent } from "../components/fs-tree/fs-tree.component";
 import { RepoPullsComponent } from "../components/repo-pulls/repo-pulls.component";
+import { VirualTreeComponent } from "../components/virual-tree/virual-tree.component";
 
 @Injectable()
 export class ComponentService {
@@ -36,7 +37,8 @@ export class ComponentService {
         RepoSelectorComponent: RepoSelectorComponent,
         RepoChangesComponent: RepoChangesComponent,
         RepoPullRequestsComponent: RepoPullRequestsComponent,
-        RepoPullsComponent: RepoPullsComponent
+        RepoPullsComponent: RepoPullsComponent,
+        VirualTreeComponent: VirualTreeComponent
     }
 
     get(key: string): any {

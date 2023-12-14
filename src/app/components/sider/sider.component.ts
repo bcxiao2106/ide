@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { siderFilesTreeViewId, SiderMenu } from 'src/app/config/sider-files.config';
 import { SiderSections } from 'src/app/config/sider-sections.config';
 import { ISection } from 'src/app/interfaces/interfaces';
 import { TreeViewService } from 'src/app/services/tree-view.service';

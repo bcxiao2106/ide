@@ -30,6 +30,7 @@ export interface ITreeNode {
   editorType?: EditorType;
   resource?: any;
   isDirty?: boolean;
+  type?: string;
 }
 export interface ITab {
   id: string;
