@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport itemSize="10" class="tree-viewport">
     <div *cdkVirtualFor="let node of nodes;let i=index;" class="tree-item" [id]="getElementId(node, i)"
-        (click)="toggleExpanded(node)" [title]="node.resource.path">
+        (click)="onClick(node)" [title]="node.resource.path">
         <div class="indent-box" *ngFor="let level of getIndents(node)"></div>
         <div class="menu-icon">
             <svg *ngIf="node!.isExpanded && node!.type == 'dir'" width="16" height="16" viewBox="0 0 16 16"

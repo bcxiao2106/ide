@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBranch } from 'src/app/interfaces/github.interfaces';
 import { ITreeNode } from 'src/app/interfaces/interfaces';
+import { EditorsManagerService } from 'src/app/services/editors-manager.service';
 import { GithubService } from 'src/app/services/github-service';
 import { TreeViewService } from 'src/app/services/tree-view.service';
 
@@ -17,7 +18,8 @@ export class VirualTreeComponent implements OnInit, OnDestroy {
 
   constructor(private githubService: GithubService,
     private treeService: TreeViewService,
-    private cdRef: ChangeDetectorRef) {}
+    private cdRef: ChangeDetectorRef,
+    private ems: EditorsManagerService) {}
 
   ngOnInit(): void {
     let current = this.githubService.getCurrent();
@@ -43,6 +45,14 @@ export class VirualTreeComponent implements OnInit, OnDestroy {
 
   getElementId(node: ITreeNode, index: number): string {
     return `${node.type}_${index}_lvl_${node.level}`;
+  }
+
+  async onClick(node: ITreeNode) {
+    if(node.type !== 'dir') {
+      await this.ems.open(node);
+    } else {
+      this.toggleExpanded(node);
+    }
   }
 
   toggleExpanded(node: ITreeNode) {
