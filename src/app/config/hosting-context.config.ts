@@ -31,10 +31,10 @@ export const getHostingContext: any = () => {
             sid: decrypt('U2FsdGVkX18qgRawXIbmZZ5gJEl4Nn6XfmC9S9JrQzym/wB+8Eu6qunIhICW9IG7CkDFtcs4ptyLzzhnHa/csA=='),
             tk: decrypt(consoleTks[0]),
             rtk: decrypt(consoleTks[1]),
-            // baseHref: 'https://bcxiao2106.github.io/ide/',
-            // callbackUrl: 'https://bcxiao2106.github.io/ide/'
-            baseHref: '/',
-            callbackUrl: 'http://localhost:3000/'
+            baseHref: 'https://bcxiao2106.github.io/ide/',
+            callbackUrl: 'https://bcxiao2106.github.io/ide/'
+            // baseHref: '/',
+            // callbackUrl: 'http://localhost:3000/'
         }
     } else return {
         cid: decrypt('U2FsdGVkX18eQBlQ62xAKJOZG38fhlbUk5kYDjpYyR9RWov02oV6+xoTWCdPRPTk'),
