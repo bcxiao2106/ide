@@ -1,16 +1,16 @@
 import * as cryptojs from 'crypto-js';
-export const ENV: string = 'local'; //pages, local, console
+export const ENV: string = 'console'; //pages, local, console
 export const ENCRYPT_KEY: string = 'ayden';
-export const OWNER: string = 'bcxiao2106'; //GEP-GitHub aydenxiao-gep bcxiao2106
-export const ACCOUNT_TYPE: string = 'users'; //orgs users
+export const OWNER: string = 'GEP-GitHub'; //GEP-GitHub aydenxiao-gep bcxiao2106
+export const ACCOUNT_TYPE: string = 'orgs'; //orgs users
 export const getHostingContext: any = () => {
     let localTks: string[] = [
         'U2FsdGVkX1+g4dWWw+iLSiYKF8EBz1swbPGrMvJHz4/3RyVuf1Aw5zBgmVs/J+1ylYE8M1jUNDIysTI8l4n7xg==',
         'U2FsdGVkX19krmXvTKhY9UiI7bYdjXCobZFgWBIr9c1I7uEc9jUNp4ND0VnnlrdZihEwiihqR75EU78hwX7BBul82b8Ij1nmtOhl2MLpUWxD/77DwvktyvE80uc0rvrsBUDCfGI6vQKNITqG4q76zQ=='
     ];
     let consoleTks: string[] = [
-        'U2FsdGVkX18VgIrMsOCv4v7ZnHeZ0DrnZf+ltIW275miaei41jUAS5PRxVrSfaPm10V0h00OMaduxRY0by0TYA==',
-        'U2FsdGVkX18ESnh7rYLadnil893m7PFCW23B6sno4FtGihe3ZtfC5f49j01g2T3eaQvd2ftH/OG46j9UtsH5U0hvyVEs0IK8CtWnDCGLRT/7K3romZRswVinBK1BRFhvZGXYSGNHFKfHqxk97boIDA=='
+        'U2FsdGVkX1+xabWH9NgGi2HXSb32EeJbAibitNyaQnMn0WKdYPlb8JpF4oVDyLSQlosmkP8Ci4PtXqjmDndn8Q==',
+        'U2FsdGVkX18P2CjCnU+Z9mqsKiR8SDhkANp+aN68DjmiBUdXw+Rcl89KqUS49E4x/M2N2K/PCH5HFbWapE9Ri9+IklEUOFdKpw3qHx5LzI+1igkNrc6LAAbwGNsFzNuf17CmcohH/4KNQZNDfbxGqw=='
     ];
     let pagesTks: string[] = [
         'U2FsdGVkX1/OovCxkf7hyeDGZ0UeAV6HnCrv9/xSicBfAQcYeI+EGtSRNNz3kmu5VAKHx5cqXvajPYZCRAUTAw==',

@@ -43,7 +43,7 @@ export class FsTreeComponent implements OnInit, OnDestroy {
   }
 
   private initTree() {
-    this.treeService.register(this.config?.viewId!);
+    this.treeService.register(this.config?.viewId!, []);
     this.treeService.setRange(this.treeNodes);
     this.config?.children && this.config?.children.forEach(nodeId => {
       let node: any = this.treeService.get(this.config?.viewId!, nodeId);

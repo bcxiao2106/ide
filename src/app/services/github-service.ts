@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 import { OctokitResponse, RequestParameters } from "@octokit/types";
 import { Buffer } from 'buffer';
 import { Octokit } from "octokit";
-import { IBranch, IRepo, IRepoBasics, IResource, IResourceChange, PullRequest } from "../interfaces/github.interfaces";
+import { IBranch, IRepo, IRepoBasics, IRepoFs, IResource, IResourceChange, PullRequest } from "../interfaces/github.interfaces";
 import { ITreeNode } from "../interfaces/interfaces";
 import { TreeNode } from "../classes/tree.node.class";
 import { Observable, Subject } from "rxjs";
 import { ACCOUNT_TYPE, OWNER, getHostingContext } from "../config/hosting-context.config";
+import { TreeViewService } from "./tree-view.service";
 
 @Injectable()
 export class GithubService {
@@ -31,7 +32,7 @@ export class GithubService {
   resourceChange$: Observable<IResourceChange>;
   prChange$: Observable<PullRequest[]>;
 
-  constructor() {
+  constructor(private treeService: TreeViewService) {
     this.repoSelectionSubject = new Subject<IBranch>();
     this.repoChange$ = this.repoSelectionSubject.asObservable();
     this.resourceChangeSubject = new Subject<IResourceChange>();
@@ -472,21 +473,40 @@ export class GithubService {
     let pathMap: Map<string, ITreeNode> = new Map<string, ITreeNode>();
     pathMap.set('.', current.tree[0]);
     tree.forEach(item => {
-      item['name'] = item.path.substring(item.path.lastIndexOf('/') + 1);
+      let name: string = item.path.substring(item.path.lastIndexOf('/') + 1);
+      if(name.indexOf('__dot__') > -1) name = name.replace('__dot__', '.');
+      item['name'] = name;
       item['repo'] = this.selectedRepo;
       let parentPath: string = '.';
       if (item.path.lastIndexOf('/') > -1) {
         parentPath = item.path.substring(0, item.path.lastIndexOf('/'));
       }
       let parent = pathMap.get(parentPath);
-      current.fs.set(item.sha, item);
+      current.fs.set(item.path, item);
       let type = item.type == 'tree' ? 'dir' : 'file';
-      let node = new TreeNode(item.sha, current.tree[0].viewId, item.name, type, parent?.id, item);
+      let level: number = 0;
+      let path: string[] = parentPath.split('/');
+      if(path[0] != '.') level = path.length;
+      let node = new TreeNode(item.path, current.tree[0].viewId, item.name, type, parentPath.split('/'), parent?.id, item);
       if (item.type == 'tree') {
         pathMap.set(item.path, node);
       }
       parent?.children?.push(node.id);
       current.tree.push(node);
+    });
+    this.treeNodeSort(current);
+    this.treeService.register(current.tree[0].viewId, current.tree);
+  }
+
+  private treeNodeSort(current: IBranch) {
+    current.tree.forEach(node => {
+      let dirs: string[] = [];
+      let files: string[] = [];
+      node.children && node.children.forEach(id => {
+        if(current.fs.get(id)?.type == 'tree') dirs.push(id);
+        else files.push(id);
+      });
+      node.children = [...dirs, ...files];
     });
   }
 

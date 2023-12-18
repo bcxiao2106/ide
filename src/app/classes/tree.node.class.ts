@@ -10,15 +10,22 @@ export class TreeNode implements ITreeNode {
   children?: string[] | undefined;
   path?: string[] | undefined;
   parent?: string | undefined;
+  level: number;
+  type: string;
 
 
-  constructor(id: string, viewId: string, text: string, type: string, parent?: string, resource?: any) {
+  constructor(id: string, viewId: string, text: string, type: string, path?: string[], parent?: string, resource?: any) {
     this.id = id;
     this.viewId = viewId;
     this.text = text;
-    this.path = text.length > 1 ? [text] : [];
+    this.path = path ? path : [];
+    if(path?.length == 1 && path[0] == '.') this.level = 0;
+    else this.level = this.path.length;
     this.parent = parent;
-    if(resource) this.resource = resource;
+    this.type = type;
+    if(resource) {
+      this.resource = resource;
+    }
     if(type === 'dir') {
       this.children = [];
       this.editorType = EditorType.none;

@@ -9,8 +9,8 @@ export class TreeViewService {
 
     constructor() {}
 
-    register(viewId: string) {
-        this.map.set(viewId, new TreeView(viewId));
+    register(viewId: string, nodes: ITreeNode[]) {
+        this.map.set(viewId, new TreeView(viewId, nodes));
     }
 
     deregister(viewId: string) {
@@ -40,11 +40,19 @@ export class TreeViewService {
         return this.map.get(viewId)?.get(id);
     }
 
+    getTree(viewId: string): ITreeNode[] {
+        return this.map.get(viewId)?.getTree() || [];
+    }
+
     select(viewId: string, id: string | undefined) {
         viewId && id && this.map.get(viewId)?.select(id);
     }
 
     appendChild(viewId: string, parentNodeId: string, node: ITreeNode) {
         this.map.get(viewId)?.appendChild(parentNodeId, node);
+    }
+
+    toggleExpanded(node: ITreeNode): ITreeNode[] {
+        return this.map.get(node.viewId)?.toggleExpanded(node) || [];
     }
 }

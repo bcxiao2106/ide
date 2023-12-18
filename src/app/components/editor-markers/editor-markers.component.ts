@@ -38,7 +38,7 @@ export class EditorMarkersComponent implements OnInit, OnDestroy {
 
   generateTree() {
     // this.treeService.deregister(this.editorMarkersTreeViewId);
-    this.treeService.register(this.editorMarkersTreeViewId);
+    this.treeService.register(this.editorMarkersTreeViewId, []);
     this.rootNode.children = [];
     this.markers.forEach(marker => {
       if (!this.treeService.has(this.editorMarkersTreeViewId, marker.resource.authority)) {

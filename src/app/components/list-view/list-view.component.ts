@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-view.component.scss']
 })
 export class ListViewComponent {
-
+  items = Array.from({ length: 10000 }).map((_, i) => `Item #${i}`);
 }
